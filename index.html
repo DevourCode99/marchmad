@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>March Madness Main Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+      background: linear-gradient(-45deg, #000, #333, #111, #222);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* Container for the menu */
+    .menu-container {
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      padding: 20px;
+    }
+    /* Header Styling */
+    .header {
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .header p {
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+    /* Menu Items Styling */
+    .menu-item {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 20px 0;
+      padding: 20px;
+      border: 2px solid #fff;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+    }
+    .menu-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+      background-color: #fff;
+      color: #000;
+    }
+    /* Mobile Responsiveness */
+    @media (max-width: 600px) {
+      .menu-item {
+        font-size: 2rem;
+        padding: 15px;
+        margin: 15px 0;
+      }
+      .header h1 {
+        font-size: 2.5rem;
+      }
+      .header p {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+    <div class="header">
+      <h1>MARCH MADNESS</h1>
+      <p>WHO WILL WIN THE $200 GRAND PRIZE?</p>
+    </div>
+    <div class="menu-item" onclick="navigate('standings')">Standings</div>
+    <div class="menu-item" onclick="navigate('results')">Results</div>
+    <div class="menu-item" onclick="navigate('power_rankings')">Power Rankings</div>
+    <div class="menu-item" onclick="navigate('sudoku')">Sudoku</div>
+    <div class="menu-item" onclick="navigate('schedule')">Schedule</div>
+  </div>
+
+  <script>
+    function navigate(option) {
+      console.log("Navigating to: " + option);
+      // Placeholder: Replace with your navigation logic, for example:
+      // window.location.href = option + '.html';
+    }
+  </script>
+</body>
+</html>
