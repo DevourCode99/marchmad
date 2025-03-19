@@ -25,7 +25,7 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    /* Common container for sections */
+    /* Section container */
     .section {
       display: none;
       padding: 20px;
@@ -110,17 +110,16 @@
     tr:nth-child(even) {
       background-color: rgba(255,255,255,0.1);
     }
-    /* Animation for table rows */
+    /* Dramatic Animation for table rows */
     tbody tr {
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.5s ease forwards;
+      transform: translateY(20px) scale(0.8);
+      animation: dramaticFadeIn 0.8s ease forwards;
     }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes dramaticFadeIn {
+      0% { opacity: 0; transform: translateY(20px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-5px) scale(1.05); }
+      100% { transform: translateY(0) scale(1); }
     }
     /* Responsive design */
     @media (max-width: 600px) {
@@ -203,24 +202,6 @@
     <p>Coming soon...</p>
   </div>
 
-  <!-- Inline JSON Data Source -->
-  <script>
-    const sourceData = {
-      "participants": [
-        { "name": "Matt", "points": 45 },
-        { "name": "Emily", "points": 50 },
-        { "name": "Paige", "points": 40 },
-        { "name": "Blake", "points": 55 },
-        { "name": "Lori", "points": 48 },
-        { "name": "Larry", "points": 35 },
-        { "name": "Scott", "points": 60 },
-        { "name": "Peggy", "points": 42 },
-        { "name": "Marshall", "points": 37 },
-        { "name": "Jeanne", "points": 52 }
-      ]
-    };
-  </script>
-
   <!-- Navigation and Standings Update Script -->
   <script>
     // Function to show a particular section and hide the others
@@ -228,41 +209,42 @@
       const sections = document.querySelectorAll('.section');
       sections.forEach(sec => sec.style.display = 'none');
       document.getElementById(sectionId).style.display = 'block';
-      
-      // If showing the standings section, update the table
+      // If showing the standings section, update the table by fetching external JSON
       if (sectionId === 'standingsSection') {
         updateStandings();
       }
     }
 
+    // Function to fetch JSON data and update the standings table
     function updateStandings() {
-      const participants = sourceData.participants.slice(); // Create a copy
-      // Sort by points descending (highest points first)
-      participants.sort((a, b) => b.points - a.points);
-      const tbody = document.getElementById('standingsBody');
-      tbody.innerHTML = ''; // Clear previous rows
-      
-      const delayInterval = 0.1;
-      const total = participants.length;
-      participants.forEach((participant, index) => {
-        const row = document.createElement('tr');
-        const rankCell = document.createElement('td');
-        const nameCell = document.createElement('td');
-        const pointsCell = document.createElement('td');
-  
-        rankCell.textContent = index + 1;
-        nameCell.textContent = participant.name;
-        pointsCell.textContent = participant.points;
-  
-        row.appendChild(rankCell);
-        row.appendChild(nameCell);
-        row.appendChild(pointsCell);
-  
-        // Highest rank gets the longest delay so that rows animate from last to first
-        const delay = (total - index - 1) * delayInterval;
-        row.style.animationDelay = delay + 's';
-        tbody.appendChild(row);
-      });
+      fetch('data/source.json')
+        .then(response => response.json())
+        .then(data => {
+          const participants = data.participants.slice();
+          // Sort by points descending (highest points first)
+          participants.sort((a, b) => b.points - a.points);
+          const tbody = document.getElementById('standingsBody');
+          tbody.innerHTML = ''; // Clear previous rows
+          const delayInterval = 0.15;
+          const total = participants.length;
+          participants.forEach((participant, index) => {
+            const row = document.createElement('tr');
+            const rankCell = document.createElement('td');
+            const nameCell = document.createElement('td');
+            const pointsCell = document.createElement('td');
+            rankCell.textContent = index + 1;
+            nameCell.textContent = participant.name;
+            pointsCell.textContent = participant.points;
+            row.appendChild(rankCell);
+            row.appendChild(nameCell);
+            row.appendChild(pointsCell);
+            // Apply staggered delay (more dramatic appearance from last to first)
+            const delay = (total - index - 1) * delayInterval;
+            row.style.animationDelay = delay + 's';
+            tbody.appendChild(row);
+          });
+        })
+        .catch(error => console.error('Error fetching JSON:', error));
     }
 
     // On page load, display the main menu
