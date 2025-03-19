@@ -193,19 +193,19 @@
 
   <!-- Navigation and Standings Update Script -->
   <script>
-    // Function to show a particular section and hide the others
+    // Show a specific section and hide the rest
     function showSection(sectionId) {
       const sections = document.querySelectorAll('.section');
       sections.forEach(sec => sec.style.display = 'none');
       document.getElementById(sectionId).style.display = 'block';
-      // If showing the standings section, update the table by fetching external JSON
+      // When displaying Standings, fetch and animate the table
       if (sectionId === 'standingsSection') {
         updateStandings();
       }
     }
 
-    // Animate scramble effect on a given element.
-    // It replaces the element's text with random characters until the final text is revealed.
+    // Scramble animation function using requestAnimationFrame.
+    // It updates the element's text with random characters until the final text is revealed.
     function animateScramble(element, finalText, durationMs) {
       finalText = finalText.toString();
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{};:,.<>/?";
@@ -237,24 +237,29 @@
       requestAnimationFrame(update);
     }
 
-    // Fetch JSON data and update the standings table with scramble animations.
-    // Rank cells show immediately; name cells scramble over 8 seconds, then after 8 seconds the points cells scramble over another 8 seconds.
+    // Fetch JSON data and update the standings table with sequential scramble animations.
+    // Animations progress from rank #10 (lowest) to rank #1 (highest) over a total of 16 seconds.
     function updateStandings() {
       fetch('data/source.json')
         .then(response => response.json())
         .then(data => {
           const participants = data.participants.slice();
-          // Sort by points descending (highest points first)
+          // Sort participants by points descending (rank 1 = highest points)
           participants.sort((a, b) => b.points - a.points);
           const tbody = document.getElementById('standingsBody');
           tbody.innerHTML = ''; // Clear previous rows
+          
+          const totalAnimationTime = 16000; // total time in milliseconds (16 sec)
+          const totalRows = participants.length;
+          const delayStep = totalAnimationTime / totalRows; // stagger delay for sequential effect
+
           participants.forEach((participant, index) => {
             const row = document.createElement('tr');
             const rankCell = document.createElement('td');
             const nameCell = document.createElement('td');
             const pointsCell = document.createElement('td');
 
-            // Rank shows immediately.
+            // Rank displays immediately.
             rankCell.textContent = index + 1;
             nameCell.textContent = "";
             pointsCell.textContent = "";
@@ -264,12 +269,22 @@
             row.appendChild(pointsCell);
             tbody.appendChild(row);
 
-            // Animate name scramble over 8 seconds.
-            animateScramble(nameCell, participant.name, 8000);
-            // Animate points scramble (as a string) after 8 seconds, over another 8 seconds.
+            // Calculate delay for this row.
+            // We want row with rank #10 (index 9) to start at 0 ms and rank #1 (index 0) to start later.
+            const rowDelay = ((totalRows - 1) - index) * delayStep;
+            const rowAnimationTime = totalAnimationTime - rowDelay; // remaining time for this row's animations
+            const nameDuration = rowAnimationTime / 2;  // first half for name scramble
+            const pointsDuration = rowAnimationTime / 2; // second half for points scramble
+
+            // Start the name scramble after the rowDelay.
             setTimeout(() => {
-              animateScramble(pointsCell, participant.points.toString(), 8000);
-            }, 8000);
+              animateScramble(nameCell, participant.name, nameDuration);
+            }, rowDelay);
+
+            // Start the points scramble after rowDelay + nameDuration.
+            setTimeout(() => {
+              animateScramble(pointsCell, participant.points.toString(), pointsDuration);
+            }, rowDelay + nameDuration);
           });
         })
         .catch(error => console.error('Error fetching JSON:', error));
