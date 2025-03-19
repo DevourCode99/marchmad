@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>March Madness Main Menu</title>
+  <title>March Madness - All In One</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
   <style>
     /* Reset & Base */
@@ -14,43 +14,44 @@
     }
     body {
       font-family: 'Roboto', sans-serif;
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      -webkit-font-smoothing: antialiased;
       background: linear-gradient(-45deg, #000, #333, #111, #222);
       background-size: 400% 400%;
       animation: gradientAnimation 15s ease infinite;
+      color: #fff;
+      min-height: 100vh;
     }
     @keyframes gradientAnimation {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    /* Container for the menu */
-    .menu-container {
-      text-align: center;
-      width: 90%;
-      max-width: 500px;
+    /* Common container for sections */
+    .section {
+      display: none;
       padding: 20px;
+      text-align: center;
     }
-    /* Header Styling */
+    /* Main Menu styling */
+    .menu-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
     .header {
       margin-bottom: 40px;
     }
     .header h1 {
       font-size: 3rem;
-      margin-bottom: 10px;
-      text-transform: uppercase;
       letter-spacing: 2px;
+      text-transform: uppercase;
     }
     .header p {
       font-size: 1.5rem;
       letter-spacing: 1px;
+      margin-top: 10px;
     }
-    /* Menu Items Styling */
     .menu-item {
       font-size: 2.5rem;
       font-weight: 700;
@@ -60,19 +61,72 @@
       border-radius: 12px;
       transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
       cursor: pointer;
+      width: 80%;
+      max-width: 500px;
     }
     .menu-item:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 16px rgba(255,255,255,0.2);
       background-color: #fff;
       color: #000;
     }
-    /* Mobile Responsiveness */
+    /* Section headings */
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    /* Back button styling */
+    .back-button {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      cursor: pointer;
+      padding: 10px 20px;
+      border: none;
+      background: #fff;
+      color: #000;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+      background: #ddd;
+    }
+    /* Table styling for standings */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    th, td {
+      border: 2px solid #fff;
+      padding: 15px;
+      font-size: 1.5rem;
+    }
+    th {
+      background-color: rgba(255,255,255,0.2);
+    }
+    tr:nth-child(even) {
+      background-color: rgba(255,255,255,0.1);
+    }
+    /* Animation for table rows */
+    tbody tr {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Responsive design */
     @media (max-width: 600px) {
       .menu-item {
         font-size: 2rem;
         padding: 15px;
-        margin: 15px 0;
       }
       .header h1 {
         font-size: 2.5rem;
@@ -80,28 +134,141 @@
       .header p {
         font-size: 1.2rem;
       }
+      th, td {
+        font-size: 1.2rem;
+        padding: 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="menu-container">
-    <div class="header">
-      <h1>MARCH MADNESS</h1>
-      <p>WHO WILL WIN THE $200 GRAND PRIZE?</p>
+  <!-- Main Menu Section -->
+  <div id="menuSection" class="section">
+    <div class="menu-container">
+      <div class="header">
+        <h1>MARCH MADNESS</h1>
+        <p>WHO WILL WIN THE $200 GRAND PRIZE?</p>
+      </div>
+      <div class="menu-item" onclick="showSection('standingsSection')">Standings</div>
+      <div class="menu-item" onclick="showSection('resultsSection')">Results</div>
+      <div class="menu-item" onclick="showSection('powerRankingsSection')">Power Rankings</div>
+      <div class="menu-item" onclick="showSection('sudokuSection')">Sudoku</div>
+      <div class="menu-item" onclick="showSection('scheduleSection')">Schedule</div>
     </div>
-    <div class="menu-item" onclick="navigate('standings')">Standings</div>
-    <div class="menu-item" onclick="navigate('results')">Results</div>
-    <div class="menu-item" onclick="navigate('power_rankings')">Power Rankings</div>
-    <div class="menu-item" onclick="navigate('sudoku')">Sudoku</div>
-    <div class="menu-item" onclick="navigate('schedule')">Schedule</div>
   </div>
 
+  <!-- Standings Section -->
+  <div id="standingsSection" class="section">
+    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
+    <h2>Standings</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody id="standingsBody">
+        <!-- Dynamically filled -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Results Section -->
+  <div id="resultsSection" class="section">
+    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
+    <h2>Results</h2>
+    <p>Coming soon...</p>
+  </div>
+
+  <!-- Power Rankings Section -->
+  <div id="powerRankingsSection" class="section">
+    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
+    <h2>Power Rankings</h2>
+    <p>Coming soon...</p>
+  </div>
+
+  <!-- Sudoku Section -->
+  <div id="sudokuSection" class="section">
+    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
+    <h2>Sudoku</h2>
+    <p>Coming soon...</p>
+  </div>
+
+  <!-- Schedule Section -->
+  <div id="scheduleSection" class="section">
+    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
+    <h2>Schedule</h2>
+    <p>Coming soon...</p>
+  </div>
+
+  <!-- Inline JSON Data Source -->
   <script>
-    function navigate(option) {
-      console.log("Navigating to: " + option);
-      // Placeholder: Replace with your navigation logic, for example:
-      // window.location.href = option + '.html';
+    const sourceData = {
+      "participants": [
+        { "name": "Matt", "points": 45 },
+        { "name": "Emily", "points": 50 },
+        { "name": "Paige", "points": 40 },
+        { "name": "Blake", "points": 55 },
+        { "name": "Lori", "points": 48 },
+        { "name": "Larry", "points": 35 },
+        { "name": "Scott", "points": 60 },
+        { "name": "Peggy", "points": 42 },
+        { "name": "Marshall", "points": 37 },
+        { "name": "Jeanne", "points": 52 }
+      ]
+    };
+  </script>
+
+  <!-- Navigation and Standings Update Script -->
+  <script>
+    // Function to show a particular section and hide the others
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.style.display = 'none');
+      document.getElementById(sectionId).style.display = 'block';
+      
+      // If showing the standings section, update the table
+      if (sectionId === 'standingsSection') {
+        updateStandings();
+      }
     }
+
+    function updateStandings() {
+      const participants = sourceData.participants.slice(); // Create a copy
+      // Sort by points descending (highest points first)
+      participants.sort((a, b) => b.points - a.points);
+      const tbody = document.getElementById('standingsBody');
+      tbody.innerHTML = ''; // Clear previous rows
+      
+      const delayInterval = 0.1;
+      const total = participants.length;
+      participants.forEach((participant, index) => {
+        const row = document.createElement('tr');
+        const rankCell = document.createElement('td');
+        const nameCell = document.createElement('td');
+        const pointsCell = document.createElement('td');
+  
+        rankCell.textContent = index + 1;
+        nameCell.textContent = participant.name;
+        pointsCell.textContent = participant.points;
+  
+        row.appendChild(rankCell);
+        row.appendChild(nameCell);
+        row.appendChild(pointsCell);
+  
+        // Highest rank gets the longest delay so that rows animate from last to first
+        const delay = (total - index - 1) * delayInterval;
+        row.style.animationDelay = delay + 's';
+        tbody.appendChild(row);
+      });
+    }
+
+    // On page load, display the main menu
+    document.addEventListener("DOMContentLoaded", function() {
+      showSection('menuSection');
+    });
   </script>
 </body>
 </html>
