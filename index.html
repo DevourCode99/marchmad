@@ -402,7 +402,7 @@
     <button class="back-button" style="margin-top:20px;" onclick="scrollToTop()">Back to Top</button>
   </div>
 
-  <!-- 10 Facts Section -->
+  <!-- Facts Section -->
   <div id="factsSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
     <h2>10 Facts</h2>
@@ -479,9 +479,33 @@
       fetch('data/source.json')
         .then(response => response.json())
         .then(data => {
-          const participants = data.participants.slice();
+          let participants = data.participants.slice();
           // Sort participants by points descending (rank 1 = highest)
           participants.sort((a, b) => b.points - a.points);
+          
+          // Determine if all scores are zero
+          const allZero = participants.every(p => p.points === 0);
+          // Compute tie-aware ranks
+          let ranks = [];
+          if (allZero) {
+            // Everyone is tied for first.
+            for (let i = 0; i < participants.length; i++) {
+              ranks.push("T1");
+            }
+          } else {
+            let currentRank = 1;
+            ranks[0] = currentRank;
+            for (let i = 1; i < participants.length; i++) {
+              if (participants[i].points === participants[i - 1].points) {
+                // Tie: prefix with "T"
+                ranks[i] = "T" + currentRank;
+              } else {
+                currentRank = i + 1;
+                ranks[i] = currentRank;
+              }
+            }
+          }
+          
           const tbody = document.getElementById('standingsBody');
           tbody.innerHTML = '';
           const totalAnimationTime = 16000; // 16 seconds total
@@ -493,8 +517,8 @@
             const nameCell = document.createElement('td');
             const pointsCell = document.createElement('td');
 
-            // Rank shows immediately
-            rankCell.textContent = index + 1;
+            // Use computed tie-aware rank
+            rankCell.textContent = ranks[index];
             nameCell.textContent = "";
             pointsCell.textContent = "";
 
@@ -503,7 +527,7 @@
             row.appendChild(pointsCell);
             tbody.appendChild(row);
 
-            // Animate from #10 to #1
+            // Animate from bottom (last) to top (first)
             const rowDelay = ((totalRows - 1) - index) * delayStep;
             const rowAnimationTime = totalAnimationTime - rowDelay;
             const nameDuration = rowAnimationTime / 2;
@@ -603,7 +627,7 @@
     }
 
     // ---------------- TV Schedule Section ----------------
-    // TV schedule content is static and defined in the HTML below.
+    // Static content defined in HTML below.
 
     // ---------------- Facts Section ----------------
     const facts = [
@@ -650,7 +674,7 @@
       {
         question: "Who has the most upsets in the Sweet 16 and Elite 8 rounds?",
         answer: "Matt",
-        explanation: "Why? It isn’t just that Matt picked a lot of underdogs in the first round—he continued riding them through the middle rounds. He advances multiple double-digit seeds (e.g., Lipscomb, Liberty, Grand Canyon, Wofford, etc.) into later rounds more often than anyone else."
+        explanation: "Why? It isn’t just that Matt picked a lot of underdogs in the first round—he continued riding them through the middle rounds. He advances multiple double‐digit seeds (e.g., Lipscomb, Liberty, Grand Canyon, Wofford, etc.) into later rounds more often than anyone else."
       },
       {
         question: "Who predicted the fewest number-one seeds in their Final Four?",
@@ -687,4 +711,3 @@
   </script>
 </body>
 </html>
-
