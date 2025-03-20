@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>March Madness - All In One</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet" />
   <style>
     /* Reset & Base */
     * {
@@ -43,6 +43,7 @@
       margin-bottom: 40px;
     }
     .header h1 {
+      font-family: 'Roboto Condensed', sans-serif;
       font-size: 3rem;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -72,6 +73,7 @@
     }
     /* Section headings */
     h2 {
+      font-family: 'Roboto Condensed', sans-serif;
       font-size: 2.5rem;
       margin-bottom: 20px;
       text-transform: uppercase;
@@ -139,6 +141,24 @@
     }
     tr:nth-child(even) {
       background-color: rgba(255,255,255,0.1);
+    }
+    /* Scoring Section Styling */
+    #scoringSection {
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #fff;
+      border-radius: 10px;
+      padding: 30px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    #scoringSection p, #scoringSection li {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+    #scoringSection ul {
+      list-style: disc;
+      margin: 15px 0 15px 20px;
+      text-align: left;
     }
     /* Responsive design: on mobile, dropdowns stack */
     @media (max-width: 600px) {
@@ -211,7 +231,7 @@
         <option value="marshall">Marshall</option>
         <option value="jeanne">Jeanne</option>
       </select>
-      <!-- Round Dropdown -->
+      <!-- Round Dropdown (fixed options) -->
       <select id="roundSelect" onchange="onRoundChange()">
         <option value="0">64</option>
         <option value="1">32</option>
@@ -242,15 +262,15 @@
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
     <h2>Scoring</h2>
     <p>The traditional March Madness scoring method awards points for correctly picking winners in each round, typically doubling each round as follows:</p>
-    <ul style="text-align:left; display:inline-block; margin-top:15px;">
+    <ul>
       <li>Round of 64: 1 point per correct pick</li>
       <li>Round of 32: 2 points per correct pick</li>
       <li>Sweet 16: 4 points per correct pick</li>
       <li>Elite 8: 8 points per correct pick</li>
       <li>Final Four: 16 points per correct pick</li>
-      <li>Championship: 32 points for correctly picking the champion</li>
+      <li>Championship Game: 32 points for correctly picking the champion</li>
     </ul>
-    <p style="margin-top:15px;">This scoring method places increasing value on correctly picking winners in later rounds.</p>
+    <p>This scoring method places increasing value on correctly picking winners in later rounds.</p>
   </div>
 
   <!-- Navigation and Content Scripts -->
