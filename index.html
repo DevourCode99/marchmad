@@ -160,6 +160,32 @@
       margin: 15px 0 15px 20px;
       text-align: left;
     }
+    /* TV Schedule Section Styling */
+    #tvScheduleSection {
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #fff;
+      border-radius: 10px;
+      padding: 30px;
+      margin: 20px auto;
+      max-width: 600px;
+      text-align: left;
+    }
+    #tvScheduleSection h3 {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    #tvScheduleSection ul {
+      list-style: disc;
+      margin: 10px 0 20px 20px;
+      padding: 0;
+    }
+    #tvScheduleSection li {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
     /* Responsive design: on mobile, dropdowns stack */
     @media (max-width: 600px) {
       .menu-item {
@@ -191,6 +217,7 @@
       <div class="menu-item" onclick="showSection('bracketsSection')">Brackets</div>
       <div class="menu-item" onclick="showSection('powerRankingsSection')">Power Rankings</div>
       <div class="menu-item" onclick="showSection('scoringSection')">Scoring</div>
+      <div class="menu-item" onclick="showSection('tvScheduleSection')">TV Schedule</div>
     </div>
   </div>
 
@@ -261,16 +288,62 @@
   <div id="scoringSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
     <h2>Scoring</h2>
-    <p>The traditional March Madness scoring method awards points for correctly picking winners in each round, typically doubling each round as follows:</p>
+    <div id="scoringContent">
+      <p>The traditional March Madness scoring method awards points for correctly picking winners in each round, typically doubling each round as follows:</p>
+      <ul>
+        <li>Round of 64: 1 point per correct pick</li>
+        <li>Round of 32: 2 points per correct pick</li>
+        <li>Sweet 16: 4 points per correct pick</li>
+        <li>Elite 8: 8 points per correct pick</li>
+        <li>Final Four: 16 points per correct pick</li>
+        <li>Championship Game: 32 points for correctly picking the champion</li>
+      </ul>
+      <p>This scoring method places increasing value on correctly picking winners in later rounds.</p>
+    </div>
+  </div>
+
+  <!-- TV Schedule Section -->
+  <div id="tvScheduleSection" class="section">
+    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
+    <h2>TV Schedule</h2>
+    <h3>Thursday, March 20 (First Round/Round of 64)</h3>
     <ul>
-      <li>Round of 64: 1 point per correct pick</li>
-      <li>Round of 32: 2 points per correct pick</li>
-      <li>Sweet 16: 4 points per correct pick</li>
-      <li>Elite 8: 8 points per correct pick</li>
-      <li>Final Four: 16 points per correct pick</li>
-      <li>Championship Game: 32 points for correctly picking the champion</li>
+      <li>(8) Louisville vs. (9) Creighton, 12:15 p.m. | CBS</li>
+      <li>(4) Purdue vs. (13) High Point, 12:40 p.m. | truTV</li>
+      <li>(3) Wisconsin vs. (14) Montana, 1:30 p.m. | TNT</li>
+      <li>(1) Houston vs. (16) SIU Edwardsville, 2 p.m. | TBS</li>
+      <li>(1) Auburn vs. (16) Alabama State, 2:50 p.m. | CBS</li>
+      <li>(5) Clemson vs. (12) McNeese, 3:15 p.m. | truTV</li>
+      <li>(6) BYU vs. (11) VCU, 4:05 p.m. | TNT</li>
+      <li>(8) Gonzaga vs. (9) Georgia, 4:35 p.m. | TBS</li>
+      <li>(2) Tennessee vs. (15) Wofford, 6:50 p.m. | TNT</li>
+      <li>(7) Kansas vs. (10) Arkansas, 7:10 p.m. | CBS</li>
+      <li>(4) Texas A&M vs. (13) Yale, 7:25 p.m. | TBS</li>
+      <li>(6) Missouri vs. (11) Drake, 7:35 p.m. | truTV</li>
+      <li>(7) UCLA vs. (10) Utah State, 9:25 p.m. | TNT</li>
+      <li>(2) St. John's vs. (15) Omaha, 9:45 p.m. | CBS</li>
+      <li>(5) Michigan vs. (12) UC San Diego, 10 p.m. | TBS</li>
+      <li>(3) Texas Tech vs. (14) UNC Wilmington, 10:10 p.m. | truTV</li>
     </ul>
-    <p>This scoring method places increasing value on correctly picking winners in later rounds.</p>
+    <h3>Friday, March 21 (First Round/Round of 64)</h3>
+    <ul>
+      <li>(8) Mississippi State vs. (9) Baylor, 12:15 p.m. | CBS</li>
+      <li>(2) Alabama vs. (15) Robert Morris, 12:40 p.m. | truTV</li>
+      <li>(3) Iowa State vs. (14) Lipscomb, 1:30 p.m. | TNT</li>
+      <li>(5) Memphis vs. (12) Colorado State, 2 p.m. | TBS</li>
+      <li>(1) Duke vs. (16) Mount St. Mary's/American, 2:50 p.m. | CBS</li>
+      <li>(7) Saint Mary's vs. (10) Vanderbilt, 3:15 p.m. | truTV</li>
+      <li>(6) Ole Miss vs. (11) North Carolina, 4:05 p.m. | TNT</li>
+      <li>(4) Maryland vs. (13) Grand Canyon, 4:35 p.m. | TBS</li>
+      <li>(1) Florida vs. (16) Norfolk State, 6:50 p.m. | TNT</li>
+      <li>(3) Kentucky vs. (14) Troy, 7:10 p.m. | CBS</li>
+      <li>(7) Marquette vs. (10) New Mexico, 7:25 p.m. | TBS</li>
+      <li>(4) Arizona vs. (13) Akron, 7:35 p.m. | truTV</li>
+      <li>(8) UConn vs. (9) Oklahoma, 9:25 p.m. | TNT</li>
+      <li>(6) Illinois vs. (11) Xavier/Texas, 9:45 p.m. | TNT</li>
+      <li>(2) Michigan State vs. (15) Bryant, 10 p.m. | TBS</li>
+      <li>(5) Oregon vs. (12) Liberty, 10:10 p.m. | truTV</li>
+    </ul>
   </div>
 
   <!-- Navigation and Content Scripts -->
@@ -459,7 +532,12 @@
       document.getElementById('bracketContainer').innerHTML = html;
     }
 
-    // Back to Top function for smooth scrolling
+    // ---------------- TV Schedule Section ----------------
+    // This section displays the TV schedule in a modern, styled container.
+    // The schedule content is hardcoded below.
+    // You can easily update the content if needed.
+    
+    // ---------------- Back to Top Function ----------------
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
