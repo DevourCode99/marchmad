@@ -482,43 +482,19 @@
           const participants = data.participants.slice();
           // Sort participants by points descending (rank 1 = highest)
           participants.sort((a, b) => b.points - a.points);
-
           const tbody = document.getElementById('standingsBody');
           tbody.innerHTML = '';
-
           const totalAnimationTime = 16000; // 16 seconds total
           const totalRows = participants.length;
           const delayStep = totalAnimationTime / totalRows;
-
-          // We'll track the last seen points and the rank for that tie group.
-          let lastPoints = null;
-          let lastRank = 1;
-
           participants.forEach((participant, index) => {
             const row = document.createElement('tr');
             const rankCell = document.createElement('td');
             const nameCell = document.createElement('td');
             const pointsCell = document.createElement('td');
 
-            // Tie logic: if this participant has the same points as the previous,
-            // display the same rank with a "T-" prefix.
-            if (index === 0) {
-              rankCell.textContent = 1; // First row is always rank 1
-              lastPoints = participant.points;
-              lastRank = 1;
-            } else {
-              if (participant.points === lastPoints) {
-                // Same score => tied rank
-                rankCell.textContent = "T-" + lastRank;
-              } else {
-                // New score => new rank
-                lastPoints = participant.points;
-                lastRank = index + 1;
-                rankCell.textContent = lastRank;
-              }
-            }
-
-            // We'll scramble in the name & points cells as before
+            // Rank shows immediately
+            rankCell.textContent = index + 1;
             nameCell.textContent = "";
             pointsCell.textContent = "";
 
@@ -610,7 +586,7 @@
           const teamsStr = match.teams[0] + " vs " + match.teams[1];
           let winnerStr = match.winner;
           if (roundData.round === 1 && match.score) {
-            winnerStr += \` (Score: \${match.score})\`;
+            winnerStr += ` (Score: ${match.score})`;
           }
           html += `
             <tr>
@@ -627,7 +603,7 @@
     }
 
     // ---------------- TV Schedule Section ----------------
-    // TV schedule content is static in the HTML.
+    // TV schedule content is static and defined in the HTML below.
 
     // ---------------- Facts Section ----------------
     const facts = [
@@ -683,7 +659,6 @@
       }
     ];
     let currentFactIndex = 0;
-
     function updateFact() {
       const factContainer = document.getElementById('factContent');
       const fact = facts[currentFactIndex];
@@ -705,16 +680,11 @@
         updateFact();
       }
     }
-
     // On page load, initialize facts section (if visited later)
     document.addEventListener("DOMContentLoaded", function() {
       showSection('menuSection');
     });
-
-    // Helper to scroll to top
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
   </script>
 </body>
 </html>
+
