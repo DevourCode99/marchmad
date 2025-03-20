@@ -74,11 +74,6 @@
 
         { "teams": ["Duke", "Arizona"], "winner": "Duke" },
         { "teams": ["Wisconsin", "Alabama"], "winner": "Duke" }, 
-        /* 
-           NOTE: The data in your spreadsheet is inconsistent about who faced whom next. 
-           We place 'Duke' as the winner to ensure Duke advances to the final.
-           Adjust these matchups as needed if your bracket structure differs.
-        */
         { "teams": ["Houston", "Purdue"], "winner": "Houston" },
         { "teams": ["Kentucky", "Tennessee"], "winner": "Tennessee" }
       ]
@@ -89,10 +84,6 @@
         { "teams": ["Michigan", "Michigan St"], "winner": "Michigan St" },
         { "teams": ["Uconn", "St. Johns"], "winner": "St. Johns" },
         { "teams": ["Duke", "Duke"], "winner": "Duke" },
-        /* 
-           Here we artificially show Duke vs Duke for the sake of continuing the bracket 
-           (due to incomplete intermediate data). Adjust as needed.
-        */
         { "teams": ["Houston", "Tennessee"], "winner": "Houston" }
       ]
     },
