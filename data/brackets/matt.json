@@ -1,0 +1,108 @@
+{
+  "rounds": [
+    {
+      "round": 64,
+      "matchups": [
+        {"teams": ["Auburn (1)", "Alabama St. (16)"], "winner": "Auburn"},
+        {"teams": ["Louisville (8)", "Creighton (9)"], "winner": "Creighton"},
+        {"teams": ["Michigan (5)", "UC San Diego (12)"], "winner": "Michigan"},
+        {"teams": ["Texas A&M (4)", "Yale (13)"], "winner": "Texas A&M"},
+        {"teams": ["Mississippi (6)", "N. Carolina (11)"], "winner": "Ole Miss"},
+        {"teams": ["Iowa St. (3)", "Lipscomb (14)"], "winner": "Lipscomb"},
+        {"teams": ["Marquette (7)", "New Mexico (10)"], "winner": "New Mexico"},
+        {"teams": ["Michigan St. (2)", "Bryant (15)"], "winner": "Michigan State"},
+
+        {"teams": ["Florida (1)", "Norfolk St. (16)"], "winner": "Florida"},
+        {"teams": ["Connecticut (8)", "Oklahoma (9)"], "winner": "Oklahoma"},
+        {"teams": ["Memphis (5)", "Colorado St. (12)"], "winner": "Memphis"},
+        {"teams": ["Maryland (4)", "Grand Canyon (13)"], "winner": "Maryland"},
+        {"teams": ["Missouri (6)", "Drake (11)"], "winner": "Drake"},
+        {"teams": ["Texas Tech (3)", "N.C. Wilmington (14)"], "winner": "Texas Tech"},
+        {"teams": ["Kansas (7)", "Arkansas (10)"], "winner": "Arkansas"},
+        {"teams": ["St. John's (2)", "Nebraska Omaha (15)"], "winner": "St. Johns"},
+
+        {"teams": ["Duke (1)", "AMER/MSM (16)"], "winner": "Duke"},
+        {"teams": ["Mississippi St. (8)", "Baylor (9)"], "winner": "Mississippi St"},
+        {"teams": ["Oregon (5)", "Liberty (12)"], "winner": "Oregon"},
+        {"teams": ["Arizona (4)", "Akron (13)"], "winner": "Arizona"},
+        {"teams": ["BYU (6)", "VCU (11)"], "winner": "VCU"},
+        {"teams": ["Wisconsin (3)", "Montana (14)"], "winner": "Wisconsin"},
+        {"teams": ["St. Mary's (7)", "Vanderbilt (10)"], "winner": "Vander"},
+        {"teams": ["Alabama (2)", "Robert Morris (15)"], "winner": "Alabama"},
+
+        {"teams": ["Houston (1)", "SIU Edwardsville (16)"], "winner": "Houston"},
+        {"teams": ["Gonzaga (8)", "Georgia (9)"], "winner": "Gonzaga"},
+        {"teams": ["Clemson (5)", "McNeese (12)"], "winner": "Clemson"},
+        {"teams": ["Purdue (4)", "High Point (13)"], "winner": "Purdue"},
+        {"teams": ["Illinois (6)", "TEX/XAV (11)"], "winner": "Texas/Xavier"},
+        {"teams": ["Kentucky (3)", "Troy (14)"], "winner": "Kentucky"},
+        {"teams": ["UCLA (7)", "Utah St. (10)"], "winner": "Utah St"},
+        {"teams": ["Tennessee (2)", "Wofford (15)"], "winner": "Tennessee"}
+      ]
+    },
+    {
+      "round": 32,
+      "matchups": [
+        {"teams": ["Auburn", "Creighton"], "winner": "Auburn"},
+        {"teams": ["Michigan", "Texas A&M"], "winner": "Michigan"},
+        {"teams": ["Ole Miss", "Lipscomb"], "winner": "North Carolina"},
+        {"teams": ["Marquette", "Michigan State"], "winner": "Michigan State"},
+
+        {"teams": ["Florida", "Oklahoma"], "winner": "Florida"},
+        {"teams": ["Memphis", "Grand Canyon"], "winner": "Memphis"},
+        {"teams": ["Drake", "Texas Tech"], "winner": "Texas Tech"},
+        {"teams": ["Arkansas", "St. Johns"], "winner": "St. Johns"},
+
+        {"teams": ["Florida", "Mississippi St"], "winner": "Duke"},
+        {"teams": ["Oregon", "Arizona"], "winner": "Liberty"},
+        {"teams": ["VCU", "Wisconsin"], "winner": "Wisconsin"},
+        {"teams": ["Vander", "Alabama"], "winner": "Alabama"},
+
+        {"teams": ["Houston", "Gonzaga"], "winner": "Houston"},
+        {"teams": ["Clemson", "Purdue"], "winner": "Purdue"},
+        {"teams": ["Texas/Xavier", "Kentucky"], "winner": "Kentucky"},
+        {"teams": ["Utah St.", "Tennessee"], "winner": "Wofford"}
+      ]
+    },
+    {
+      "round": 16,
+      "matchups": [
+        {"teams": ["Auburn", "Michigan"], "winner": "Michigan"},
+        {"teams": ["North Carolina", "Michigan State"], "winner": "Michigan State"},
+        {"teams": ["Florida", "Memphis"], "winner": "Florida"},
+        {"teams": ["Texas Tech", "St. Johns"], "winner": "Texas Tech"},
+
+        {"teams": ["Duke", "Liberty"], "winner": "Duke"},
+        {"teams": ["Wisconsin", "Alabama"], "winner": "Wisconsin"},
+        {"teams": ["Houston", "Purdue"], "winner": "Houston"},
+        {"teams": ["Kentucky", "Wofford"], "winner": "Wofford"}
+      ]
+    },
+    {
+      "round": 8,
+      "matchups": [
+        {"teams": ["Michigan", "North Carolina"], "winner": "Michigan"},
+        {"teams": ["Florida", "Texas Tech"], "winner": "Florida"},
+        {"teams": ["Duke", "Wisconsin"], "winner": "Wisconsin"},
+        {"teams": ["Houston", "Wofford"], "winner": "Houston"}
+      ]
+    },
+    {
+      "round": 4,
+      "matchups": [
+        {"teams": ["Michigan", "Florida"], "winner": "Michigan"},
+        {"teams": ["Wisconsin", "Houston"], "winner": "Florida"}
+      ]
+    },
+    {
+      "round": 1,
+      "matchups": [
+        {
+          "teams": ["Michigan", "Florida"],
+          "winner": "Michigan",
+          "score": "84-72"
+        }
+      ]
+    }
+  ]
+}
