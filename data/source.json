@@ -1,14 +1,14 @@
 {
   "participants": [
-    { "name": "Matt", "points": 1 },
-    { "name": "Emily", "points": 1 },
-    { "name": "Paige", "points": 0 },
-    { "name": "Blake", "points": 0 },
-    { "name": "Lori", "points": 0 },
-    { "name": "Larry", "points": 0 },
-    { "name": "Scott", "points": 1 },
-    { "name": "Peggy", "points": 0 },
-    { "name": "Marshall", "points": 0 },
-    { "name": "Jeanne", "points": 1 }
+    { "name": "Matt", "points": 3 },
+    { "name": "Emily", "points": 3 },
+    { "name": "Paige", "points": 2 },
+    { "name": "Blake", "points": 2 },
+    { "name": "Lori", "points": 2 },
+    { "name": "Larry", "points": 2 },
+    { "name": "Scott", "points": 3 },
+    { "name": "Peggy", "points": 2 },
+    { "name": "Marshall", "points": 2 },
+    { "name": "Jeanne", "points": 3 }
   ]
 }
