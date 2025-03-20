@@ -96,6 +96,8 @@
       color: #000;
     }
     select {
+      width: 80%;
+      max-width: 500px;
       font-size: 1rem;
       padding: 10px 20px;
       border: 2px solid #fff;
@@ -104,18 +106,18 @@
       color: #fff;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin: 10px;
+      margin-bottom: 20px;
     }
     select:hover {
       background: #fff;
       color: #000;
     }
-    /* Container for round selection (dropdown) */
-    .round-select-container {
+    /* Container for dropdowns */
+    .dropdown-container {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      flex-wrap: wrap;
+      justify-content: center;
       margin-bottom: 20px;
     }
     /* Table styling for Standings and Brackets */
@@ -138,7 +140,7 @@
     tr:nth-child(even) {
       background-color: rgba(255,255,255,0.1);
     }
-    /* Responsive design: on mobile, dropdowns stack vertically */
+    /* Responsive design: on mobile, dropdowns stack */
     @media (max-width: 600px) {
       .menu-item {
         font-size: 2rem;
@@ -153,9 +155,6 @@
       th, td {
         font-size: 1.2rem;
         padding: 10px;
-      }
-      .round-select-container {
-        flex-direction: column;
       }
     }
   </style>
@@ -198,31 +197,33 @@
   <div id="bracketsSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
     
-    <!-- Round Selection Dropdown -->
-    <div class="round-select-container">
-      <label for="roundSelect" style="margin-right:10px; font-size:1rem;">Select Round:</label>
+    <div class="dropdown-container">
+      <!-- User Dropdown -->
+      <select id="bracketUserSelect" onchange="onBracketUserChange()">
+        <option value="">Select a user</option>
+        <option value="matt">Matt</option>
+        <option value="emily">Emily</option>
+        <option value="paige">Paige</option>
+        <option value="blake">Blake</option>
+        <option value="lori">Lori</option>
+        <option value="larry">Larry</option>
+        <option value="scott">Scott</option>
+        <option value="peggy">Peggy</option>
+        <option value="marshall">Marshall</option>
+        <option value="jeanne">Jeanne</option>
+      </select>
+      <!-- Round Dropdown (fixed options) -->
       <select id="roundSelect" onchange="onRoundChange()">
-        <option value="">-- Choose a Round --</option>
-        <!-- Options will be populated dynamically -->
+        <option value="0">64</option>
+        <option value="1">32</option>
+        <option value="2">Sweet 16</option>
+        <option value="3">Elite 8</option>
+        <option value="4">Final Four</option>
+        <option value="5">Championship Game</option>
       </select>
     </div>
     
     <h2>Brackets</h2>
-    <!-- Dropdown for 10 Users -->
-    <select id="bracketUserSelect" onchange="onBracketUserChange()">
-      <option value="">Select a user</option>
-      <option value="matt">Matt</option>
-      <option value="emily">Emily</option>
-      <option value="paige">Paige</option>
-      <option value="blake">Blake</option>
-      <option value="lori">Lori</option>
-      <option value="larry">Larry</option>
-      <option value="scott">Scott</option>
-      <option value="peggy">Peggy</option>
-      <option value="marshall">Marshall</option>
-      <option value="jeanne">Jeanne</option>
-    </select>
-    
     <!-- Container for displaying bracket rounds -->
     <div id="bracketContainer" style="margin-top: 20px;"></div>
     
@@ -253,15 +254,13 @@
 
   <!-- Navigation and Content Scripts -->
   <script>
-    // Mapping of JSON round numbers to display labels.
-    const roundLabels = {
-      "64": "64",
-      "32": "32",
-      "16": "Sweet 16",
-      "8": "Elite 8",
-      "4": "Final Four",
-      "1": "Championship Game"
-    };
+    // Mapping of JSON round numbers to fixed dropdown order:
+    // We assume JSON rounds are in order: 64, 32, 16, 8, 4, 1.
+    const fixedRoundOrder = ["64", "32", "Sweet 16", "Elite 8", "Final Four", "Championship Game"];
+
+    // Global bracket variables
+    let currentBracketData = null;
+    let currentRoundIndex = 0;
 
     // Show/hide sections
     function showSection(sectionId) {
@@ -353,9 +352,6 @@
     }
 
     // ---------------- Brackets Section ----------------
-    let currentBracketData = null;
-    let currentRoundIndex = 0;
-
     function onBracketUserChange() {
       const select = document.getElementById('bracketUserSelect');
       const user = select.value;
@@ -363,7 +359,6 @@
         loadBracket(user);
       } else {
         document.getElementById('bracketContainer').innerHTML = '';
-        populateRoundSelect([]);
       }
     }
 
@@ -373,36 +368,17 @@
         .then(response => response.json())
         .then(data => {
           currentBracketData = data;
-          // If a round was already selected, preserve that index if possible;
-          // otherwise, default to 0.
+          // Preserve currentRoundIndex if possible; else default to 0.
           if (typeof currentRoundIndex !== 'number' || currentRoundIndex >= data.rounds.length) {
             currentRoundIndex = 0;
           }
-          populateRoundSelect(data.rounds);
+          document.getElementById('roundSelect').value = currentRoundIndex;
           showBracketRound(currentRoundIndex);
         })
         .catch(error => {
           console.error('Error loading bracket for ' + user + ':', error);
           document.getElementById('bracketContainer').innerHTML = '<p>Bracket data not available.</p>';
-          populateRoundSelect([]);
         });
-    }
-
-    // Populate the round dropdown based on the current bracket's rounds.
-    function populateRoundSelect(rounds) {
-      const roundSelect = document.getElementById('roundSelect');
-      roundSelect.innerHTML = '<option value="">Select a round</option>';
-      if (rounds && rounds.length > 0) {
-        rounds.forEach((roundData, index) => {
-          const label = roundLabels[roundData.round.toString()] || roundData.round;
-          const option = document.createElement('option');
-          option.value = index;
-          option.textContent = label;
-          roundSelect.appendChild(option);
-        });
-        // Set the dropdown to the current round index.
-        roundSelect.value = currentRoundIndex;
-      }
     }
 
     function onRoundChange() {
@@ -424,8 +400,6 @@
 
       currentRoundIndex = roundIndex;
       const roundData = rounds[roundIndex];
-
-      // Build an HTML table for this round
       let html = '';
       if (roundData.matchups && roundData.matchups.length > 0) {
         html += `
