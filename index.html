@@ -92,7 +92,7 @@
     .back-button:hover {
       background: #ddd;
     }
-    /* Table styling for standings */
+    /* Table styling for Standings */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -138,7 +138,7 @@
         <p>WHO WILL WIN THE $200 GRAND PRIZE?</p>
       </div>
       <div class="menu-item" onclick="showSection('standingsSection')">Standings</div>
-      <div class="menu-item" onclick="showSection('resultsSection')">Results</div>
+      <div class="menu-item" onclick="showSection('bracketsSection')">Brackets</div>
       <div class="menu-item" onclick="showSection('powerRankingsSection')">Power Rankings</div>
       <div class="menu-item" onclick="showSection('sudokuSection')">Sudoku</div>
       <div class="menu-item" onclick="showSection('scheduleSection')">Schedule</div>
@@ -163,11 +163,31 @@
     </table>
   </div>
 
-  <!-- Results Section -->
-  <div id="resultsSection" class="section">
+  <!-- Brackets Section -->
+  <div id="bracketsSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>Results</h2>
-    <p>Coming soon...</p>
+    <h2>Brackets</h2>
+    <select id="bracketUserSelect" onchange="onBracketUserChange()">
+      <option value="">Select a user</option>
+      <option value="matt">Matt</option>
+      <option value="emily">Emily</option>
+      <option value="paige">Paige</option>
+      <option value="blake">Blake</option>
+      <option value="lori">Lori</option>
+      <option value="larry">Larry</option>
+      <option value="scott">Scott</option>
+      <option value="peggy">Peggy</option>
+      <option value="marshall">Marshall</option>
+      <option value="jeanne">Jeanne</option>
+    </select>
+    <div id="bracketContainer" style="margin-top: 20px;">
+      <!-- Bracket round display goes here -->
+    </div>
+    <div id="bracketNavigation" style="display:none; margin-top: 20px;">
+      <button class="back-button" onclick="previousRound()">&#8592; Previous Round</button>
+      <span id="roundLabel" style="margin: 0 15px;"></span>
+      <button class="back-button" onclick="nextRound()">Next Round &#8594;</button>
+    </div>
   </div>
 
   <!-- Power Rankings Section -->
@@ -191,21 +211,19 @@
     <p>Coming soon...</p>
   </div>
 
-  <!-- Navigation and Standings Update Script -->
+  <!-- Navigation and Content Scripts -->
   <script>
-    // Show a specific section and hide the rest
+    // Function to show a particular section and hide the others
     function showSection(sectionId) {
       const sections = document.querySelectorAll('.section');
       sections.forEach(sec => sec.style.display = 'none');
       document.getElementById(sectionId).style.display = 'block';
-      // When displaying Standings, fetch and animate the table
       if (sectionId === 'standingsSection') {
         updateStandings();
       }
     }
 
-    // Scramble animation function using requestAnimationFrame.
-    // It updates the element's text with random characters until the final text is revealed.
+    // Scramble animation: gradually reveals final text over the duration.
     function animateScramble(element, finalText, durationMs) {
       finalText = finalText.toString();
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{};:,.<>/?";
@@ -237,51 +255,45 @@
       requestAnimationFrame(update);
     }
 
-    // Fetch JSON data and update the standings table with sequential scramble animations.
-    // Animations progress from rank #10 (lowest) to rank #1 (highest) over a total of 16 seconds.
+    // Standings update with dramatic sequential scramble animations.
     function updateStandings() {
       fetch('data/source.json')
         .then(response => response.json())
         .then(data => {
           const participants = data.participants.slice();
-          // Sort participants by points descending (rank 1 = highest points)
+          // Sort participants by points descending (rank 1 = highest)
           participants.sort((a, b) => b.points - a.points);
           const tbody = document.getElementById('standingsBody');
-          tbody.innerHTML = ''; // Clear previous rows
-          
-          const totalAnimationTime = 16000; // total time in milliseconds (16 sec)
+          tbody.innerHTML = '';
+          const totalAnimationTime = 16000; // 16 seconds
           const totalRows = participants.length;
-          const delayStep = totalAnimationTime / totalRows; // stagger delay for sequential effect
-
+          const delayStep = totalAnimationTime / totalRows;
           participants.forEach((participant, index) => {
             const row = document.createElement('tr');
             const rankCell = document.createElement('td');
             const nameCell = document.createElement('td');
             const pointsCell = document.createElement('td');
-
-            // Rank displays immediately.
+            
+            // Rank shows immediately.
             rankCell.textContent = index + 1;
             nameCell.textContent = "";
             pointsCell.textContent = "";
-
+            
             row.appendChild(rankCell);
             row.appendChild(nameCell);
             row.appendChild(pointsCell);
             tbody.appendChild(row);
-
-            // Calculate delay for this row.
-            // We want row with rank #10 (index 9) to start at 0 ms and rank #1 (index 0) to start later.
+            
+            // For progressive effect, row with rank #10 starts immediately,
+            // and rank #1 starts last.
             const rowDelay = ((totalRows - 1) - index) * delayStep;
-            const rowAnimationTime = totalAnimationTime - rowDelay; // remaining time for this row's animations
+            const rowAnimationTime = totalAnimationTime - rowDelay;
             const nameDuration = rowAnimationTime / 2;  // first half for name scramble
             const pointsDuration = rowAnimationTime / 2; // second half for points scramble
-
-            // Start the name scramble after the rowDelay.
+            
             setTimeout(() => {
               animateScramble(nameCell, participant.name, nameDuration);
             }, rowDelay);
-
-            // Start the points scramble after rowDelay + nameDuration.
             setTimeout(() => {
               animateScramble(pointsCell, participant.points.toString(), pointsDuration);
             }, rowDelay + nameDuration);
@@ -290,6 +302,80 @@
         .catch(error => console.error('Error fetching JSON:', error));
     }
 
+    // ---------------- Brackets Section ----------------
+    let currentBracketData = null;
+    let currentRoundIndex = 0;
+    
+    function onBracketUserChange() {
+      const select = document.getElementById('bracketUserSelect');
+      const user = select.value;
+      if (user) {
+        loadBracket(user);
+      } else {
+        document.getElementById('bracketContainer').innerHTML = '';
+        document.getElementById('bracketNavigation').style.display = 'none';
+      }
+    }
+    
+    function loadBracket(user) {
+      // Assume bracket JSON is at data/brackets/[user].json
+      fetch('data/brackets/' + user + '.json')
+        .then(response => response.json())
+        .then(data => {
+          currentBracketData = data;
+          currentRoundIndex = 0;
+          showBracketRound(currentRoundIndex);
+        })
+        .catch(error => {
+          console.error('Error loading bracket for ' + user + ':', error);
+          document.getElementById('bracketContainer').innerHTML = '<p>Bracket data not available.</p>';
+          document.getElementById('bracketNavigation').style.display = 'none';
+        });
+    }
+    
+    function showBracketRound(roundIndex) {
+      if (!currentBracketData || !currentBracketData.rounds || currentBracketData.rounds.length === 0) {
+        document.getElementById('bracketContainer').innerHTML = '<p>No bracket data available.</p>';
+        document.getElementById('bracketNavigation').style.display = 'none';
+        return;
+      }
+      const rounds = currentBracketData.rounds;
+      if (roundIndex < 0 || roundIndex >= rounds.length) {
+        return;
+      }
+      currentRoundIndex = roundIndex;
+      const roundData = rounds[roundIndex];
+      let html = '<h3>Round ' + roundData.round + '</h3>';
+      if (roundData.matchups && roundData.matchups.length > 0) {
+        html += '<ul style="list-style: none; padding: 0;">';
+        roundData.matchups.forEach(match => {
+          html += '<li style="margin: 10px 0;">' + match.team1 + ' vs. ' + match.team2 + '</li>';
+        });
+        html += '</ul>';
+      } else {
+        html += '<p>No matchups available.</p>';
+      }
+      document.getElementById('bracketContainer').innerHTML = html;
+      if (rounds.length > 1) {
+        document.getElementById('bracketNavigation').style.display = 'block';
+        document.getElementById('roundLabel').textContent = 'Round ' + (roundIndex + 1) + ' of ' + rounds.length;
+      } else {
+        document.getElementById('bracketNavigation').style.display = 'none';
+      }
+    }
+    
+    function nextRound() {
+      if (currentBracketData && currentBracketData.rounds && currentRoundIndex < currentBracketData.rounds.length - 1) {
+        showBracketRound(currentRoundIndex + 1);
+      }
+    }
+    
+    function previousRound() {
+      if (currentBracketData && currentBracketData.rounds && currentRoundIndex > 0) {
+        showBracketRound(currentRoundIndex - 1);
+      }
+    }
+    
     // On page load, display the main menu.
     document.addEventListener("DOMContentLoaded", function() {
       showSection('menuSection');
