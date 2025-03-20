@@ -239,6 +239,16 @@
 
   <!-- Navigation and Content Scripts -->
   <script>
+    // Mapping of JSON round numbers to display labels.
+    const roundLabels = {
+      "64": "64",
+      "32": "32",
+      "16": "Sweet 16",
+      "8": "Elite 8",
+      "4": "Final Four",
+      "1": "Championship Game"
+    };
+
     // Show/hide sections
     function showSection(sectionId) {
       const sections = document.querySelectorAll('.section');
@@ -349,7 +359,12 @@
         .then(response => response.json())
         .then(data => {
           currentBracketData = data;
-          currentRoundIndex = 0;
+          // Preserve currentRoundIndex if it exists; otherwise, initialize to 0.
+          if (typeof currentRoundIndex !== 'number') {
+            currentRoundIndex = 0;
+          } else if (currentRoundIndex >= data.rounds.length) {
+            currentRoundIndex = data.rounds.length - 1;
+          }
           showBracketRound(currentRoundIndex);
         })
         .catch(error => {
@@ -371,8 +386,9 @@
       currentRoundIndex = roundIndex;
       const roundData = rounds[roundIndex];
 
-      // Build an HTML table for this round
-      let html = `<h3>Round of ${roundData.round}</h3>`;
+      // Use the round label mapping (if available)
+      const label = roundLabels[roundData.round.toString()] || roundData.round;
+      let html = `<h3>${label}</h3>`;
       if (roundData.matchups && roundData.matchups.length > 0) {
         html += `
           <table>
@@ -407,8 +423,7 @@
 
     function updateBracketNavButtons() {
       const rounds = currentBracketData ? currentBracketData.rounds : [];
-      // Update top navigation buttons visibility:
-      // Hide Previous on first round, hide Next on last round.
+      // Hide Previous on first round, Next on last round.
       if (currentRoundIndex === 0) {
         document.getElementById('prevRoundTop').style.display = 'none';
       } else {
@@ -419,9 +434,11 @@
       } else {
         document.getElementById('nextRoundTop').style.display = 'inline-block';
       }
-      // Update round label text
+      // Update round label text using our mapping.
       if (currentBracketData && rounds.length > 0) {
-        document.getElementById('roundLabel').textContent = `Round ${currentRoundIndex + 1} of ${rounds.length}`;
+        const currentRound = rounds[currentRoundIndex];
+        const label = roundLabels[currentRound.round.toString()] || currentRound.round;
+        document.getElementById('roundLabel').textContent = `${label} (${currentRoundIndex + 1} of ${rounds.length})`;
       } else {
         document.getElementById('roundLabel').textContent = '';
       }
