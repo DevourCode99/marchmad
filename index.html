@@ -475,8 +475,8 @@
     }
 
     function updateStandings() {
-      // Fetch data from data/source.json
-      fetch('data/source.json')
+      // Fetch data from data/source.json with cache busting
+      fetch('data/source.json?v=' + new Date().getTime())
         .then(response => response.json())
         .then(data => {
           let participants = data.participants.slice();
@@ -557,8 +557,8 @@
     }
 
     function loadBracket(user) {
-      // Fetch bracket JSON at data/brackets/[user].json
-      fetch('data/brackets/' + user + '.json')
+      // Fetch bracket JSON at data/brackets/[user].json with cache busting
+      fetch('data/brackets/' + user + '.json?v=' + new Date().getTime())
         .then(response => response.json())
         .then(data => {
           currentBracketData = data;
@@ -627,7 +627,7 @@
     }
 
     // ---------------- TV Schedule Section ----------------
-    // Static content defined in HTML below.
+    // TV schedule content is static and defined in the HTML below.
 
     // ---------------- Facts Section ----------------
     const facts = [
