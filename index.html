@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>March Madness - All In One</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
   <style>
@@ -77,20 +77,38 @@
       text-transform: uppercase;
       letter-spacing: 2px;
     }
-    /* Back button styling */
-    .back-button {
+    /* Buttons & Dropdown styling */
+    .back-button,
+    .nav-button {
       font-size: 1rem;
-      margin-bottom: 20px;
+      margin: 5px;
       cursor: pointer;
       padding: 10px 20px;
-      border: none;
+      border: 2px solid #fff;
+      background: #000;
+      color: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    .back-button:hover,
+    .nav-button:hover {
       background: #fff;
       color: #000;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
     }
-    .back-button:hover {
-      background: #ddd;
+    select {
+      font-size: 1rem;
+      padding: 10px 20px;
+      border: 2px solid #fff;
+      border-radius: 5px;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+    }
+    select:hover {
+      background: #fff;
+      color: #000;
     }
     /* Table styling for Standings and Brackets */
     table {
@@ -168,6 +186,14 @@
   <!-- Brackets Section -->
   <div id="bracketsSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
+    
+    <!-- Navigation at Top -->
+    <div id="bracketNavigationTop" style="margin: 20px 0;">
+      <button id="prevRoundTop" class="nav-button" onclick="previousRound()">&#8592; Previous Round</button>
+      <span id="roundLabel" style="margin: 0 15px; font-size: 1.2rem;"></span>
+      <button id="nextRoundTop" class="nav-button" onclick="nextRound()">Next Round &#8594;</button>
+    </div>
+    
     <h2>Brackets</h2>
     <!-- Dropdown for 10 Users -->
     <select id="bracketUserSelect" onchange="onBracketUserChange()">
@@ -185,12 +211,9 @@
     </select>
     <!-- Container for displaying bracket rounds -->
     <div id="bracketContainer" style="margin-top: 20px;"></div>
-    <!-- Navigation for switching rounds -->
-    <div id="bracketNavigation" style="display:none; margin-top: 20px;">
-      <button class="back-button" onclick="previousRound()">&#8592; Previous Round</button>
-      <span id="roundLabel" style="margin: 0 15px;"></span>
-      <button class="back-button" onclick="nextRound()">Next Round &#8594;</button>
-    </div>
+    
+    <!-- Back to Top Button at Bottom -->
+    <button class="back-button" style="margin-top:20px;" onclick="scrollToTop()">Back to Top</button>
   </div>
 
   <!-- Power Rankings Section -->
@@ -316,12 +339,12 @@
         loadBracket(user);
       } else {
         document.getElementById('bracketContainer').innerHTML = '';
-        document.getElementById('bracketNavigation').style.display = 'none';
+        updateBracketNavButtons();
       }
     }
 
     function loadBracket(user) {
-      // bracket JSON at data/brackets/[user].json
+      // Fetch bracket JSON at data/brackets/[user].json
       fetch('data/brackets/' + user + '.json')
         .then(response => response.json())
         .then(data => {
@@ -332,14 +355,14 @@
         .catch(error => {
           console.error('Error loading bracket for ' + user + ':', error);
           document.getElementById('bracketContainer').innerHTML = '<p>Bracket data not available.</p>';
-          document.getElementById('bracketNavigation').style.display = 'none';
+          updateBracketNavButtons();
         });
     }
 
     function showBracketRound(roundIndex) {
       if (!currentBracketData || !currentBracketData.rounds || currentBracketData.rounds.length === 0) {
         document.getElementById('bracketContainer').innerHTML = '<p>No bracket data available.</p>';
-        document.getElementById('bracketNavigation').style.display = 'none';
+        updateBracketNavButtons();
         return;
       }
       const rounds = currentBracketData.rounds;
@@ -362,9 +385,7 @@
             <tbody>
         `;
         roundData.matchups.forEach(match => {
-          // "Team vs Team"
           const teamsStr = match.teams[0] + " vs " + match.teams[1];
-          // Winner (append score if Championship round=1 and match.score exists)
           let winnerStr = match.winner;
           if (roundData.round === 1 && match.score) {
             winnerStr += ` (Score: ${match.score})`;
@@ -380,14 +401,29 @@
       } else {
         html += '<p>No matchups available.</p>';
       }
-
       document.getElementById('bracketContainer').innerHTML = html;
-      // Round navigation
-      if (rounds.length > 1) {
-        document.getElementById('bracketNavigation').style.display = 'block';
-        document.getElementById('roundLabel').textContent = `Round ${roundIndex + 1} of ${rounds.length}`;
+      updateBracketNavButtons();
+    }
+
+    function updateBracketNavButtons() {
+      const rounds = currentBracketData ? currentBracketData.rounds : [];
+      // Update top navigation buttons visibility:
+      // Hide Previous on first round, hide Next on last round.
+      if (currentRoundIndex === 0) {
+        document.getElementById('prevRoundTop').style.display = 'none';
       } else {
-        document.getElementById('bracketNavigation').style.display = 'none';
+        document.getElementById('prevRoundTop').style.display = 'inline-block';
+      }
+      if (currentBracketData && currentRoundIndex === rounds.length - 1) {
+        document.getElementById('nextRoundTop').style.display = 'none';
+      } else {
+        document.getElementById('nextRoundTop').style.display = 'inline-block';
+      }
+      // Update round label text
+      if (currentBracketData && rounds.length > 0) {
+        document.getElementById('roundLabel').textContent = `Round ${currentRoundIndex + 1} of ${rounds.length}`;
+      } else {
+        document.getElementById('roundLabel').textContent = '';
       }
     }
 
@@ -403,7 +439,12 @@
       }
     }
 
-    // On page load, show the main menu
+    // Back to Top function for smooth scrolling
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // On page load, show the main menu.
     document.addEventListener("DOMContentLoaded", function() {
       showSection('menuSection');
     });
