@@ -170,8 +170,7 @@
       <div class="menu-item" onclick="showSection('standingsSection')">Standings</div>
       <div class="menu-item" onclick="showSection('bracketsSection')">Brackets</div>
       <div class="menu-item" onclick="showSection('powerRankingsSection')">Power Rankings</div>
-      <div class="menu-item" onclick="showSection('sudokuSection')">Sudoku</div>
-      <div class="menu-item" onclick="showSection('scheduleSection')">Schedule</div>
+      <div class="menu-item" onclick="showSection('scoringSection')">Scoring</div>
     </div>
   </div>
 
@@ -212,7 +211,7 @@
         <option value="marshall">Marshall</option>
         <option value="jeanne">Jeanne</option>
       </select>
-      <!-- Round Dropdown (fixed options) -->
+      <!-- Round Dropdown -->
       <select id="roundSelect" onchange="onRoundChange()">
         <option value="0">64</option>
         <option value="1">32</option>
@@ -238,25 +237,33 @@
     <p>Coming soon...</p>
   </div>
 
-  <!-- Sudoku Section -->
-  <div id="sudokuSection" class="section">
+  <!-- Scoring Section -->
+  <div id="scoringSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>Sudoku</h2>
-    <p>Coming soon...</p>
-  </div>
-
-  <!-- Schedule Section -->
-  <div id="scheduleSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>Schedule</h2>
-    <p>Coming soon...</p>
+    <h2>Scoring</h2>
+    <p>The traditional March Madness scoring method awards points for correctly picking winners in each round, typically doubling each round as follows:</p>
+    <ul style="text-align:left; display:inline-block; margin-top:15px;">
+      <li>Round of 64: 1 point per correct pick</li>
+      <li>Round of 32: 2 points per correct pick</li>
+      <li>Sweet 16: 4 points per correct pick</li>
+      <li>Elite 8: 8 points per correct pick</li>
+      <li>Final Four: 16 points per correct pick</li>
+      <li>Championship: 32 points for correctly picking the champion</li>
+    </ul>
+    <p style="margin-top:15px;">This scoring method places increasing value on correctly picking winners in later rounds.</p>
   </div>
 
   <!-- Navigation and Content Scripts -->
   <script>
-    // Mapping of JSON round numbers to fixed dropdown order:
-    // We assume JSON rounds are in order: 64, 32, 16, 8, 4, 1.
-    const fixedRoundOrder = ["64", "32", "Sweet 16", "Elite 8", "Final Four", "Championship Game"];
+    // Mapping of JSON round numbers to display labels.
+    const roundLabels = {
+      "64": "64",
+      "32": "32",
+      "16": "Sweet 16",
+      "8": "Elite 8",
+      "4": "Final Four",
+      "1": "Championship Game"
+    };
 
     // Global bracket variables
     let currentBracketData = null;
@@ -368,7 +375,7 @@
         .then(response => response.json())
         .then(data => {
           currentBracketData = data;
-          // Preserve currentRoundIndex if possible; else default to 0.
+          // Preserve currentRoundIndex if possible; otherwise default to 0.
           if (typeof currentRoundIndex !== 'number' || currentRoundIndex >= data.rounds.length) {
             currentRoundIndex = 0;
           }
