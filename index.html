@@ -92,17 +92,19 @@
     .back-button:hover {
       background: #ddd;
     }
-    /* Table styling for Standings */
+    /* Table styling for Standings and Brackets */
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 20px auto;
       max-width: 600px;
+      color: #fff;
     }
     th, td {
       border: 2px solid #fff;
       padding: 15px;
       font-size: 1.5rem;
+      text-align: center;
     }
     th {
       background-color: rgba(255,255,255,0.2);
@@ -167,6 +169,7 @@
   <div id="bracketsSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
     <h2>Brackets</h2>
+    <!-- Dropdown for 10 Users -->
     <select id="bracketUserSelect" onchange="onBracketUserChange()">
       <option value="">Select a user</option>
       <option value="matt">Matt</option>
@@ -180,9 +183,9 @@
       <option value="marshall">Marshall</option>
       <option value="jeanne">Jeanne</option>
     </select>
-    <div id="bracketContainer" style="margin-top: 20px;">
-      <!-- Bracket round display goes here -->
-    </div>
+    <!-- Container for displaying bracket rounds -->
+    <div id="bracketContainer" style="margin-top: 20px;"></div>
+    <!-- Navigation for switching rounds -->
     <div id="bracketNavigation" style="display:none; margin-top: 20px;">
       <button class="back-button" onclick="previousRound()">&#8592; Previous Round</button>
       <span id="roundLabel" style="margin: 0 15px;"></span>
@@ -213,7 +216,7 @@
 
   <!-- Navigation and Content Scripts -->
   <script>
-    // Function to show a particular section and hide the others
+    // Show/hide sections
     function showSection(sectionId) {
       const sections = document.querySelectorAll('.section');
       sections.forEach(sec => sec.style.display = 'none');
@@ -223,7 +226,7 @@
       }
     }
 
-    // Scramble animation: gradually reveals final text over the duration.
+    // ---------------- Standings Section ----------------
     function animateScramble(element, finalText, durationMs) {
       finalText = finalText.toString();
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{};:,.<>/?";
@@ -255,8 +258,8 @@
       requestAnimationFrame(update);
     }
 
-    // Standings update with dramatic sequential scramble animations.
     function updateStandings() {
+      // Fetch data from data/source.json
       fetch('data/source.json')
         .then(response => response.json())
         .then(data => {
@@ -265,7 +268,7 @@
           participants.sort((a, b) => b.points - a.points);
           const tbody = document.getElementById('standingsBody');
           tbody.innerHTML = '';
-          const totalAnimationTime = 16000; // 16 seconds
+          const totalAnimationTime = 16000; // 16 seconds total
           const totalRows = participants.length;
           const delayStep = totalAnimationTime / totalRows;
           participants.forEach((participant, index) => {
@@ -273,27 +276,27 @@
             const rankCell = document.createElement('td');
             const nameCell = document.createElement('td');
             const pointsCell = document.createElement('td');
-            
-            // Rank shows immediately.
+
+            // Rank shows immediately
             rankCell.textContent = index + 1;
             nameCell.textContent = "";
             pointsCell.textContent = "";
-            
+
             row.appendChild(rankCell);
             row.appendChild(nameCell);
             row.appendChild(pointsCell);
             tbody.appendChild(row);
-            
-            // For progressive effect, row with rank #10 starts immediately,
-            // and rank #1 starts last.
+
+            // Animate from #10 to #1
             const rowDelay = ((totalRows - 1) - index) * delayStep;
             const rowAnimationTime = totalAnimationTime - rowDelay;
-            const nameDuration = rowAnimationTime / 2;  // first half for name scramble
-            const pointsDuration = rowAnimationTime / 2; // second half for points scramble
-            
+            const nameDuration = rowAnimationTime / 2;
+            const pointsDuration = rowAnimationTime / 2;
+
             setTimeout(() => {
               animateScramble(nameCell, participant.name, nameDuration);
             }, rowDelay);
+
             setTimeout(() => {
               animateScramble(pointsCell, participant.points.toString(), pointsDuration);
             }, rowDelay + nameDuration);
@@ -305,7 +308,7 @@
     // ---------------- Brackets Section ----------------
     let currentBracketData = null;
     let currentRoundIndex = 0;
-    
+
     function onBracketUserChange() {
       const select = document.getElementById('bracketUserSelect');
       const user = select.value;
@@ -316,9 +319,9 @@
         document.getElementById('bracketNavigation').style.display = 'none';
       }
     }
-    
+
     function loadBracket(user) {
-      // Assume bracket JSON is at data/brackets/[user].json
+      // bracket JSON at data/brackets/[user].json
       fetch('data/brackets/' + user + '.json')
         .then(response => response.json())
         .then(data => {
@@ -332,7 +335,7 @@
           document.getElementById('bracketNavigation').style.display = 'none';
         });
     }
-    
+
     function showBracketRound(roundIndex) {
       if (!currentBracketData || !currentBracketData.rounds || currentBracketData.rounds.length === 0) {
         document.getElementById('bracketContainer').innerHTML = '<p>No bracket data available.</p>';
@@ -340,43 +343,67 @@
         return;
       }
       const rounds = currentBracketData.rounds;
-      if (roundIndex < 0 || roundIndex >= rounds.length) {
-        return;
-      }
+      if (roundIndex < 0 || roundIndex >= rounds.length) return;
+
       currentRoundIndex = roundIndex;
       const roundData = rounds[roundIndex];
-      let html = '<h3>Round ' + roundData.round + '</h3>';
+
+      // Build an HTML table for this round
+      let html = `<h3>Round of ${roundData.round}</h3>`;
       if (roundData.matchups && roundData.matchups.length > 0) {
-        html += '<ul style="list-style: none; padding: 0;">';
+        html += `
+          <table>
+            <thead>
+              <tr>
+                <th>Team vs Team</th>
+                <th>Winner</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
         roundData.matchups.forEach(match => {
-          html += '<li style="margin: 10px 0;">' + match.team1 + ' vs. ' + match.team2 + '</li>';
+          // "Team vs Team"
+          const teamsStr = match.teams[0] + " vs " + match.teams[1];
+          // Winner (append score if Championship round=1 and match.score exists)
+          let winnerStr = match.winner;
+          if (roundData.round === 1 && match.score) {
+            winnerStr += ` (Score: ${match.score})`;
+          }
+          html += `
+            <tr>
+              <td>${teamsStr}</td>
+              <td>${winnerStr}</td>
+            </tr>
+          `;
         });
-        html += '</ul>';
+        html += `</tbody></table>`;
       } else {
         html += '<p>No matchups available.</p>';
       }
+
       document.getElementById('bracketContainer').innerHTML = html;
+      // Round navigation
       if (rounds.length > 1) {
         document.getElementById('bracketNavigation').style.display = 'block';
-        document.getElementById('roundLabel').textContent = 'Round ' + (roundIndex + 1) + ' of ' + rounds.length;
+        document.getElementById('roundLabel').textContent = `Round ${roundIndex + 1} of ${rounds.length}`;
       } else {
         document.getElementById('bracketNavigation').style.display = 'none';
       }
     }
-    
+
     function nextRound() {
       if (currentBracketData && currentBracketData.rounds && currentRoundIndex < currentBracketData.rounds.length - 1) {
         showBracketRound(currentRoundIndex + 1);
       }
     }
-    
+
     function previousRound() {
       if (currentBracketData && currentBracketData.rounds && currentRoundIndex > 0) {
         showBracketRound(currentRoundIndex - 1);
       }
     }
-    
-    // On page load, display the main menu.
+
+    // On page load, show the main menu
     document.addEventListener("DOMContentLoaded", function() {
       showSection('menuSection');
     });
