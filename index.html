@@ -104,11 +104,19 @@
       color: #fff;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin-bottom: 20px;
+      margin: 10px;
     }
     select:hover {
       background: #fff;
       color: #000;
+    }
+    /* Container for round selection (dropdown) */
+    .round-select-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
     }
     /* Table styling for Standings and Brackets */
     table {
@@ -130,7 +138,7 @@
     tr:nth-child(even) {
       background-color: rgba(255,255,255,0.1);
     }
-    /* Responsive design */
+    /* Responsive design: on mobile, dropdowns stack vertically */
     @media (max-width: 600px) {
       .menu-item {
         font-size: 2rem;
@@ -145,6 +153,9 @@
       th, td {
         font-size: 1.2rem;
         padding: 10px;
+      }
+      .round-select-container {
+        flex-direction: column;
       }
     }
   </style>
@@ -187,11 +198,13 @@
   <div id="bracketsSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
     
-    <!-- Navigation at Top -->
-    <div id="bracketNavigationTop" style="margin: 20px 0;">
-      <button id="prevRoundTop" class="nav-button" onclick="previousRound()">&#8592; Previous Round</button>
-      <span id="roundLabel" style="margin: 0 15px; font-size: 1.2rem;"></span>
-      <button id="nextRoundTop" class="nav-button" onclick="nextRound()">Next Round &#8594;</button>
+    <!-- Round Selection Dropdown -->
+    <div class="round-select-container">
+      <label for="roundSelect" style="margin-right:10px; font-size:1rem;">Select Round:</label>
+      <select id="roundSelect" onchange="onRoundChange()">
+        <option value="">-- Choose a Round --</option>
+        <!-- Options will be populated dynamically -->
+      </select>
     </div>
     
     <h2>Brackets</h2>
@@ -209,6 +222,7 @@
       <option value="marshall">Marshall</option>
       <option value="jeanne">Jeanne</option>
     </select>
+    
     <!-- Container for displaying bracket rounds -->
     <div id="bracketContainer" style="margin-top: 20px;"></div>
     
@@ -349,7 +363,7 @@
         loadBracket(user);
       } else {
         document.getElementById('bracketContainer').innerHTML = '';
-        updateBracketNavButtons();
+        populateRoundSelect([]);
       }
     }
 
@@ -359,25 +373,50 @@
         .then(response => response.json())
         .then(data => {
           currentBracketData = data;
-          // Preserve currentRoundIndex if it exists; otherwise, initialize to 0.
-          if (typeof currentRoundIndex !== 'number') {
+          // If a round was already selected, preserve that index if possible;
+          // otherwise, default to 0.
+          if (typeof currentRoundIndex !== 'number' || currentRoundIndex >= data.rounds.length) {
             currentRoundIndex = 0;
-          } else if (currentRoundIndex >= data.rounds.length) {
-            currentRoundIndex = data.rounds.length - 1;
           }
+          populateRoundSelect(data.rounds);
           showBracketRound(currentRoundIndex);
         })
         .catch(error => {
           console.error('Error loading bracket for ' + user + ':', error);
           document.getElementById('bracketContainer').innerHTML = '<p>Bracket data not available.</p>';
-          updateBracketNavButtons();
+          populateRoundSelect([]);
         });
+    }
+
+    // Populate the round dropdown based on the current bracket's rounds.
+    function populateRoundSelect(rounds) {
+      const roundSelect = document.getElementById('roundSelect');
+      roundSelect.innerHTML = '<option value="">Select a round</option>';
+      if (rounds && rounds.length > 0) {
+        rounds.forEach((roundData, index) => {
+          const label = roundLabels[roundData.round.toString()] || roundData.round;
+          const option = document.createElement('option');
+          option.value = index;
+          option.textContent = label;
+          roundSelect.appendChild(option);
+        });
+        // Set the dropdown to the current round index.
+        roundSelect.value = currentRoundIndex;
+      }
+    }
+
+    function onRoundChange() {
+      const roundSelect = document.getElementById('roundSelect');
+      const newIndex = parseInt(roundSelect.value, 10);
+      if (!isNaN(newIndex)) {
+        currentRoundIndex = newIndex;
+        showBracketRound(currentRoundIndex);
+      }
     }
 
     function showBracketRound(roundIndex) {
       if (!currentBracketData || !currentBracketData.rounds || currentBracketData.rounds.length === 0) {
         document.getElementById('bracketContainer').innerHTML = '<p>No bracket data available.</p>';
-        updateBracketNavButtons();
         return;
       }
       const rounds = currentBracketData.rounds;
@@ -386,9 +425,8 @@
       currentRoundIndex = roundIndex;
       const roundData = rounds[roundIndex];
 
-      // Use the round label mapping (if available)
-      const label = roundLabels[roundData.round.toString()] || roundData.round;
-      let html = `<h3>${label}</h3>`;
+      // Build an HTML table for this round
+      let html = '';
       if (roundData.matchups && roundData.matchups.length > 0) {
         html += `
           <table>
@@ -418,42 +456,6 @@
         html += '<p>No matchups available.</p>';
       }
       document.getElementById('bracketContainer').innerHTML = html;
-      updateBracketNavButtons();
-    }
-
-    function updateBracketNavButtons() {
-      const rounds = currentBracketData ? currentBracketData.rounds : [];
-      // Hide Previous on first round, Next on last round.
-      if (currentRoundIndex === 0) {
-        document.getElementById('prevRoundTop').style.display = 'none';
-      } else {
-        document.getElementById('prevRoundTop').style.display = 'inline-block';
-      }
-      if (currentBracketData && currentRoundIndex === rounds.length - 1) {
-        document.getElementById('nextRoundTop').style.display = 'none';
-      } else {
-        document.getElementById('nextRoundTop').style.display = 'inline-block';
-      }
-      // Update round label text using our mapping.
-      if (currentBracketData && rounds.length > 0) {
-        const currentRound = rounds[currentRoundIndex];
-        const label = roundLabels[currentRound.round.toString()] || currentRound.round;
-        document.getElementById('roundLabel').textContent = `${label} (${currentRoundIndex + 1} of ${rounds.length})`;
-      } else {
-        document.getElementById('roundLabel').textContent = '';
-      }
-    }
-
-    function nextRound() {
-      if (currentBracketData && currentBracketData.rounds && currentRoundIndex < currentBracketData.rounds.length - 1) {
-        showBracketRound(currentRoundIndex + 1);
-      }
-    }
-
-    function previousRound() {
-      if (currentBracketData && currentBracketData.rounds && currentRoundIndex > 0) {
-        showBracketRound(currentRoundIndex - 1);
-      }
     }
 
     // Back to Top function for smooth scrolling
