@@ -172,7 +172,7 @@
     </div>
   </div>
 
-  <!-- Standings Section (unchanged) -->
+  <!-- Standings Section -->
   <div id="standingsSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
     <h2>Standings</h2>
@@ -190,12 +190,10 @@
     </table>
   </div>
 
-  <!-- Brackets Section (unchanged) -->
+  <!-- Brackets Section -->
   <div id="bracketsSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    
     <div class="dropdown-container">
-      <!-- User Dropdown -->
       <select id="bracketUserSelect" onchange="onBracketUserChange()">
         <option value="">Select a user</option>
         <option value="matt">Matt</option>
@@ -209,7 +207,6 @@
         <option value="marshall">Marshall</option>
         <option value="jeanne">Jeanne</option>
       </select>
-      <!-- Round Dropdown (fixed options) -->
       <select id="roundSelect" onchange="onRoundChange()">
         <option value="0">64</option>
         <option value="1">32</option>
@@ -219,11 +216,8 @@
         <option value="5">Championship Game</option>
       </select>
     </div>
-    
     <h2>Brackets</h2>
-    <!-- Container for displaying bracket rounds -->
     <div id="bracketContainer" style="margin-top: 20px;"></div>
-    
     <button class="back-button" style="margin-top:20px;" onclick="scrollToTop()">Back to Top</button>
   </div>
 
@@ -237,8 +231,7 @@
 
   <!-- Navigation and Content Scripts -->
   <script>
-    /********* Existing Functions: Standings and Brackets **********/
-    // Standings Functions
+    /********* Standings Functions **********/
     function animateScramble(element, finalText, durationMs) {
       finalText = finalText.toString();
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{};:,.<>/?";
@@ -324,14 +317,13 @@
         })
         .catch(error => console.error('Error fetching JSON:', error));
     }
-    // Live update standings every 5 seconds if visible.
     setInterval(() => {
       if (document.getElementById('standingsSection').style.display === 'block') {
         updateStandings();
       }
     }, 5000);
 
-    /********* Brackets Section Functions **********/
+    /********* Brackets Functions **********/
     let currentBracketData = null;
     let currentRoundIndex = 0;
     function onBracketUserChange() {
@@ -408,8 +400,8 @@
       document.getElementById('bracketContainer').innerHTML = html;
     }
 
-    /********* AI Analyze Section Functions **********/
-    // Initialize round4 and round5 as arrays
+    /********* AI Analyze Functions **********/
+    // Initialize selections as arrays for rounds 4 & 5.
     let userSelections = {
       round4: [],
       round5: [],
@@ -417,6 +409,9 @@
     };
     let analyzeStep = 1;
     let matchupData = null; // Loaded from /marchmad/data/matchup.json
+    // Cache analysis data globally.
+    let analysisSource = null;
+    let analysisPicks = null;
     function loadMatchupData(callback) {
       fetch('/marchmad/data/matchup.json?v=' + new Date().getTime())
         .then(response => response.json())
@@ -426,7 +421,92 @@
         })
         .catch(error => console.error('Error loading matchup data:', error));
     }
-    // Remove explicit next buttons – automatically progress when selections complete.
+    function loadAnalysisData() {
+      Promise.all([
+        fetch('/marchmad/data/source.json?v=' + new Date().getTime()).then(r => r.json()),
+        fetch('/marchmad/data/picks.json?v=' + new Date().getTime()).then(r => r.json())
+      ]).then(([src, picks]) => {
+        analysisSource = src;
+        analysisPicks = picks;
+        updateLiveAnalysis();
+      }).catch(error => console.error('Error loading analysis data:', error));
+    }
+    // Update live analysis (if final score is valid)
+    function updateLiveAnalysis() {
+      const scoreInput = document.getElementById('finalScoreInput');
+      const liveElem = document.getElementById('liveAnalysis');
+      if (!scoreInput || !liveElem) return;
+      if (!scoreInput.value.match(/^\d+\s*-\s*\d+$/)) {
+        liveElem.innerHTML = '<h3>Live Analysis</h3><p>Please enter a valid final score to update analysis.</p>';
+        return;
+      }
+      const finalScoreStr = scoreInput.value.trim();
+      const actualParts = finalScoreStr.split('-').map(s => parseInt(s.trim()));
+      const actualMargin = actualParts[0] - actualParts[1];
+      if (!analysisSource || !analysisPicks) {
+        liveElem.innerHTML = '<h3>Live Analysis</h3><p>Loading analysis data...</p>';
+        return;
+      }
+      let results = [];
+      analysisSource.participants.forEach(participant => {
+        const playerName = participant.name;
+        let currentScore = participant.points;
+        let additional = 0;
+        let tieBreakerDiff = Infinity;
+        const playerPicks = analysisPicks[playerName.toUpperCase()] || { round4: [], round5: [], round6: [] };
+        // Round 4 (Elite 8: 8 points each)
+        if (playerPicks.round4 && matchupData.round4) {
+          matchupData.round4.forEach((game, index) => {
+            const effectiveWinner = game.winner ? game.winner : userSelections.round4[index];
+            const pick = playerPicks.round4[index] ? playerPicks.round4[index].pick : null;
+            if (effectiveWinner && pick && effectiveWinner.toLowerCase() === pick.toLowerCase()) {
+              additional += 8;
+            }
+          });
+        }
+        // Round 5 (Final Four: 16 points each)
+        if (playerPicks.round5 && userSelections.round5) {
+          userSelections.round5.forEach((winner, index) => {
+            const pick = playerPicks.round5[index] ? playerPicks.round5[index].pick : null;
+            if (winner && pick && winner.toLowerCase() === pick.toLowerCase()) {
+              additional += 16;
+            }
+          });
+        }
+        // Round 6 (Championship: 32 points)
+        if (playerPicks.round6 && userSelections.round6.champion) {
+          const pick = playerPicks.round6[0] ? playerPicks.round6[0].pick : null;
+          if (pick && userSelections.round6.champion.toLowerCase() === pick.toLowerCase()) {
+            additional += 32;
+            const predictedScoreStr = playerPicks.round6[0].score;
+            if (predictedScoreStr && predictedScoreStr.match(/^\d+\s*-\s*\d+$/)) {
+              const predictedParts = predictedScoreStr.split('-').map(s => parseInt(s.trim()));
+              const predictedMargin = predictedParts[0] - predictedParts[1];
+              tieBreakerDiff = Math.abs(predictedMargin - actualMargin);
+            }
+          }
+        }
+        const finalScore = currentScore + additional;
+        results.push({ player: playerName, finalScore: finalScore, tieBreakerDiff: tieBreakerDiff });
+      });
+      const maxScore = Math.max(...results.map(r => r.finalScore));
+      results.forEach(r => {
+        r.chance = ((r.finalScore / (maxScore + 5)) * 100).toFixed(1);
+      });
+      results.sort((a, b) => {
+        if (b.finalScore === a.finalScore) {
+          return a.tieBreakerDiff - b.tieBreakerDiff;
+        }
+        return b.finalScore - a.finalScore;
+      });
+      let tableHTML = '<h3>Live Analysis</h3><table><thead><tr><th>PLAYER</th><th>% CHANCE TO WIN</th><th>POINTS</th></tr></thead><tbody>';
+      results.forEach(r => {
+        tableHTML += '<tr><td>' + r.player + '</td><td>' + r.chance + '%</td><td>' + r.finalScore + '</td></tr>';
+      });
+      tableHTML += '</tbody></table>';
+      liveElem.innerHTML = tableHTML;
+    }
+    // showAnalyzeStep: automatically progress when selections are complete.
     function showAnalyzeStep(step) {
       analyzeStep = step;
       const container = document.getElementById('analyzeContent');
@@ -440,20 +520,19 @@
       } else if (step === 3) {
         container.innerHTML = '<h2>Championship Selection</h2><div id="championshipContainer"></div>' +
                               '<div><label for="finalScoreInput">Enter Final Score (e.g., 85-82): </label>' +
-                              '<input type="text" id="finalScoreInput" /></div>';
+                              '<input type="text" id="finalScoreInput" /></div>' +
+                              '<div id="liveAnalysis" style="margin-top:20px;"><h3>Live Analysis</h3><p>Please enter a valid final score to update analysis.</p></div>';
         renderChampionship();
-        // Listen for Enter key on the score input
-        document.getElementById('finalScoreInput').addEventListener('keypress', function(e) {
-          if (e.key === 'Enter') {
-            analyzeResults();
-          }
+        // Listen for input events on finalScoreInput to update analysis live.
+        document.getElementById('finalScoreInput').addEventListener('input', function() {
+          updateLiveAnalysis();
         });
       } else if (step === 4) {
         container.innerHTML = '<h2>Analysis Results</h2><div id="analysisResults"></div>' +
                               '<button class="back-button" onclick="showSection(\'menuSection\')">Back to Menu</button>';
       }
     }
-    // Render Elite 8 UI with selectable buttons that highlight on click
+    // Render Elite 8 UI
     function renderElite8() {
       const container = document.getElementById('elite8Container');
       if (!matchupData) {
@@ -465,7 +544,6 @@
         html += '<div style="margin-bottom:20px;">';
         html += '<p>Game ' + (index + 1) + ': ' + game.teams[0] + ' vs ' + game.teams[1] + '</p>';
         if (game.winner) {
-          // Use a confirmed style for games with a preset winner
           html += '<div class="confirmed">Result: ' + game.winner + '</div>';
           userSelections.round4[index] = game.winner;
         } else {
@@ -480,7 +558,6 @@
         html += '</div>';
       });
       container.innerHTML = html;
-      // Automatically progress if all games are selected or confirmed
       const allSelected = matchupData.round4.every((game, idx) => game.winner || userSelections.round4[idx]);
       if (allSelected) {
         setTimeout(() => { goToFinalFour(); }, 500);
@@ -488,11 +565,11 @@
     }
     function selectElite8(gameIndex, team, buttonElement) {
       userSelections.round4[gameIndex] = team;
-      // Highlight the selected button (remove from siblings)
       const parentDiv = buttonElement.parentElement;
       Array.from(parentDiv.children).forEach(btn => btn.classList.remove('selected'));
       buttonElement.classList.add('selected');
       renderElite8();
+      updateLiveAnalysis();
     }
     function goToFinalFour() {
       window.effectiveRound4 = matchupData.round4.map((game, idx) => game.winner ? game.winner : userSelections.round4[idx]);
@@ -506,7 +583,6 @@
             teamC = effectiveRound4[2],
             teamD = effectiveRound4[3];
       let html = '';
-      // Game 1
       html += '<div style="margin-bottom:20px;">';
       html += '<p>Final Four Game 1: ' + teamA + ' vs ' + teamB + '</p>';
       if (userSelections.round5[0]) {
@@ -518,7 +594,6 @@
         html += '</div>';
       }
       html += '</div>';
-      // Game 2
       html += '<div style="margin-bottom:20px;">';
       html += '<p>Final Four Game 2: ' + teamC + ' vs ' + teamD + '</p>';
       if (userSelections.round5[1]) {
@@ -535,6 +610,7 @@
       if (allSelected) {
         setTimeout(() => { goToChampionship(); }, 500);
       }
+      updateLiveAnalysis();
     }
     function selectFinalFour(gameIndex, team, buttonElement) {
       userSelections.round5[gameIndex] = team;
@@ -542,6 +618,7 @@
       Array.from(parentDiv.children).forEach(btn => btn.classList.remove('selected'));
       buttonElement.classList.add('selected');
       renderFinalFour();
+      updateLiveAnalysis();
     }
     function goToChampionship() {
       window.effectiveRound5 = userSelections.round5.slice();
@@ -563,14 +640,12 @@
       }
       container.innerHTML = html;
       if (userSelections.round6.champion) {
-        // Attach listener for valid score input to auto-analyze
         const scoreInput = document.getElementById('finalScoreInput');
-        scoreInput.addEventListener('change', function() {
-          if(scoreInput.value.match(/^\d+\s*-\s*\d+$/)) {
-            analyzeResults();
-          }
+        scoreInput.addEventListener('input', function() {
+          updateLiveAnalysis();
         });
       }
+      updateLiveAnalysis();
     }
     function selectChampionship(team, buttonElement) {
       userSelections.round6.champion = team;
@@ -578,94 +653,81 @@
       Array.from(parentDiv.children).forEach(btn => btn.classList.remove('selected'));
       buttonElement.classList.add('selected');
       renderChampionship();
+      updateLiveAnalysis();
     }
-    // Analyze results based on current scores, picks, and user selections
-    function analyzeResults() {
-      const finalScoreStr = document.getElementById('finalScoreInput').value.trim();
-      if (!finalScoreStr.match(/^\d+\s*-\s*\d+$/)) {
-        alert('Please enter a valid final score (e.g., 85-82).');
+    // Instead of a separate analyzeResults(), updateLiveAnalysis() now does the calculation and updates the live analysis container.
+    function updateLiveAnalysis() {
+      const scoreInput = document.getElementById('finalScoreInput');
+      const liveElem = document.getElementById('liveAnalysis');
+      if (!scoreInput || !liveElem) return;
+      if (!scoreInput.value.match(/^\d+\s*-\s*\d+$/)) {
+        liveElem.innerHTML = '<h3>Live Analysis</h3><p>Please enter a valid final score to update analysis.</p>';
         return;
       }
-      userSelections.round6.score = finalScoreStr;
+      const finalScoreStr = scoreInput.value.trim();
       const actualParts = finalScoreStr.split('-').map(s => parseInt(s.trim()));
       const actualMargin = actualParts[0] - actualParts[1];
-      Promise.all([
-        fetch('/marchmad/data/source.json?v=' + new Date().getTime()).then(r => r.json()),
-        fetch('/marchmad/data/picks.json?v=' + new Date().getTime()).then(r => r.json())
-      ]).then(([sourceData, picksData]) => {
-        let results = [];
-        sourceData.participants.forEach(participant => {
-          const playerName = participant.name;
-          let currentScore = participant.points;
-          let additional = 0;
-          let tieBreakerDiff = Infinity;
-          const playerPicks = picksData[playerName.toUpperCase()] || { round4: [], round5: [], round6: [] };
-          // Round 4 (Elite 8: 8 points each)
-          if (playerPicks.round4 && matchupData.round4) {
-            matchupData.round4.forEach((game, index) => {
-              const effectiveWinner = game.winner ? game.winner : userSelections.round4[index];
-              const pick = playerPicks.round4[index] ? playerPicks.round4[index].pick : null;
-              if (effectiveWinner && pick && effectiveWinner.toLowerCase() === pick.toLowerCase()) {
-                additional += 8;
-              }
-            });
-          }
-          // Round 5 (Final Four: 16 points each)
-          if (playerPicks.round5 && userSelections.round5) {
-            userSelections.round5.forEach((winner, index) => {
-              const pick = playerPicks.round5[index] ? playerPicks.round5[index].pick : null;
-              if (winner && pick && winner.toLowerCase() === pick.toLowerCase()) {
-                additional += 16;
-              }
-            });
-          }
-          // Round 6 (Championship: 32 points)
-          if (playerPicks.round6 && userSelections.round6.champion) {
-            const pick = playerPicks.round6[0] ? playerPicks.round6[0].pick : null;
-            if (pick && userSelections.round6.champion.toLowerCase() === pick.toLowerCase()) {
-              additional += 32;
-              const predictedScoreStr = playerPicks.round6[0].score;
-              if (predictedScoreStr && predictedScoreStr.match(/^\d+\s*-\s*\d+$/)) {
-                const predictedParts = predictedScoreStr.split('-').map(s => parseInt(s.trim()));
-                const predictedMargin = predictedParts[0] - predictedParts[1];
-                tieBreakerDiff = Math.abs(predictedMargin - actualMargin);
-              }
+      if (!analysisSource || !analysisPicks) {
+        liveElem.innerHTML = '<h3>Live Analysis</h3><p>Loading analysis data...</p>';
+        return;
+      }
+      let results = [];
+      analysisSource.participants.forEach(participant => {
+        const playerName = participant.name;
+        let currentScore = participant.points;
+        let additional = 0;
+        let tieBreakerDiff = Infinity;
+        const playerPicks = analysisPicks[playerName.toUpperCase()] || { round4: [], round5: [], round6: [] };
+        if (playerPicks.round4 && matchupData.round4) {
+          matchupData.round4.forEach((game, index) => {
+            const effectiveWinner = game.winner ? game.winner : userSelections.round4[index];
+            const pick = playerPicks.round4[index] ? playerPicks.round4[index].pick : null;
+            if (effectiveWinner && pick && effectiveWinner.toLowerCase() === pick.toLowerCase()) {
+              additional += 8;
+            }
+          });
+        }
+        if (playerPicks.round5 && userSelections.round5) {
+          userSelections.round5.forEach((winner, index) => {
+            const pick = playerPicks.round5[index] ? playerPicks.round5[index].pick : null;
+            if (winner && pick && winner.toLowerCase() === pick.toLowerCase()) {
+              additional += 16;
+            }
+          });
+        }
+        if (playerPicks.round6 && userSelections.round6.champion) {
+          const pick = playerPicks.round6[0] ? playerPicks.round6[0].pick : null;
+          if (pick && userSelections.round6.champion.toLowerCase() === pick.toLowerCase()) {
+            additional += 32;
+            const predictedScoreStr = playerPicks.round6[0].score;
+            if (predictedScoreStr && predictedScoreStr.match(/^\d+\s*-\s*\d+$/)) {
+              const predictedParts = predictedScoreStr.split('-').map(s => parseInt(s.trim()));
+              const predictedMargin = predictedParts[0] - predictedParts[1];
+              tieBreakerDiff = Math.abs(predictedMargin - actualMargin);
             }
           }
-          const finalScore = currentScore + additional;
-          results.push({ player: playerName, finalScore: finalScore, tieBreakerDiff: tieBreakerDiff });
-        });
-        const maxScore = Math.max(...results.map(r => r.finalScore));
-        results.forEach(r => {
-          r.chance = ((r.finalScore / (maxScore + 5)) * 100).toFixed(1);
-        });
-        results.sort((a, b) => {
-          if (b.finalScore === a.finalScore) {
-            return a.tieBreakerDiff - b.tieBreakerDiff;
-          }
-          return b.finalScore - a.finalScore;
-        });
-        let tableHTML = '<table><thead><tr><th>PLAYER</th><th>% CHANCE TO WIN</th><th>POINTS</th></tr></thead><tbody>';
-        results.forEach(r => {
-          tableHTML += '<tr><td>' + r.player + '</td><td>' + r.chance + '%</td><td>' + r.finalScore + '</td></tr>';
-        });
-        tableHTML += '</tbody></table>';
-        // First, render the Analysis Results section so that the element exists.
-        showAnalyzeStep(4);
-        // After a short delay, update the analysisResults element.
-        setTimeout(() => {
-          const analysisElem = document.getElementById('analysisResults');
-          if (analysisElem) {
-            analysisElem.innerHTML = tableHTML;
-          } else {
-            console.error("analysisResults element not found.");
-          }
-        }, 100);
-      }).catch(error => {
-        console.error('Error during analysis:', error);
+        }
+        const finalScore = currentScore + additional;
+        results.push({ player: playerName, finalScore: finalScore, tieBreakerDiff: tieBreakerDiff });
       });
+      const maxScore = Math.max(...results.map(r => r.finalScore));
+      results.forEach(r => {
+        r.chance = ((r.finalScore / (maxScore + 5)) * 100).toFixed(1);
+      });
+      results.sort((a, b) => {
+        if (b.finalScore === a.finalScore) {
+          return a.tieBreakerDiff - b.tieBreakerDiff;
+        }
+        return b.finalScore - a.finalScore;
+      });
+      let tableHTML = '<h3>Live Analysis</h3><table><thead><tr><th>PLAYER</th><th>% CHANCE TO WIN</th><th>POINTS</th></tr></thead><tbody>';
+      results.forEach(r => {
+        tableHTML += '<tr><td>' + r.player + '</td><td>' + r.chance + '%</td><td>' + r.finalScore + '</td></tr>';
+      });
+      tableHTML += '</tbody></table>';
+      liveElem.innerHTML = tableHTML;
     }
-    // Show a section and hide others
+    // Show a section and initialize as needed.
     function showSection(sectionId) {
       const sections = document.querySelectorAll('.section');
       sections.forEach(sec => sec.style.display = 'none');
@@ -677,9 +739,9 @@
         analyzeStep = 1;
         userSelections = { round4: [], round5: [], round6: { champion: null, score: null } };
         loadMatchupData(() => { showAnalyzeStep(1); });
+        loadAnalysisData();
       }
     }
-    // Scroll to top
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
