@@ -409,7 +409,7 @@
     }
 
     /********* AI Analyze Section Functions **********/
-    // Updated: Initialize round4 and round5 as arrays
+    // Initialize round4 and round5 as arrays
     let userSelections = {
       round4: [],
       round5: [],
@@ -426,7 +426,7 @@
         })
         .catch(error => console.error('Error loading matchup data:', error));
     }
-    // Remove next buttons – automatically progress when selections complete.
+    // Remove explicit next buttons – automatically progress when selections complete.
     function showAnalyzeStep(step) {
       analyzeStep = step;
       const container = document.getElementById('analyzeContent');
@@ -488,11 +488,10 @@
     }
     function selectElite8(gameIndex, team, buttonElement) {
       userSelections.round4[gameIndex] = team;
-      // Highlight the selected button (remove from sibling)
+      // Highlight the selected button (remove from siblings)
       const parentDiv = buttonElement.parentElement;
       Array.from(parentDiv.children).forEach(btn => btn.classList.remove('selected'));
       buttonElement.classList.add('selected');
-      // Re-render the container to show the selected value
       renderElite8();
     }
     function goToFinalFour() {
@@ -564,7 +563,7 @@
       }
       container.innerHTML = html;
       if (userSelections.round6.champion) {
-        // If champion selected, attach listener for valid score input to auto-analyze
+        // Attach listener for valid score input to auto-analyze
         const scoreInput = document.getElementById('finalScoreInput');
         scoreInput.addEventListener('change', function() {
           if(scoreInput.value.match(/^\d+\s*-\s*\d+$/)) {
@@ -651,8 +650,17 @@
           tableHTML += '<tr><td>' + r.player + '</td><td>' + r.chance + '%</td><td>' + r.finalScore + '</td></tr>';
         });
         tableHTML += '</tbody></table>';
-        document.getElementById('analysisResults').innerHTML = tableHTML;
+        // First, render the Analysis Results section so that the element exists.
         showAnalyzeStep(4);
+        // After a short delay, update the analysisResults element.
+        setTimeout(() => {
+          const analysisElem = document.getElementById('analysisResults');
+          if (analysisElem) {
+            analysisElem.innerHTML = tableHTML;
+          } else {
+            console.error("analysisResults element not found.");
+          }
+        }, 100);
       }).catch(error => {
         console.error('Error during analysis:', error);
       });
