@@ -142,97 +142,7 @@
     tr:nth-child(even) {
       background-color: rgba(255,255,255,0.1);
     }
-    /* Scoring Section Styling */
-    #scoringSection {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #fff;
-      border-radius: 10px;
-      padding: 30px;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    #scoringSection p, #scoringSection li {
-      font-size: 1.2rem;
-      line-height: 1.6;
-    }
-    #scoringSection ul {
-      list-style: disc;
-      margin: 15px 0 15px 20px;
-      text-align: left;
-    }
-    /* TV Schedule Section Styling */
-    #tvScheduleSection {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #fff;
-      border-radius: 10px;
-      padding: 30px;
-      margin: 20px auto;
-      max-width: 600px;
-      text-align: left;
-    }
-    #tvScheduleSection h3 {
-      font-family: 'Roboto Condensed', sans-serif;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-    #tvScheduleSection ul {
-      list-style: disc;
-      margin: 10px 0 20px 20px;
-      padding: 0;
-    }
-    #tvScheduleSection li {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
-    /* Facts Section Styling */
-    #factsSection {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #fff;
-      border-radius: 10px;
-      padding: 30px;
-      margin: 20px auto;
-      max-width: 600px;
-      text-align: left;
-    }
-    #factsSection h3 {
-      font-family: 'Roboto Condensed', sans-serif;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-    #factContent {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-    #factContent p {
-      margin-bottom: 10px;
-    }
-    /* Navigation arrows for facts */
-    .fact-nav {
-      font-size: 1.2rem;
-      cursor: pointer;
-      padding: 10px 20px;
-      border: 2px solid #fff;
-      background: #000;
-      color: #fff;
-      border-radius: 5px;
-      margin: 0 10px;
-      transition: all 0.3s ease;
-    }
-    .fact-nav:hover {
-      background: #fff;
-      color: #000;
-    }
-    .fact-nav-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
-    }
-    /* Responsive design: on mobile, dropdowns and facts stack */
+    /* Responsive design: on mobile, adjust menu and table text sizes */
     @media (max-width: 600px) {
       .menu-item {
         font-size: 2rem;
@@ -248,12 +158,6 @@
         font-size: 1.2rem;
         padding: 10px;
       }
-      .fact-nav-container {
-        flex-direction: column;
-      }
-      .fact-nav {
-        margin: 10px 0;
-      }
     }
   </style>
 </head>
@@ -267,10 +171,6 @@
       </div>
       <div class="menu-item" onclick="showSection('standingsSection')">Standings</div>
       <div class="menu-item" onclick="showSection('bracketsSection')">Brackets</div>
-      <div class="menu-item" onclick="showSection('powerRankingsSection')">Power Rankings</div>
-      <div class="menu-item" onclick="showSection('scoringSection')">Scoring</div>
-      <div class="menu-item" onclick="showSection('tvScheduleSection')">TV Schedule</div>
-      <div class="menu-item" onclick="showSection('factsSection')">10 Facts</div>
     </div>
   </div>
 
@@ -327,92 +227,6 @@
     <div id="bracketContainer" style="margin-top: 20px;"></div>
     
     <!-- Back to Top Button at Bottom -->
-    <button class="back-button" style="margin-top:20px;" onclick="scrollToTop()">Back to Top</button>
-  </div>
-
-  <!-- Power Rankings Section -->
-  <div id="powerRankingsSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>Power Rankings</h2>
-    <p>Coming soon...</p>
-  </div>
-
-  <!-- Scoring Section -->
-  <div id="scoringSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>Scoring</h2>
-    <div id="scoringContent">
-      <p>The traditional March Madness scoring method awards points for correctly picking winners in each round, typically doubling each round as follows:</p>
-      <ul>
-        <li>Round of 64: 1 point per correct pick</li>
-        <li>Round of 32: 2 points per correct pick</li>
-        <li>Sweet 16: 4 points per correct pick</li>
-        <li>Elite 8: 8 points per correct pick</li>
-        <li>Final Four: 16 points per correct pick</li>
-        <li>Championship Game: 32 points for correctly picking the champion</li>
-      </ul>
-      <p>This scoring method places increasing value on correctly picking winners in later rounds.</p>
-    </div>
-  </div>
-
-  <!-- TV Schedule Section -->
-  <div id="tvScheduleSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>TV Schedule</h2>
-    <h3>Thursday, March 20 (First Round/Round of 64)</h3>
-    <ul>
-      <li>(8) Louisville vs. (9) Creighton, 12:15 p.m. | CBS</li>
-      <li>(4) Purdue vs. (13) High Point, 12:40 p.m. | truTV</li>
-      <li>(3) Wisconsin vs. (14) Montana, 1:30 p.m. | TNT</li>
-      <li>(1) Houston vs. (16) SIU Edwardsville, 2 p.m. | TBS</li>
-      <li>(1) Auburn vs. (16) Alabama State, 2:50 p.m. | CBS</li>
-      <li>(5) Clemson vs. (12) McNeese, 3:15 p.m. | truTV</li>
-      <li>(6) BYU vs. (11) VCU, 4:05 p.m. | TNT</li>
-      <li>(8) Gonzaga vs. (9) Georgia, 4:35 p.m. | TBS</li>
-      <li>(2) Tennessee vs. (15) Wofford, 6:50 p.m. | TNT</li>
-      <li>(7) Kansas vs. (10) Arkansas, 7:10 p.m. | CBS</li>
-      <li>(4) Texas A&M vs. (13) Yale, 7:25 p.m. | TBS</li>
-      <li>(6) Missouri vs. (11) Drake, 7:35 p.m. | truTV</li>
-      <li>(7) UCLA vs. (10) Utah State, 9:25 p.m. | TNT</li>
-      <li>(2) St. John's vs. (15) Omaha, 9:45 p.m. | CBS</li>
-      <li>(5) Michigan vs. (12) UC San Diego, 10 p.m. | TBS</li>
-      <li>(3) Texas Tech vs. (14) UNC Wilmington, 10:10 p.m. | truTV</li>
-    </ul>
-    <h3>Friday, March 21 (First Round/Round of 64)</h3>
-    <ul>
-      <li>(8) Mississippi State vs. (9) Baylor, 12:15 p.m. | CBS</li>
-      <li>(2) Alabama vs. (15) Robert Morris, 12:40 p.m. | truTV</li>
-      <li>(3) Iowa State vs. (14) Lipscomb, 1:30 p.m. | TNT</li>
-      <li>(5) Memphis vs. (12) Colorado State, 2 p.m. | TBS</li>
-      <li>(1) Duke vs. (16) Mount St. Mary's/American, 2:50 p.m. | CBS</li>
-      <li>(7) Saint Mary's vs. (10) Vanderbilt, 3:15 p.m. | truTV</li>
-      <li>(6) Ole Miss vs. (11) North Carolina, 4:05 p.m. | TNT</li>
-      <li>(4) Maryland vs. (13) Grand Canyon, 4:35 p.m. | TBS</li>
-      <li>(1) Florida vs. (16) Norfolk State, 6:50 p.m. | TNT</li>
-      <li>(3) Kentucky vs. (14) Troy, 7:10 p.m. | CBS</li>
-      <li>(7) Marquette vs. (10) New Mexico, 7:25 p.m. | TBS</li>
-      <li>(4) Arizona vs. (13) Akron, 7:35 p.m. | truTV</li>
-      <li>(8) UConn vs. (9) Oklahoma, 9:25 p.m. | TNT</li>
-      <li>(6) Illinois vs. (11) Xavier/Texas, 9:45 p.m. | TNT</li>
-      <li>(2) Michigan State vs. (15) Bryant, 10 p.m. | TBS</li>
-      <li>(5) Oregon vs. (12) Liberty, 10:10 p.m. | truTV</li>
-    </ul>
-    <h3>Saturday, March 22 (Second Round/Round of 32)</h3>
-    <p>(TV schedule for Saturday will be updated soon.)</p>
-    <button class="back-button" style="margin-top:20px;" onclick="scrollToTop()">Back to Top</button>
-  </div>
-
-  <!-- Facts Section -->
-  <div id="factsSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>10 Facts</h2>
-    <div id="factContent">
-      <!-- Fact content will be dynamically updated -->
-    </div>
-    <div class="fact-nav-container">
-      <button class="fact-nav" onclick="previousFact()">&#8592; Previous</button>
-      <button class="fact-nav" onclick="nextFact()">Next &#8594;</button>
-    </div>
     <button class="back-button" style="margin-top:20px;" onclick="scrollToTop()">Back to Top</button>
   </div>
 
@@ -625,86 +439,13 @@
       }
       document.getElementById('bracketContainer').innerHTML = html;
     }
+    
+    // Simple scroll to top function for Back to Top buttons.
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    // ---------------- TV Schedule Section ----------------
-    // TV schedule content is static and defined in the HTML below.
-
-    // ---------------- Facts Section ----------------
-    const facts = [
-      {
-        question: "Who picked the riskiest bracket overall?",
-        answer: "Jeanne",
-        explanation: "Why? She not only chose a #4 seed (Texas A&M) to win the entire tournament—something no one else did—but also took several big underdogs in the first round (e.g., a #15, #14, and #13 seed all advancing). In other words, she has the most picks that deviate from the standard “chalk” (favorites)."
-      },
-      {
-        question: "Who has the most conservative (chalk-heavy) bracket?",
-        answer: "Larry",
-        explanation: "Why? Larry’s bracket is dominated by #1 and #2 seeds almost everywhere you look. In his Final Four, for instance, he has three #1 seeds (Auburn, Florida, Duke) plus a #2 (Tennessee), and he crowned a #1 seed (Florida) as champion—about as “safe” (top-heavy) a bracket as you can get."
-      },
-      {
-        question: "Who predicted the most first-round upsets?",
-        answer: "Matt",
-        explanation: "Why? Counting “true” upsets in Round 1 (i.e., 10‐over‐7, 11‐over‐6, 12‐over‐5, etc.), Matt picked double‐digit shockers like #14 Lipscomb over #3 Iowa State, #13 Grand Canyon over #4 Maryland, #15 Wofford over #2 Tennessee, #12 Liberty over #5 Oregon—and more. He ends up with about ten round‐of‐64 underdogs winning, which is the most of anyone."
-      },
-      {
-        question: "Who picked the lowest seed to reach the Final Four?",
-        answer: "A three-way tie among Paige, Peggy, and Matt",
-        explanation: "No one else pushed a seed lower than #5 all the way to the Final Four. Jeanne had a #4 seed winning the title, but that is still not as “low” a seed number as #5."
-      },
-      {
-        question: "Which two players chose brackets most similar to each other?",
-        answer: "Peggy and Scott",
-        explanation: "Why? They share a very similar Final Four (both have Auburn, Florida, Duke, and a fifth‐seed or second‐seed in the mix) and they picked the exact same championship matchup (Florida vs. Duke) with the same champion (Florida). Their early‐round picks also line up closely."
-      },
-      {
-        question: "Who selected a champion that nobody else picked?",
-        answer: "Jeanne",
-        explanation: "Why? She went with Texas A&M (#4 seed) as her champion. All other brackets chose Auburn, Florida, Duke, or Michigan State—no one else has A&M cutting down the nets."
-      },
-      {
-        question: "Who has the most unusual Final Four teams?",
-        answer: "Jeanne again",
-        explanation: "Why? Her Final Four is Texas A&M (#4), Iowa State (#3), St. John’s (#2), and Tennessee (#2). Almost everyone else has at least one #1 seed in the Final Four (Auburn, Florida, or Duke). Jeanne is the only person with no #1s and a #4 as her champion."
-      },
-      {
-        question: "Who predicted the highest-scoring championship game?",
-        answer: "Scott",
-        explanation: "Why? Looking at the final-game tiebreakers, Scott’s total (85) is the highest. Peggy and Matt are at 84, Blake at 82, Paige at 78, Larry 77, etc. Scott tops everyone with an 85-point final."
-      },
-      {
-        question: "Who has the most upsets in the Sweet 16 and Elite 8 rounds?",
-        answer: "Matt",
-        explanation: "Why? It isn’t just that Matt picked a lot of underdogs in the first round—he continued riding them through the middle rounds. He advances multiple double‐digit seeds (e.g., Lipscomb, Liberty, Grand Canyon, Wofford, etc.) into later rounds more often than anyone else."
-      },
-      {
-        question: "Who predicted the fewest number-one seeds in their Final Four?",
-        answer: "Jeanne",
-        explanation: "Why? She has zero #1 seeds in her Final Four (it’s #4, #3, #2, #2). Everyone else has at least one #1 seed in that last weekend."
-      }
-    ];
-    let currentFactIndex = 0;
-    function updateFact() {
-      const factContainer = document.getElementById('factContent');
-      const fact = facts[currentFactIndex];
-      factContainer.innerHTML = `
-        <p><strong>Q: ${fact.question}</strong></p>
-        <p><strong>A: ${fact.answer}</strong></p>
-        <p>${fact.explanation}</p>
-      `;
-    }
-    function nextFact() {
-      if (currentFactIndex < facts.length - 1) {
-        currentFactIndex++;
-        updateFact();
-      }
-    }
-    function previousFact() {
-      if (currentFactIndex > 0) {
-        currentFactIndex--;
-        updateFact();
-      }
-    }
-    // On page load, initialize facts section (if visited later)
+    // On page load, show the menu section.
     document.addEventListener("DOMContentLoaded", function() {
       showSection('menuSection');
     });
