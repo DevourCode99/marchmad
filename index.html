@@ -238,7 +238,7 @@
   <!-- Navigation and Content Scripts -->
   <script>
     /********* Existing Functions: Standings and Brackets **********/
-    // (The functions for standings and brackets remain largely unchanged.)
+    // Standings Functions
     function animateScramble(element, finalText, durationMs) {
       finalText = finalText.toString();
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{};:,.<>/?";
@@ -269,7 +269,6 @@
       }
       requestAnimationFrame(update);
     }
-
     function updateStandings() {
       fetch('/marchmad/data/source.json?v=' + new Date().getTime())
         .then(response => response.json())
@@ -410,12 +409,13 @@
     }
 
     /********* AI Analyze Section Functions **********/
-    let analyzeStep = 1;
+    // Updated: Initialize round4 and round5 as arrays
     let userSelections = {
-      round4: {},
-      round5: {},
+      round4: [],
+      round5: [],
       round6: { champion: null, score: null }
     };
+    let analyzeStep = 1;
     let matchupData = null; // Loaded from /marchmad/data/matchup.json
     function loadMatchupData(callback) {
       fetch('/marchmad/data/matchup.json?v=' + new Date().getTime())
@@ -564,7 +564,7 @@
       }
       container.innerHTML = html;
       if (userSelections.round6.champion) {
-        // If champion selected and final score entered, auto-analyze
+        // If champion selected, attach listener for valid score input to auto-analyze
         const scoreInput = document.getElementById('finalScoreInput');
         scoreInput.addEventListener('change', function() {
           if(scoreInput.value.match(/^\d+\s*-\s*\d+$/)) {
@@ -657,7 +657,6 @@
         console.error('Error during analysis:', error);
       });
     }
-
     // Show a section and hide others
     function showSection(sectionId) {
       const sections = document.querySelectorAll('.section');
@@ -668,16 +667,14 @@
       }
       if (sectionId === 'analyzeSection') {
         analyzeStep = 1;
-        userSelections = { round4: {}, round5: {}, round6: { champion: null, score: null } };
+        userSelections = { round4: [], round5: [], round6: { champion: null, score: null } };
         loadMatchupData(() => { showAnalyzeStep(1); });
       }
     }
-
     // Scroll to top
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
     document.addEventListener("DOMContentLoaded", function() {
       showSection('menuSection');
     });
