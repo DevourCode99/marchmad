@@ -68,22 +68,8 @@
     .menu-item:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 16px rgba(255,255,255,0.2);
-    }
-    /* Highlight selected button */
-    .menu-item.selected {
       background-color: #fff;
       color: #000;
-      border: 2px solid #00ff00;
-    }
-    /* Styling for confirmed games (pre-picked) */
-    .confirmed {
-      font-size: 1.8rem;
-      font-weight: bold;
-      padding: 15px;
-      background-color: #222;
-      margin-bottom: 20px;
-      border: 2px solid #fff;
-      border-radius: 8px;
     }
     /* Section headings */
     h2 {
@@ -93,8 +79,9 @@
       text-transform: uppercase;
       letter-spacing: 2px;
     }
-    /* Buttons & Input styling */
-    .back-button {
+    /* Buttons & Dropdown styling */
+    .back-button,
+    .nav-button {
       font-size: 1rem;
       margin: 5px;
       cursor: pointer;
@@ -105,21 +92,37 @@
       border-radius: 5px;
       transition: all 0.3s ease;
     }
-    .back-button:hover {
+    .back-button:hover,
+    .nav-button:hover {
       background: #fff;
       color: #000;
     }
-    input[type="text"] {
+    select {
+      width: 80%;
+      max-width: 500px;
       font-size: 1rem;
-      padding: 5px 10px;
+      padding: 10px 20px;
       border: 2px solid #fff;
       border-radius: 5px;
       background: #000;
       color: #fff;
-      text-align: center;
-      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
     }
-    /* Table styling */
+    select:hover {
+      background: #fff;
+      color: #000;
+    }
+    /* Container for dropdowns */
+    .dropdown-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    /* Table styling for Standings and Brackets */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -139,7 +142,7 @@
     tr:nth-child(even) {
       background-color: rgba(255,255,255,0.1);
     }
-    /* Responsive design */
+    /* Responsive design: on mobile, adjust menu and table text sizes */
     @media (max-width: 600px) {
       .menu-item {
         font-size: 2rem;
@@ -168,7 +171,6 @@
       </div>
       <div class="menu-item" onclick="showSection('standingsSection')">Standings</div>
       <div class="menu-item" onclick="showSection('bracketsSection')">Brackets</div>
-      <div class="menu-item" onclick="showSection('analyzeSection')">AI Analyze</div>
     </div>
   </div>
 
@@ -193,7 +195,9 @@
   <!-- Brackets Section -->
   <div id="bracketsSection" class="section">
     <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
+    
     <div class="dropdown-container">
+      <!-- User Dropdown -->
       <select id="bracketUserSelect" onchange="onBracketUserChange()">
         <option value="">Select a user</option>
         <option value="matt">Matt</option>
@@ -207,6 +211,7 @@
         <option value="marshall">Marshall</option>
         <option value="jeanne">Jeanne</option>
       </select>
+      <!-- Round Dropdown (fixed options) -->
       <select id="roundSelect" onchange="onRoundChange()">
         <option value="0">64</option>
         <option value="1">32</option>
@@ -216,22 +221,42 @@
         <option value="5">Championship Game</option>
       </select>
     </div>
+    
     <h2>Brackets</h2>
+    <!-- Container for displaying bracket rounds -->
     <div id="bracketContainer" style="margin-top: 20px;"></div>
+    
+    <!-- Back to Top Button at Bottom -->
     <button class="back-button" style="margin-top:20px;" onclick="scrollToTop()">Back to Top</button>
-  </div>
-
-  <!-- AI Analyze Section -->
-  <div id="analyzeSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <div id="analyzeContent">
-      <!-- Analysis steps will be injected here -->
-    </div>
   </div>
 
   <!-- Navigation and Content Scripts -->
   <script>
-    /********* Standings Functions **********/
+    // Mapping of JSON round numbers to display labels.
+    const roundLabels = {
+      "64": "64",
+      "32": "32",
+      "16": "Sweet 16",
+      "8": "Elite 8",
+      "4": "Final Four",
+      "1": "Championship Game"
+    };
+
+    // Global bracket variables
+    let currentBracketData = null;
+    let currentRoundIndex = 0;
+
+    // Show/hide sections
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.style.display = 'none');
+      document.getElementById(sectionId).style.display = 'block';
+      if (sectionId === 'standingsSection') {
+        updateStandings();
+      }
+    }
+
+    // ---------------- Standings Section ----------------
     function animateScramble(element, finalText, durationMs) {
       finalText = finalText.toString();
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{};:,.<>/?";
@@ -262,15 +287,22 @@
       }
       requestAnimationFrame(update);
     }
+
     function updateStandings() {
-      fetch('/marchmad/data/source.json?v=' + new Date().getTime())
+      // Fetch data from data/source.json with cache busting
+      fetch('data/source.json?v=' + new Date().getTime())
         .then(response => response.json())
         .then(data => {
           let participants = data.participants.slice();
+          // Sort participants by points descending (rank 1 = highest)
           participants.sort((a, b) => b.points - a.points);
+          
+          // Determine if all scores are zero
           const allZero = participants.every(p => p.points === 0);
+          // Compute tie-aware ranks
           let ranks = [];
           if (allZero) {
+            // Everyone is tied for first.
             for (let i = 0; i < participants.length; i++) {
               ranks.push("T1");
             }
@@ -279,6 +311,7 @@
             ranks[0] = currentRank;
             for (let i = 1; i < participants.length; i++) {
               if (participants[i].points === participants[i - 1].points) {
+                // Tie: prefix with "T"
                 ranks[i] = "T" + currentRank;
               } else {
                 currentRank = i + 1;
@@ -286,9 +319,10 @@
               }
             }
           }
+          
           const tbody = document.getElementById('standingsBody');
           tbody.innerHTML = '';
-          const totalAnimationTime = 16000;
+          const totalAnimationTime = 16000; // 16 seconds total
           const totalRows = participants.length;
           const delayStep = totalAnimationTime / totalRows;
           participants.forEach((participant, index) => {
@@ -296,20 +330,27 @@
             const rankCell = document.createElement('td');
             const nameCell = document.createElement('td');
             const pointsCell = document.createElement('td');
+
+            // Use computed tie-aware rank
             rankCell.textContent = ranks[index];
             nameCell.textContent = "";
             pointsCell.textContent = "";
+
             row.appendChild(rankCell);
             row.appendChild(nameCell);
             row.appendChild(pointsCell);
             tbody.appendChild(row);
+
+            // Animate from bottom (last) to top (first)
             const rowDelay = ((totalRows - 1) - index) * delayStep;
             const rowAnimationTime = totalAnimationTime - rowDelay;
             const nameDuration = rowAnimationTime / 2;
             const pointsDuration = rowAnimationTime / 2;
+
             setTimeout(() => {
               animateScramble(nameCell, participant.name, nameDuration);
             }, rowDelay);
+
             setTimeout(() => {
               animateScramble(pointsCell, participant.points.toString(), pointsDuration);
             }, rowDelay + nameDuration);
@@ -317,15 +358,8 @@
         })
         .catch(error => console.error('Error fetching JSON:', error));
     }
-    setInterval(() => {
-      if (document.getElementById('standingsSection').style.display === 'block') {
-        updateStandings();
-      }
-    }, 5000);
 
-    /********* Brackets Functions **********/
-    let currentBracketData = null;
-    let currentRoundIndex = 0;
+    // ---------------- Brackets Section ----------------
     function onBracketUserChange() {
       const select = document.getElementById('bracketUserSelect');
       const user = select.value;
@@ -335,11 +369,14 @@
         document.getElementById('bracketContainer').innerHTML = '';
       }
     }
+
     function loadBracket(user) {
-      fetch('/marchmad/data/brackets/' + user + '.json?v=' + new Date().getTime())
+      // Fetch bracket JSON at data/brackets/[user].json with cache busting
+      fetch('data/brackets/' + user + '.json?v=' + new Date().getTime())
         .then(response => response.json())
         .then(data => {
           currentBracketData = data;
+          // Preserve currentRoundIndex if possible; otherwise default to 0.
           if (typeof currentRoundIndex !== 'number' || currentRoundIndex >= data.rounds.length) {
             currentRoundIndex = 0;
           }
@@ -351,6 +388,7 @@
           document.getElementById('bracketContainer').innerHTML = '<p>Bracket data not available.</p>';
         });
     }
+
     function onRoundChange() {
       const roundSelect = document.getElementById('roundSelect');
       const newIndex = parseInt(roundSelect.value, 10);
@@ -359,6 +397,7 @@
         showBracketRound(currentRoundIndex);
       }
     }
+
     function showBracketRound(roundIndex) {
       if (!currentBracketData || !currentBracketData.rounds || currentBracketData.rounds.length === 0) {
         document.getElementById('bracketContainer').innerHTML = '<p>No bracket data available.</p>';
@@ -366,6 +405,7 @@
       }
       const rounds = currentBracketData.rounds;
       if (roundIndex < 0 || roundIndex >= rounds.length) return;
+
       currentRoundIndex = roundIndex;
       const roundData = rounds[roundIndex];
       let html = '';
@@ -399,352 +439,13 @@
       }
       document.getElementById('bracketContainer').innerHTML = html;
     }
-
-    /********* AI Analyze Functions **********/
-    // Initialize selections as arrays for rounds 4 & 5.
-    let userSelections = {
-      round4: [],
-      round5: [],
-      round6: { champion: null, score: null }
-    };
-    let analyzeStep = 1;
-    let matchupData = null; // Loaded from /marchmad/data/matchup.json
-    // Cache analysis data globally.
-    let analysisSource = null;
-    let analysisPicks = null;
-    function loadMatchupData(callback) {
-      fetch('/marchmad/data/matchup.json?v=' + new Date().getTime())
-        .then(response => response.json())
-        .then(data => {
-          matchupData = data;
-          if (callback) callback();
-        })
-        .catch(error => console.error('Error loading matchup data:', error));
-    }
-    function loadAnalysisData() {
-      Promise.all([
-        fetch('/marchmad/data/source.json?v=' + new Date().getTime()).then(r => r.json()),
-        fetch('/marchmad/data/picks.json?v=' + new Date().getTime()).then(r => r.json())
-      ]).then(([src, picks]) => {
-        analysisSource = src;
-        analysisPicks = picks;
-        updateLiveAnalysis();
-      }).catch(error => console.error('Error loading analysis data:', error));
-    }
-    // Update live analysis (if final score is valid)
-    function updateLiveAnalysis() {
-      const scoreInput = document.getElementById('finalScoreInput');
-      const liveElem = document.getElementById('liveAnalysis');
-      if (!scoreInput || !liveElem) return;
-      if (!scoreInput.value.match(/^\d+\s*-\s*\d+$/)) {
-        liveElem.innerHTML = '<h3>Live Analysis</h3><p>Please enter a valid final score to update analysis.</p>';
-        return;
-      }
-      const finalScoreStr = scoreInput.value.trim();
-      const actualParts = finalScoreStr.split('-').map(s => parseInt(s.trim()));
-      const actualMargin = actualParts[0] - actualParts[1];
-      if (!analysisSource || !analysisPicks) {
-        liveElem.innerHTML = '<h3>Live Analysis</h3><p>Loading analysis data...</p>';
-        return;
-      }
-      let results = [];
-      analysisSource.participants.forEach(participant => {
-        const playerName = participant.name;
-        let currentScore = participant.points;
-        let additional = 0;
-        let tieBreakerDiff = Infinity;
-        const playerPicks = analysisPicks[playerName.toUpperCase()] || { round4: [], round5: [], round6: [] };
-        // Round 4 (Elite 8: 8 points each)
-        if (playerPicks.round4 && matchupData.round4) {
-          matchupData.round4.forEach((game, index) => {
-            const effectiveWinner = game.winner ? game.winner : userSelections.round4[index];
-            const pick = playerPicks.round4[index] ? playerPicks.round4[index].pick : null;
-            if (effectiveWinner && pick && effectiveWinner.toLowerCase() === pick.toLowerCase()) {
-              additional += 8;
-            }
-          });
-        }
-        // Round 5 (Final Four: 16 points each)
-        if (playerPicks.round5 && userSelections.round5) {
-          userSelections.round5.forEach((winner, index) => {
-            const pick = playerPicks.round5[index] ? playerPicks.round5[index].pick : null;
-            if (winner && pick && winner.toLowerCase() === pick.toLowerCase()) {
-              additional += 16;
-            }
-          });
-        }
-        // Round 6 (Championship: 32 points)
-        if (playerPicks.round6 && userSelections.round6.champion) {
-          const pick = playerPicks.round6[0] ? playerPicks.round6[0].pick : null;
-          if (pick && userSelections.round6.champion.toLowerCase() === pick.toLowerCase()) {
-            additional += 32;
-            const predictedScoreStr = playerPicks.round6[0].score;
-            if (predictedScoreStr && predictedScoreStr.match(/^\d+\s*-\s*\d+$/)) {
-              const predictedParts = predictedScoreStr.split('-').map(s => parseInt(s.trim()));
-              const predictedMargin = predictedParts[0] - predictedParts[1];
-              tieBreakerDiff = Math.abs(predictedMargin - actualMargin);
-            }
-          }
-        }
-        const finalScore = currentScore + additional;
-        results.push({ player: playerName, finalScore: finalScore, tieBreakerDiff: tieBreakerDiff });
-      });
-      const maxScore = Math.max(...results.map(r => r.finalScore));
-      results.forEach(r => {
-        r.chance = ((r.finalScore / (maxScore + 5)) * 100).toFixed(1);
-      });
-      results.sort((a, b) => {
-        if (b.finalScore === a.finalScore) {
-          return a.tieBreakerDiff - b.tieBreakerDiff;
-        }
-        return b.finalScore - a.finalScore;
-      });
-      let tableHTML = '<h3>Live Analysis</h3><table><thead><tr><th>PLAYER</th><th>% CHANCE TO WIN</th><th>POINTS</th></tr></thead><tbody>';
-      results.forEach(r => {
-        tableHTML += '<tr><td>' + r.player + '</td><td>' + r.chance + '%</td><td>' + r.finalScore + '</td></tr>';
-      });
-      tableHTML += '</tbody></table>';
-      liveElem.innerHTML = tableHTML;
-    }
-    // showAnalyzeStep: automatically progress when selections are complete.
-    function showAnalyzeStep(step) {
-      analyzeStep = step;
-      const container = document.getElementById('analyzeContent');
-      container.innerHTML = '';
-      if (step === 1) {
-        container.innerHTML = '<h2>Elite 8 Selection</h2><div id="elite8Container"></div>';
-        renderElite8();
-      } else if (step === 2) {
-        container.innerHTML = '<h2>Final Four Selection</h2><div id="finalFourContainer"></div>';
-        renderFinalFour();
-      } else if (step === 3) {
-        container.innerHTML = '<h2>Championship Selection</h2><div id="championshipContainer"></div>' +
-                              '<div><label for="finalScoreInput">Enter Final Score (e.g., 85-82): </label>' +
-                              '<input type="text" id="finalScoreInput" /></div>' +
-                              '<div id="liveAnalysis" style="margin-top:20px;"><h3>Live Analysis</h3><p>Please enter a valid final score to update analysis.</p></div>';
-        renderChampionship();
-        // Listen for input events on finalScoreInput to update analysis live.
-        document.getElementById('finalScoreInput').addEventListener('input', function() {
-          updateLiveAnalysis();
-        });
-      } else if (step === 4) {
-        container.innerHTML = '<h2>Analysis Results</h2><div id="analysisResults"></div>' +
-                              '<button class="back-button" onclick="showSection(\'menuSection\')">Back to Menu</button>';
-      }
-    }
-    // Render Elite 8 UI
-    function renderElite8() {
-      const container = document.getElementById('elite8Container');
-      if (!matchupData) {
-        loadMatchupData(renderElite8);
-        return;
-      }
-      let html = '';
-      matchupData.round4.forEach((game, index) => {
-        html += '<div style="margin-bottom:20px;">';
-        html += '<p>Game ' + (index + 1) + ': ' + game.teams[0] + ' vs ' + game.teams[1] + '</p>';
-        if (game.winner) {
-          html += '<div class="confirmed">Result: ' + game.winner + '</div>';
-          userSelections.round4[index] = game.winner;
-        } else {
-          html += '<div style="display:flex; justify-content:center;">';
-          html += '<button class="menu-item" id="elite8-' + index + '-0" style="margin:5px; flex:1;" onclick="selectElite8(' + index + ', \'' + game.teams[0] + '\', this)">' + game.teams[0] + '</button>';
-          html += '<button class="menu-item" id="elite8-' + index + '-1" style="margin:5px; flex:1;" onclick="selectElite8(' + index + ', \'' + game.teams[1] + '\', this)">' + game.teams[1] + '</button>';
-          html += '</div>';
-          if (userSelections.round4[index]) {
-            html += '<p>Selected: ' + userSelections.round4[index] + '</p>';
-          }
-        }
-        html += '</div>';
-      });
-      container.innerHTML = html;
-      const allSelected = matchupData.round4.every((game, idx) => game.winner || userSelections.round4[idx]);
-      if (allSelected) {
-        setTimeout(() => { goToFinalFour(); }, 500);
-      }
-    }
-    function selectElite8(gameIndex, team, buttonElement) {
-      userSelections.round4[gameIndex] = team;
-      const parentDiv = buttonElement.parentElement;
-      Array.from(parentDiv.children).forEach(btn => btn.classList.remove('selected'));
-      buttonElement.classList.add('selected');
-      renderElite8();
-      updateLiveAnalysis();
-    }
-    function goToFinalFour() {
-      window.effectiveRound4 = matchupData.round4.map((game, idx) => game.winner ? game.winner : userSelections.round4[idx]);
-      showAnalyzeStep(2);
-    }
-    // Render Final Four UI
-    function renderFinalFour() {
-      const container = document.getElementById('finalFourContainer');
-      const teamA = effectiveRound4[0],
-            teamB = effectiveRound4[1],
-            teamC = effectiveRound4[2],
-            teamD = effectiveRound4[3];
-      let html = '';
-      html += '<div style="margin-bottom:20px;">';
-      html += '<p>Final Four Game 1: ' + teamA + ' vs ' + teamB + '</p>';
-      if (userSelections.round5[0]) {
-        html += '<div class="confirmed">Selected: ' + userSelections.round5[0] + '</div>';
-      } else {
-        html += '<div style="display:flex; justify-content:center;">';
-        html += '<button class="menu-item" id="final4-0-0" style="margin:5px; flex:1;" onclick="selectFinalFour(0, \'' + teamA + '\', this)">' + teamA + '</button>';
-        html += '<button class="menu-item" id="final4-0-1" style="margin:5px; flex:1;" onclick="selectFinalFour(0, \'' + teamB + '\', this)">' + teamB + '</button>';
-        html += '</div>';
-      }
-      html += '</div>';
-      html += '<div style="margin-bottom:20px;">';
-      html += '<p>Final Four Game 2: ' + teamC + ' vs ' + teamD + '</p>';
-      if (userSelections.round5[1]) {
-        html += '<div class="confirmed">Selected: ' + userSelections.round5[1] + '</div>';
-      } else {
-        html += '<div style="display:flex; justify-content:center;">';
-        html += '<button class="menu-item" id="final4-1-0" style="margin:5px; flex:1;" onclick="selectFinalFour(1, \'' + teamC + '\', this)">' + teamC + '</button>';
-        html += '<button class="menu-item" id="final4-1-1" style="margin:5px; flex:1;" onclick="selectFinalFour(1, \'' + teamD + '\', this)">' + teamD + '</button>';
-        html += '</div>';
-      }
-      html += '</div>';
-      container.innerHTML = html;
-      const allSelected = (userSelections.round5[0] && userSelections.round5[1]);
-      if (allSelected) {
-        setTimeout(() => { goToChampionship(); }, 500);
-      }
-      updateLiveAnalysis();
-    }
-    function selectFinalFour(gameIndex, team, buttonElement) {
-      userSelections.round5[gameIndex] = team;
-      const parentDiv = buttonElement.parentElement;
-      Array.from(parentDiv.children).forEach(btn => btn.classList.remove('selected'));
-      buttonElement.classList.add('selected');
-      renderFinalFour();
-      updateLiveAnalysis();
-    }
-    function goToChampionship() {
-      window.effectiveRound5 = userSelections.round5.slice();
-      showAnalyzeStep(3);
-    }
-    // Render Championship UI
-    function renderChampionship() {
-      const container = document.getElementById('championshipContainer');
-      const team1 = effectiveRound5[0],
-            team2 = effectiveRound5[1];
-      let html = '<p>Championship: ' + team1 + ' vs ' + team2 + '</p>';
-      if (userSelections.round6.champion) {
-        html += '<div class="confirmed">Selected Champion: ' + userSelections.round6.champion + '</div>';
-      } else {
-        html += '<div style="display:flex; justify-content:center; margin-bottom:20px;">';
-        html += '<button class="menu-item" id="champ-0" style="margin:5px; flex:1;" onclick="selectChampionship(\'' + team1 + '\', this)">' + team1 + '</button>';
-        html += '<button class="menu-item" id="champ-1" style="margin:5px; flex:1;" onclick="selectChampionship(\'' + team2 + '\', this)">' + team2 + '</button>';
-        html += '</div>';
-      }
-      container.innerHTML = html;
-      if (userSelections.round6.champion) {
-        const scoreInput = document.getElementById('finalScoreInput');
-        scoreInput.addEventListener('input', function() {
-          updateLiveAnalysis();
-        });
-      }
-      updateLiveAnalysis();
-    }
-    function selectChampionship(team, buttonElement) {
-      userSelections.round6.champion = team;
-      const parentDiv = buttonElement.parentElement;
-      Array.from(parentDiv.children).forEach(btn => btn.classList.remove('selected'));
-      buttonElement.classList.add('selected');
-      renderChampionship();
-      updateLiveAnalysis();
-    }
-    // Instead of a separate analyzeResults(), updateLiveAnalysis() now does the calculation and updates the live analysis container.
-    function updateLiveAnalysis() {
-      const scoreInput = document.getElementById('finalScoreInput');
-      const liveElem = document.getElementById('liveAnalysis');
-      if (!scoreInput || !liveElem) return;
-      if (!scoreInput.value.match(/^\d+\s*-\s*\d+$/)) {
-        liveElem.innerHTML = '<h3>Live Analysis</h3><p>Please enter a valid final score to update analysis.</p>';
-        return;
-      }
-      const finalScoreStr = scoreInput.value.trim();
-      const actualParts = finalScoreStr.split('-').map(s => parseInt(s.trim()));
-      const actualMargin = actualParts[0] - actualParts[1];
-      if (!analysisSource || !analysisPicks) {
-        liveElem.innerHTML = '<h3>Live Analysis</h3><p>Loading analysis data...</p>';
-        return;
-      }
-      let results = [];
-      analysisSource.participants.forEach(participant => {
-        const playerName = participant.name;
-        let currentScore = participant.points;
-        let additional = 0;
-        let tieBreakerDiff = Infinity;
-        const playerPicks = analysisPicks[playerName.toUpperCase()] || { round4: [], round5: [], round6: [] };
-        if (playerPicks.round4 && matchupData.round4) {
-          matchupData.round4.forEach((game, index) => {
-            const effectiveWinner = game.winner ? game.winner : userSelections.round4[index];
-            const pick = playerPicks.round4[index] ? playerPicks.round4[index].pick : null;
-            if (effectiveWinner && pick && effectiveWinner.toLowerCase() === pick.toLowerCase()) {
-              additional += 8;
-            }
-          });
-        }
-        if (playerPicks.round5 && userSelections.round5) {
-          userSelections.round5.forEach((winner, index) => {
-            const pick = playerPicks.round5[index] ? playerPicks.round5[index].pick : null;
-            if (winner && pick && winner.toLowerCase() === pick.toLowerCase()) {
-              additional += 16;
-            }
-          });
-        }
-        if (playerPicks.round6 && userSelections.round6.champion) {
-          const pick = playerPicks.round6[0] ? playerPicks.round6[0].pick : null;
-          if (pick && userSelections.round6.champion.toLowerCase() === pick.toLowerCase()) {
-            additional += 32;
-            const predictedScoreStr = playerPicks.round6[0].score;
-            if (predictedScoreStr && predictedScoreStr.match(/^\d+\s*-\s*\d+$/)) {
-              const predictedParts = predictedScoreStr.split('-').map(s => parseInt(s.trim()));
-              const predictedMargin = predictedParts[0] - predictedParts[1];
-              tieBreakerDiff = Math.abs(predictedMargin - actualMargin);
-            }
-          }
-        }
-        const finalScore = currentScore + additional;
-        results.push({ player: playerName, finalScore: finalScore, tieBreakerDiff: tieBreakerDiff });
-      });
-      const maxScore = Math.max(...results.map(r => r.finalScore));
-      results.forEach(r => {
-        r.chance = ((r.finalScore / (maxScore + 5)) * 100).toFixed(1);
-      });
-      results.sort((a, b) => {
-        if (b.finalScore === a.finalScore) {
-          return a.tieBreakerDiff - b.tieBreakerDiff;
-        }
-        return b.finalScore - a.finalScore;
-      });
-      let tableHTML = '<h3>Live Analysis</h3><table><thead><tr><th>PLAYER</th><th>% CHANCE TO WIN</th><th>POINTS</th></tr></thead><tbody>';
-      results.forEach(r => {
-        tableHTML += '<tr><td>' + r.player + '</td><td>' + r.chance + '%</td><td>' + r.finalScore + '</td></tr>';
-      });
-      tableHTML += '</tbody></table>';
-      liveElem.innerHTML = tableHTML;
-    }
-    // Show a section and initialize as needed.
-    function showSection(sectionId) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(sec => sec.style.display = 'none');
-      document.getElementById(sectionId).style.display = 'block';
-      if (sectionId === 'standingsSection') {
-        updateStandings();
-      }
-      if (sectionId === 'analyzeSection') {
-        analyzeStep = 1;
-        userSelections = { round4: [], round5: [], round6: { champion: null, score: null } };
-        loadMatchupData(() => { showAnalyzeStep(1); });
-        loadAnalysisData();
-      }
-    }
+    
+    // Simple scroll to top function for Back to Top buttons.
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // On page load, show the menu section.
     document.addEventListener("DOMContentLoaded", function() {
       showSection('menuSection');
     });
