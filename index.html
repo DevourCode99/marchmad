@@ -7,7 +7,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet" />
   <style>
-    /* Inlined CSS inspired by your provided example */
+    /* Inlined CSS inspired by your provided CSS example */
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&display=swap');
 
     /* Reset & Base */
@@ -30,6 +30,7 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
     /* Sections */
     .section {
       display: none;
@@ -42,6 +43,7 @@
       justify-content: center;
       min-height: 100vh;
     }
+
     /* Header */
     .header {
       margin-bottom: 40px;
@@ -57,7 +59,8 @@
       letter-spacing: 1px;
       margin-top: 10px;
     }
-    /* Menu Items */
+
+    /* Main Menu Items */
     .menu-item {
       font-size: 2.5rem;
       font-weight: 700;
@@ -76,6 +79,7 @@
       background-color: #fff;
       color: #000;
     }
+
     /* Buttons */
     .back-button, .nav-button {
       font-size: 1rem;
@@ -92,9 +96,10 @@
       background: #fff;
       color: #000;
     }
+
     /* Grocery List Section */
     #groceryListContainer {
-      text-align: left;
+      text-align: center;
       max-width: 600px;
       margin: 20px auto;
     }
@@ -109,11 +114,17 @@
       margin-left: 20px;
       list-style: disc;
     }
+
     /* Recipe Section */
     #recipeInfoContainer {
       margin: 20px auto;
       max-width: 600px;
-      text-align: left;
+      text-align: center;
+    }
+    .recipe-date {
+      font-size: 2rem;
+      margin: 20px 0;
+      font-weight: bold;
     }
     .recipe-nav {
       display: flex;
@@ -121,7 +132,8 @@
       align-items: center;
       margin-top: 20px;
     }
-    /* Active section */
+
+    /* Active Section */
     .active {
       display: block;
     }
@@ -149,6 +161,8 @@
   <div id="recipeSection" class="section">
     <button class="back-button" id="backFromRecipe">Back to Menu</button>
     <h2>Weekly Recipes</h2>
+    <!-- Large scheduled date appears here -->
+    <div id="recipeScheduledDate" class="recipe-date"></div>
     <div id="recipeInfoContainer"></div>
     <div class="recipe-nav">
       <button class="nav-button" id="prevRecipe">Prev Recipe</button>
@@ -161,8 +175,8 @@
     let currentGroupNumber = null;
     let currentRecipeNumber = null; // From pull.json (may be null on grocery days)
     let isGroceryDay = false;
-    let recipeArray = []; // Will hold recipes from the correct recN.json file
-    let currentRecipeIndex = 1; // For carousel: values 1 to 6 (default to current recipe if available)
+    let recipeArray = []; // Holds recipes from the correct recN.json file
+    let currentRecipeIndex = 1; // Carousel index from 1 to 6 (default to today's recipe if available)
 
     // HTML element references
     const menuSection = document.getElementById("menuSection");
@@ -172,6 +186,7 @@
     const todayDateElem = document.getElementById("todayDate");
     const groceryListContainer = document.getElementById("groceryListContainer");
     const recipeInfoContainer = document.getElementById("recipeInfoContainer");
+    const recipeScheduledDateElem = document.getElementById("recipeScheduledDate");
 
     const btnGroceryList = document.getElementById("btnGroceryList");
     const btnRecipeToday = document.getElementById("btnRecipeToday");
@@ -191,7 +206,6 @@
     // Utility: Format today's CST date as "MM/DD/YYYY – Day – HH:MM:SS CST"
     function getTodayFormattedCST() {
       const now = new Date();
-      // Convert to America/Chicago time
       const cstString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
       const cstDate = new Date(cstString);
       const optionsDate = { month: "2-digit", day: "2-digit", year: "numeric" };
@@ -203,7 +217,7 @@
       return `${dateStr} – ${weekdayStr} – ${timeStr} CST`;
     }
 
-    // Utility: Get a Date object for today (at local midnight in CST)
+    // Utility: Get a Date object for today (set to midnight CST)
     function getTodayCSTDate() {
       const now = new Date();
       const cstString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
@@ -246,7 +260,7 @@
 
     // ------------------ Recipe Carousel ------------------
     async function loadRecipeCarousel() {
-      // If no recipe scheduled, default to index 1.
+      // If there's no recipe scheduled, default to index 1.
       if (!currentRecipeNumber) currentRecipeIndex = 1;
       else currentRecipeIndex = currentRecipeNumber;
       try {
@@ -271,21 +285,26 @@
         recipeInfoContainer.innerHTML = "<p>Recipe data not found.</p>";
         return;
       }
-      // Compute scheduled date based on the current recipe scheduling.
-      // Assume the recipe from pull.json is scheduled for today.
+      // Calculate the scheduled date based on the current scheduling.
+      // Assuming the recipe from pull.json is for today.
       const offsetDays = recipeNum - (currentRecipeNumber || 1);
       const todayCST = getTodayCSTDate();
       const scheduledDate = new Date(todayCST.getTime() + offsetDays * 24 * 3600 * 1000);
       const scheduledOptions = { weekday: "long", month: "2-digit", day: "2-digit", year:"numeric" };
       const scheduledStr = scheduledDate.toLocaleDateString("en-US", scheduledOptions);
+      
+      // Display the scheduled date in large text
+      recipeScheduledDateElem.textContent = scheduledStr + (offsetDays === 0 ? " (Today)" : "");
+
       let html = `<h3>${recipeData.recipeName}</h3>`;
       html += `<p><strong>Prep Time:</strong> ${recipeData.prepTime || ""}</p>`;
-      html += `<p><strong>Scheduled:</strong> ${scheduledStr} ${offsetDays === 0 ? "(Today)" : ""}</p>`;
       html += `<h4>Ingredients:</h4>`;
       html += `<ul>${(recipeData.ingredientsNeeded || []).map(ing => `<li>${ing}</li>`).join("")}</ul>`;
       html += `<h4>Steps:</h4>`;
       html += `<ol>${(recipeData.steps || []).map(step => `<li>${step}</li>`).join("")}</ol>`;
       recipeInfoContainer.innerHTML = html;
+
+      // Enable or disable navigation at boundaries
       prevRecipeBtn.disabled = (recipeNum <= 1);
       nextRecipeBtn.disabled = (recipeNum >= 6);
     }
@@ -296,7 +315,6 @@
       try {
         const response = await fetch("data/pull.json");
         const pullData = await response.json();
-        // Get today's date in YYYY-MM-DD form (using CST)
         const todayStr = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Chicago" }))
                          .toISOString().split('T')[0];
         const foundEntry = pullData.dailySchedule.find(entry => entry.date === todayStr);
