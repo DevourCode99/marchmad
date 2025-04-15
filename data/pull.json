@@ -1,0 +1,2230 @@
+{
+  "dailySchedule": [
+    {
+      "date": "2024-12-29",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2024-12-30",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2024-12-31",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-01",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-02",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-03",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-04",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-05",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-01-06",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-07",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-08",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-09",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-10",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-11",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-12",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-01-13",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-14",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-15",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-16",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-17",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-18",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-19",
+      "groupNumber": 4,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-01-20",
+      "groupNumber": 4,
+      "recipeNumber": 19,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-21",
+      "groupNumber": 4,
+      "recipeNumber": 20,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-22",
+      "groupNumber": 4,
+      "recipeNumber": 21,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-23",
+      "groupNumber": 4,
+      "recipeNumber": 22,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-24",
+      "groupNumber": 4,
+      "recipeNumber": 23,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-25",
+      "groupNumber": 4,
+      "recipeNumber": 24,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-26",
+      "groupNumber": 5,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-01-27",
+      "groupNumber": 5,
+      "recipeNumber": 25,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-28",
+      "groupNumber": 5,
+      "recipeNumber": 26,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-29",
+      "groupNumber": 5,
+      "recipeNumber": 27,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-30",
+      "groupNumber": 5,
+      "recipeNumber": 28,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-01-31",
+      "groupNumber": 5,
+      "recipeNumber": 29,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-01",
+      "groupNumber": 5,
+      "recipeNumber": 30,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-02",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-02-03",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-04",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-05",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-06",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-07",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-08",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-09",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-02-10",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-11",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-12",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-13",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-14",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-15",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-16",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-02-17",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-18",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-19",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-20",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-21",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-22",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-23",
+      "groupNumber": 4,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-02-24",
+      "groupNumber": 4,
+      "recipeNumber": 19,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-25",
+      "groupNumber": 4,
+      "recipeNumber": 20,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-26",
+      "groupNumber": 4,
+      "recipeNumber": 21,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-27",
+      "groupNumber": 4,
+      "recipeNumber": 22,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-02-28",
+      "groupNumber": 4,
+      "recipeNumber": 23,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-01",
+      "groupNumber": 4,
+      "recipeNumber": 24,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-02",
+      "groupNumber": 5,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-03-03",
+      "groupNumber": 5,
+      "recipeNumber": 25,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-04",
+      "groupNumber": 5,
+      "recipeNumber": 26,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-05",
+      "groupNumber": 5,
+      "recipeNumber": 27,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-06",
+      "groupNumber": 5,
+      "recipeNumber": 28,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-07",
+      "groupNumber": 5,
+      "recipeNumber": 29,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-08",
+      "groupNumber": 5,
+      "recipeNumber": 30,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-09",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-03-10",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-11",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-12",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-13",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-14",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-15",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-16",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-03-17",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-18",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-19",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-20",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-21",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-22",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-23",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-03-24",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-25",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-26",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-27",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-28",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-29",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-03-30",
+      "groupNumber": 4,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-03-31",
+      "groupNumber": 4,
+      "recipeNumber": 19,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-01",
+      "groupNumber": 4,
+      "recipeNumber": 20,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-02",
+      "groupNumber": 4,
+      "recipeNumber": 21,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-03",
+      "groupNumber": 4,
+      "recipeNumber": 22,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-04",
+      "groupNumber": 4,
+      "recipeNumber": 23,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-05",
+      "groupNumber": 4,
+      "recipeNumber": 24,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-06",
+      "groupNumber": 5,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-04-07",
+      "groupNumber": 5,
+      "recipeNumber": 25,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-08",
+      "groupNumber": 5,
+      "recipeNumber": 26,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-09",
+      "groupNumber": 5,
+      "recipeNumber": 27,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-10",
+      "groupNumber": 5,
+      "recipeNumber": 28,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-11",
+      "groupNumber": 5,
+      "recipeNumber": 29,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-12",
+      "groupNumber": 5,
+      "recipeNumber": 30,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-13",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-04-14",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-15",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-16",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-17",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-18",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-19",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-20",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-04-21",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-22",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-23",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-24",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-25",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-26",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-27",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-04-28",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-29",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-04-30",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-01",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-02",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-03",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-04",
+      "groupNumber": 4,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-05-05",
+      "groupNumber": 4,
+      "recipeNumber": 19,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-06",
+      "groupNumber": 4,
+      "recipeNumber": 20,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-07",
+      "groupNumber": 4,
+      "recipeNumber": 21,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-08",
+      "groupNumber": 4,
+      "recipeNumber": 22,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-09",
+      "groupNumber": 4,
+      "recipeNumber": 23,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-10",
+      "groupNumber": 4,
+      "recipeNumber": 24,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-11",
+      "groupNumber": 5,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-05-12",
+      "groupNumber": 5,
+      "recipeNumber": 25,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-13",
+      "groupNumber": 5,
+      "recipeNumber": 26,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-14",
+      "groupNumber": 5,
+      "recipeNumber": 27,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-15",
+      "groupNumber": 5,
+      "recipeNumber": 28,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-16",
+      "groupNumber": 5,
+      "recipeNumber": 29,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-17",
+      "groupNumber": 5,
+      "recipeNumber": 30,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-18",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-05-19",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-20",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-21",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-22",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-23",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-24",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-25",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-05-26",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-27",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-28",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-29",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-30",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-05-31",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-01",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-06-02",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-03",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-04",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-05",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-06",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-07",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-08",
+      "groupNumber": 4,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-06-09",
+      "groupNumber": 4,
+      "recipeNumber": 19,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-10",
+      "groupNumber": 4,
+      "recipeNumber": 20,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-11",
+      "groupNumber": 4,
+      "recipeNumber": 21,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-12",
+      "groupNumber": 4,
+      "recipeNumber": 22,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-13",
+      "groupNumber": 4,
+      "recipeNumber": 23,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-14",
+      "groupNumber": 4,
+      "recipeNumber": 24,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-15",
+      "groupNumber": 5,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-06-16",
+      "groupNumber": 5,
+      "recipeNumber": 25,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-17",
+      "groupNumber": 5,
+      "recipeNumber": 26,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-18",
+      "groupNumber": 5,
+      "recipeNumber": 27,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-19",
+      "groupNumber": 5,
+      "recipeNumber": 28,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-20",
+      "groupNumber": 5,
+      "recipeNumber": 29,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-21",
+      "groupNumber": 5,
+      "recipeNumber": 30,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-22",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-06-23",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-24",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-25",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-26",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-27",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-28",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-06-29",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-06-30",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-01",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-02",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-03",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-04",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-05",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-06",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-07-07",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-08",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-09",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-10",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-11",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-12",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-13",
+      "groupNumber": 4,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-07-14",
+      "groupNumber": 4,
+      "recipeNumber": 19,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-15",
+      "groupNumber": 4,
+      "recipeNumber": 20,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-16",
+      "groupNumber": 4,
+      "recipeNumber": 21,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-17",
+      "groupNumber": 4,
+      "recipeNumber": 22,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-18",
+      "groupNumber": 4,
+      "recipeNumber": 23,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-19",
+      "groupNumber": 4,
+      "recipeNumber": 24,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-20",
+      "groupNumber": 5,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-07-21",
+      "groupNumber": 5,
+      "recipeNumber": 25,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-22",
+      "groupNumber": 5,
+      "recipeNumber": 26,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-23",
+      "groupNumber": 5,
+      "recipeNumber": 27,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-24",
+      "groupNumber": 5,
+      "recipeNumber": 28,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-25",
+      "groupNumber": 5,
+      "recipeNumber": 29,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-26",
+      "groupNumber": 5,
+      "recipeNumber": 30,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-27",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-07-28",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-29",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-30",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-07-31",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-01",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-02",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-03",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-08-04",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-05",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-06",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-07",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-08",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-09",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-10",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-08-11",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-12",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-13",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-14",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-15",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-16",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-17",
+      "groupNumber": 4,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-08-18",
+      "groupNumber": 4,
+      "recipeNumber": 19,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-19",
+      "groupNumber": 4,
+      "recipeNumber": 20,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-20",
+      "groupNumber": 4,
+      "recipeNumber": 21,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-21",
+      "groupNumber": 4,
+      "recipeNumber": 22,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-22",
+      "groupNumber": 4,
+      "recipeNumber": 23,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-23",
+      "groupNumber": 4,
+      "recipeNumber": 24,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-24",
+      "groupNumber": 5,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-08-25",
+      "groupNumber": 5,
+      "recipeNumber": 25,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-26",
+      "groupNumber": 5,
+      "recipeNumber": 26,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-27",
+      "groupNumber": 5,
+      "recipeNumber": 27,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-28",
+      "groupNumber": 5,
+      "recipeNumber": 28,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-29",
+      "groupNumber": 5,
+      "recipeNumber": 29,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-30",
+      "groupNumber": 5,
+      "recipeNumber": 30,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-08-31",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-09-01",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-02",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-03",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-04",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-05",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-06",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-07",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-09-08",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-09",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-10",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-11",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-12",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-13",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-14",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-09-15",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-16",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-17",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-18",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-19",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-20",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-21",
+      "groupNumber": 4,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-09-22",
+      "groupNumber": 4,
+      "recipeNumber": 19,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-23",
+      "groupNumber": 4,
+      "recipeNumber": 20,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-24",
+      "groupNumber": 4,
+      "recipeNumber": 21,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-25",
+      "groupNumber": 4,
+      "recipeNumber": 22,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-26",
+      "groupNumber": 4,
+      "recipeNumber": 23,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-27",
+      "groupNumber": 4,
+      "recipeNumber": 24,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-28",
+      "groupNumber": 5,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-09-29",
+      "groupNumber": 5,
+      "recipeNumber": 25,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-09-30",
+      "groupNumber": 5,
+      "recipeNumber": 26,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-01",
+      "groupNumber": 5,
+      "recipeNumber": 27,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-02",
+      "groupNumber": 5,
+      "recipeNumber": 28,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-03",
+      "groupNumber": 5,
+      "recipeNumber": 29,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-04",
+      "groupNumber": 5,
+      "recipeNumber": 30,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-05",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-10-06",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-07",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-08",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-09",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-10",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-11",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-12",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-10-13",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-14",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-15",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-16",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-17",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-18",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-19",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-10-20",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-21",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-22",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-23",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-24",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-25",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-26",
+      "groupNumber": 4,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-10-27",
+      "groupNumber": 4,
+      "recipeNumber": 19,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-28",
+      "groupNumber": 4,
+      "recipeNumber": 20,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-29",
+      "groupNumber": 4,
+      "recipeNumber": 21,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-30",
+      "groupNumber": 4,
+      "recipeNumber": 22,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-10-31",
+      "groupNumber": 4,
+      "recipeNumber": 23,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-01",
+      "groupNumber": 4,
+      "recipeNumber": 24,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-02",
+      "groupNumber": 5,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-11-03",
+      "groupNumber": 5,
+      "recipeNumber": 25,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-04",
+      "groupNumber": 5,
+      "recipeNumber": 26,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-05",
+      "groupNumber": 5,
+      "recipeNumber": 27,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-06",
+      "groupNumber": 5,
+      "recipeNumber": 28,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-07",
+      "groupNumber": 5,
+      "recipeNumber": 29,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-08",
+      "groupNumber": 5,
+      "recipeNumber": 30,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-09",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-11-10",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-11",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-12",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-13",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-14",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-15",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-16",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-11-17",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-18",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-19",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-20",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-21",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-22",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-23",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-11-24",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-25",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-26",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-27",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-28",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-29",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-11-30",
+      "groupNumber": 4,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-12-01",
+      "groupNumber": 4,
+      "recipeNumber": 19,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-02",
+      "groupNumber": 4,
+      "recipeNumber": 20,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-03",
+      "groupNumber": 4,
+      "recipeNumber": 21,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-04",
+      "groupNumber": 4,
+      "recipeNumber": 22,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-05",
+      "groupNumber": 4,
+      "recipeNumber": 23,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-06",
+      "groupNumber": 4,
+      "recipeNumber": 24,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-07",
+      "groupNumber": 5,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-12-08",
+      "groupNumber": 5,
+      "recipeNumber": 25,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-09",
+      "groupNumber": 5,
+      "recipeNumber": 26,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-10",
+      "groupNumber": 5,
+      "recipeNumber": 27,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-11",
+      "groupNumber": 5,
+      "recipeNumber": 28,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-12",
+      "groupNumber": 5,
+      "recipeNumber": 29,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-13",
+      "groupNumber": 5,
+      "recipeNumber": 30,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-14",
+      "groupNumber": 1,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-12-15",
+      "groupNumber": 1,
+      "recipeNumber": 1,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-16",
+      "groupNumber": 1,
+      "recipeNumber": 2,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-17",
+      "groupNumber": 1,
+      "recipeNumber": 3,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-18",
+      "groupNumber": 1,
+      "recipeNumber": 4,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-19",
+      "groupNumber": 1,
+      "recipeNumber": 5,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-20",
+      "groupNumber": 1,
+      "recipeNumber": 6,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-21",
+      "groupNumber": 2,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-12-22",
+      "groupNumber": 2,
+      "recipeNumber": 7,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-23",
+      "groupNumber": 2,
+      "recipeNumber": 8,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-24",
+      "groupNumber": 2,
+      "recipeNumber": 9,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-25",
+      "groupNumber": 2,
+      "recipeNumber": 10,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-26",
+      "groupNumber": 2,
+      "recipeNumber": 11,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-27",
+      "groupNumber": 2,
+      "recipeNumber": 12,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-28",
+      "groupNumber": 3,
+      "recipeNumber": null,
+      "groceryDay": true
+    },
+    {
+      "date": "2025-12-29",
+      "groupNumber": 3,
+      "recipeNumber": 13,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-30",
+      "groupNumber": 3,
+      "recipeNumber": 14,
+      "groceryDay": false
+    },
+    {
+      "date": "2025-12-31",
+      "groupNumber": 3,
+      "recipeNumber": 15,
+      "groceryDay": false
+    },
+    {
+      "date": "2026-01-01",
+      "groupNumber": 3,
+      "recipeNumber": 16,
+      "groceryDay": false
+    },
+    {
+      "date": "2026-01-02",
+      "groupNumber": 3,
+      "recipeNumber": 17,
+      "groceryDay": false
+    },
+    {
+      "date": "2026-01-03",
+      "groupNumber": 3,
+      "recipeNumber": 18,
+      "groceryDay": false
+    }
+  ]
+}
