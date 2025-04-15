@@ -1,0 +1,131 @@
+{
+  "groupNumber": 3,
+  "recipes": [
+    {
+      "recipeNumber": 13,
+      "recipeName": "Lemon Garlic Chicken (Baked)",
+      "prepTime": "~15 minutes (+ ~25–30 minutes bake)",
+      "ingredientsNeeded": [
+        "1.5–2 lbs chicken breasts or thighs",
+        "2 cloves garlic, minced",
+        "Juice of 1 lemon",
+        "1 Tbsp olive oil",
+        "Salt, pepper, dried oregano"
+      ],
+      "steps": [
+        "Preheat oven to 400°F (200°C).",
+        "Marinate (optional): In a small bowl, whisk garlic, lemon juice, olive oil, oregano, salt, pepper. Pour over chicken; let sit ~10 minutes.",
+        "Bake: Place chicken in a baking dish. Bake ~25–30 minutes or until cooked through (internal temp 165°F).",
+        "Serve with roasted veggies or a side salad."
+      ]
+    },
+    {
+      "recipeNumber": 14,
+      "recipeName": "Chicken Tortilla Soup",
+      "prepTime": "~15 minutes (+ ~20 minutes simmer)",
+      "ingredientsNeeded": [
+        "1 lb chicken breasts, diced or shredded",
+        "1 onion, diced",
+        "1 bell pepper, diced",
+        "1 can diced tomatoes (~14 oz)",
+        "1 can beans (black or pinto), drained",
+        "4 cups chicken broth",
+        "1 tsp chili powder",
+        "1 tsp cumin",
+        "Salt, pepper to taste",
+        "Tortilla chips or strips for garnish"
+      ],
+      "steps": [
+        "Sauté onions & peppers: In a large pot, cook onions and peppers in a little oil.",
+        "Add chicken: Cook until no longer pink.",
+        "Combine: Stir in tomatoes, beans, broth, chili powder, cumin, salt, pepper.",
+        "Simmer: Bring to boil, reduce heat, simmer ~20 minutes.",
+        "Serve: Top with tortilla chips, fresh cilantro, or cheese if desired."
+      ]
+    },
+    {
+      "recipeNumber": 15,
+      "recipeName": "Ground Chicken Meatballs with Veggie Sauce",
+      "prepTime": "~20 minutes (+ ~20 minutes bake/simmer)",
+      "ingredientsNeeded": [
+        "1 lb ground chicken",
+        "½ cup breadcrumbs (or oat flour)",
+        "1 egg",
+        "2 cloves garlic, minced",
+        "1 onion, finely chopped (half for meatballs, half for sauce)",
+        "Salt, pepper, Italian herbs",
+        "1 can crushed tomatoes or tomato sauce",
+        "1 cup finely chopped veggies (mushrooms, carrots, zucchini)"
+      ],
+      "steps": [
+        "Preheat oven to 400°F (200°C).",
+        "Mix meatballs: Combine ground chicken, breadcrumbs, egg, half the chopped onion, garlic, salt, pepper, herbs. Form into small balls.",
+        "Bake: Place on a baking sheet; bake ~15–20 minutes or until golden and cooked through.",
+        "Sauce: Meanwhile, sauté remaining onion and chopped veggies in a pan. Add crushed tomatoes. Season with salt, pepper, herbs. Simmer.",
+        "Combine: Add baked meatballs to the sauce. Simmer a few minutes.",
+        "Serve over whole grains or with a vegetable side."
+      ]
+    },
+    {
+      "recipeNumber": 16,
+      "recipeName": "Chicken Lettuce Wraps",
+      "prepTime": "~15 minutes",
+      "ingredientsNeeded": [
+        "1 lb chicken breasts, diced small (or ground chicken)",
+        "2 cloves garlic, minced",
+        "1 onion, diced (optional)",
+        "2 Tbsp hoisin sauce or soy sauce + a pinch of sugar",
+        "1 Tbsp cornstarch mixed with 2 Tbsp water (optional)",
+        "Lettuce leaves (butter lettuce or romaine)",
+        "Optional veggies: diced bell pepper, shredded carrots"
+      ],
+      "steps": [
+        "Cook chicken: In a skillet with a little oil, cook chicken, onion, and garlic until chicken is done.",
+        "Sauce: Stir in hoisin/soy sauce mixture. If you want thicker sauce, add cornstarch slurry. Let simmer 1–2 minutes.",
+        "Fill lettuce wraps: Spoon chicken mixture into lettuce leaves. Top with chopped veggies, scallions, or sesame seeds if desired."
+      ]
+    },
+    {
+      "recipeNumber": 17,
+      "recipeName": "Slow-Cooker Beef Roast with Carrots & Potatoes",
+      "prepTime": "~15 minutes (+ 6–8 hours slow-cooker OR ~3 hours in oven)",
+      "ingredientsNeeded": [
+        "~1 lb beef roast (chuck or round roast)",
+        "2 carrots, peeled and cut into chunks",
+        "2 potatoes or sweet potatoes, cut into chunks",
+        "1 onion, quartered",
+        "1 cup beef broth",
+        "Salt, pepper, rosemary, thyme"
+      ],
+      "steps": [
+        "Sear roast (optional): In a hot skillet, brown each side of the roast for extra flavor.",
+        "Layer: Place carrots, potatoes, onion in slow-cooker. Season with salt, pepper. Put roast on top.",
+        "Add broth: Pour in ~1 cup beef broth. Add rosemary/thyme.",
+        "Cook: Cover and cook on low 6–8 hours or until beef is tender.",
+        "Serve: Shred or slice beef; serve with veggies and cooking juices."
+      ]
+    },
+    {
+      "recipeNumber": 18,
+      "recipeName": "Healthy Chicken Alfredo (Whole Wheat Pasta)",
+      "prepTime": "~20 minutes",
+      "ingredientsNeeded": [
+        "8 oz whole wheat fettuccine (or pasta of choice)",
+        "1 lb chicken breasts, sliced",
+        "1 cup low-fat milk or half-and-half",
+        "2 cloves garlic, minced",
+        "2 Tbsp olive oil or butter",
+        "¼ cup grated Parmesan cheese (adjust to taste)",
+        "1 cup fresh spinach or kale (optional)",
+        "Salt, pepper to taste"
+      ],
+      "steps": [
+        "Cook pasta: According to package instructions. Reserve ~½ cup pasta water.",
+        "Cook chicken: In a skillet, heat 1 Tbsp oil/butter. Sauté sliced chicken until cooked through. Remove and set aside.",
+        "Make sauce: In the same pan, add remaining oil/butter and garlic. Sauté ~1 minute. Slowly pour in milk or half-and-half, stirring. Add Parmesan; stir until slightly thickened. Use reserved pasta water if needed.",
+        "Combine: Return chicken to sauce; add spinach/kale if desired. Season with salt, pepper.",
+        "Toss in pasta: Stir pasta into sauce. Serve immediately."
+      ]
+    }
+  ]
+}
