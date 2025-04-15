@@ -3,711 +3,359 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>March Madness - All In One</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet" />
+  <title>Meal Maker App</title>
   <style>
-    /* Reset & Base */
+    /* Basic reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(-45deg, #000, #333, #111, #222);
-      background-size: 400% 400%;
-      animation: gradientAnimation 15s ease infinite;
-      color: #fff;
-      min-height: 100vh;
+      font-family: "Arial", sans-serif;
+      background: #f5f5f5;
+      color: #333;
     }
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+
+    /* Container styling */
+    .app-container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    /* Section container */
-    .section {
-      display: none;
-      padding: 20px;
+
+    /* Headings */
+    h1 {
       text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
     }
-    /* Main Menu styling */
-    .menu-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-    .header {
-      margin-bottom: 40px;
-    }
-    .header h1 {
-      font-family: 'Roboto Condensed', sans-serif;
-      font-size: 3rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    .header p {
-      font-size: 1.5rem;
-      letter-spacing: 1px;
-      margin-top: 10px;
-    }
-    .menu-item {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin: 20px 0;
-      padding: 20px;
-      border: 2px solid #fff;
-      border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-      cursor: pointer;
-      width: 80%;
-      max-width: 500px;
-    }
-    .menu-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(255,255,255,0.2);
-      background-color: #fff;
-      color: #000;
-    }
-    /* Section headings */
     h2 {
-      font-family: 'Roboto Condensed', sans-serif;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      margin-bottom: 10px;
+      color: #2c3e50;
     }
-    /* Buttons & Dropdown styling */
-    .back-button,
-    .nav-button {
-      font-size: 1rem;
+
+    /* Main menu buttons */
+    .menu-btn {
+      display: inline-block;
       margin: 5px;
-      cursor: pointer;
-      padding: 10px 20px;
-      border: 2px solid #fff;
-      background: #000;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #2980b9;
       color: #fff;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
-    .back-button:hover,
-    .nav-button:hover {
-      background: #fff;
-      color: #000;
-    }
-    select {
-      width: 80%;
-      max-width: 500px;
+      cursor: pointer;
       font-size: 1rem;
-      padding: 10px 20px;
-      border: 2px solid #fff;
-      border-radius: 5px;
-      background: #000;
-      color: #fff;
+    }
+    .menu-btn:hover {
+      background-color: #1b6a8f;
+    }
+
+    /* Back button */
+    .back-btn {
+      margin-bottom: 20px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #bdc3c7;
+      color: #444;
       cursor: pointer;
-      transition: all 0.3s ease;
-      margin-bottom: 20px;
+      font-size: 0.9rem;
     }
-    select:hover {
-      background: #fff;
-      color: #000;
+    .back-btn:hover {
+      background-color: #a8b1b3;
     }
-    /* Container for dropdowns */
-    .dropdown-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
+
+    /* Sections */
+    .hidden {
+      display: none;
     }
-    /* Table styling for Standings and Brackets */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px auto;
-      max-width: 600px;
-      color: #fff;
-    }
-    th, td {
-      border: 2px solid #fff;
-      padding: 15px;
-      font-size: 1.5rem;
-      text-align: center;
-    }
-    th {
-      background-color: rgba(255,255,255,0.2);
-    }
-    tr:nth-child(even) {
-      background-color: rgba(255,255,255,0.1);
-    }
-    /* Scoring Section Styling */
-    #scoringSection {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #fff;
-      border-radius: 10px;
-      padding: 30px;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    #scoringSection p, #scoringSection li {
-      font-size: 1.2rem;
+
+    /* Grocery and Recipe lists */
+    #grocery-list-container, #recipe-container {
+      margin-top: 10px;
       line-height: 1.6;
     }
-    #scoringSection ul {
+
+    /* Sub-lists for grocery items */
+    .grocery-category {
+      margin-top: 15px;
+    }
+    .grocery-category h3 {
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+    .grocery-category ul {
+      margin-left: 20px;
       list-style: disc;
-      margin: 15px 0 15px 20px;
-      text-align: left;
     }
-    /* TV Schedule Section Styling */
-    #tvScheduleSection {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #fff;
-      border-radius: 10px;
-      padding: 30px;
-      margin: 20px auto;
-      max-width: 600px;
-      text-align: left;
-    }
-    #tvScheduleSection h3 {
-      font-family: 'Roboto Condensed', sans-serif;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-    #tvScheduleSection ul {
-      list-style: disc;
-      margin: 10px 0 20px 20px;
-      padding: 0;
-    }
-    #tvScheduleSection li {
+
+    .today-date {
       font-size: 1.2rem;
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
-    /* Facts Section Styling */
-    #factsSection {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #fff;
-      border-radius: 10px;
-      padding: 30px;
-      margin: 20px auto;
-      max-width: 600px;
-      text-align: left;
-    }
-    #factsSection h3 {
-      font-family: 'Roboto Condensed', sans-serif;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-    #factContent {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-    #factContent p {
-      margin-bottom: 10px;
-    }
-    /* Navigation arrows for facts */
-    .fact-nav {
-      font-size: 1.2rem;
-      cursor: pointer;
-      padding: 10px 20px;
-      border: 2px solid #fff;
-      background: #000;
-      color: #fff;
-      border-radius: 5px;
-      margin: 0 10px;
-      transition: all 0.3s ease;
-    }
-    .fact-nav:hover {
-      background: #fff;
-      color: #000;
-    }
-    .fact-nav-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
-    }
-    /* Responsive design: on mobile, dropdowns and facts stack */
-    @media (max-width: 600px) {
-      .menu-item {
-        font-size: 2rem;
-        padding: 15px;
-      }
-      .header h1 {
-        font-size: 2.5rem;
-      }
-      .header p {
-        font-size: 1.2rem;
-      }
-      th, td {
-        font-size: 1.2rem;
-        padding: 10px;
-      }
-      .fact-nav-container {
-        flex-direction: column;
-      }
-      .fact-nav {
-        margin: 10px 0;
-      }
+      color: #555;
+      margin-bottom: 15px;
     }
   </style>
 </head>
 <body>
-  <!-- Main Menu Section -->
-  <div id="menuSection" class="section">
-    <div class="menu-container">
-      <div class="header">
-        <h1>MARCH MADNESS</h1>
-        <p>WHO WILL WIN THE $200 GRAND PRIZE?</p>
+  <div class="app-container">
+    <h1>Meal Maker App</h1>
+    <div id="main-menu" class="menu-section">
+      <h2>Main Menu</h2>
+      <div id="today-date-container" class="today-date">
+        <!-- The JavaScript will insert today's date here. -->
       </div>
-      <div class="menu-item" onclick="showSection('standingsSection')">Standings</div>
-      <div class="menu-item" onclick="showSection('bracketsSection')">Brackets</div>
-      <div class="menu-item" onclick="showSection('powerRankingsSection')">Power Rankings</div>
-      <div class="menu-item" onclick="showSection('scoringSection')">Scoring</div>
-      <div class="menu-item" onclick="showSection('tvScheduleSection')">TV Schedule</div>
-      <div class="menu-item" onclick="showSection('factsSection')">10 Facts</div>
+      <button id="btnGroceryList" class="menu-btn">Grocery List</button>
+      <button id="btnRecipeToday" class="menu-btn">Recipe for Today</button>
+    </div>
+
+    <!-- GROCERY LIST SECTION -->
+    <div id="grocery-section" class="hidden">
+      <button class="back-btn">&larr; Back</button>
+      <h2>Grocery List</h2>
+      <div id="grocery-list-container">
+        <!-- The JavaScript will insert grocery list data here. -->
+      </div>
+    </div>
+
+    <!-- RECIPE SECTION -->
+    <div id="recipe-section" class="hidden">
+      <button class="back-btn">&larr; Back</button>
+      <h2>Today's Recipe</h2>
+      <div id="recipe-container">
+        <!-- The JavaScript will insert recipe details here. -->
+      </div>
     </div>
   </div>
 
-  <!-- Standings Section -->
-  <div id="standingsSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>Standings</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Points</th>
-        </tr>
-      </thead>
-      <tbody id="standingsBody">
-        <!-- Dynamically filled -->
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Brackets Section -->
-  <div id="bracketsSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    
-    <div class="dropdown-container">
-      <!-- User Dropdown -->
-      <select id="bracketUserSelect" onchange="onBracketUserChange()">
-        <option value="">Select a user</option>
-        <option value="matt">Matt</option>
-        <option value="emily">Emily</option>
-        <option value="paige">Paige</option>
-        <option value="blake">Blake</option>
-        <option value="lori">Lori</option>
-        <option value="larry">Larry</option>
-        <option value="scott">Scott</option>
-        <option value="peggy">Peggy</option>
-        <option value="marshall">Marshall</option>
-        <option value="jeanne">Jeanne</option>
-      </select>
-      <!-- Round Dropdown (fixed options) -->
-      <select id="roundSelect" onchange="onRoundChange()">
-        <option value="0">64</option>
-        <option value="1">32</option>
-        <option value="2">Sweet 16</option>
-        <option value="3">Elite 8</option>
-        <option value="4">Final Four</option>
-        <option value="5">Championship Game</option>
-      </select>
-    </div>
-    
-    <h2>Brackets</h2>
-    <!-- Container for displaying bracket rounds -->
-    <div id="bracketContainer" style="margin-top: 20px;"></div>
-    
-    <!-- Back to Top Button at Bottom -->
-    <button class="back-button" style="margin-top:20px;" onclick="scrollToTop()">Back to Top</button>
-  </div>
-
-  <!-- Power Rankings Section -->
-  <div id="powerRankingsSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>Power Rankings</h2>
-    <p>Coming soon...</p>
-  </div>
-
-  <!-- Scoring Section -->
-  <div id="scoringSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>Scoring</h2>
-    <div id="scoringContent">
-      <p>The traditional March Madness scoring method awards points for correctly picking winners in each round, typically doubling each round as follows:</p>
-      <ul>
-        <li>Round of 64: 1 point per correct pick</li>
-        <li>Round of 32: 2 points per correct pick</li>
-        <li>Sweet 16: 4 points per correct pick</li>
-        <li>Elite 8: 8 points per correct pick</li>
-        <li>Final Four: 16 points per correct pick</li>
-        <li>Championship Game: 32 points for correctly picking the champion</li>
-      </ul>
-      <p>This scoring method places increasing value on correctly picking winners in later rounds.</p>
-    </div>
-  </div>
-
-  <!-- TV Schedule Section -->
-  <div id="tvScheduleSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>TV Schedule</h2>
-    <h3>Thursday, March 20 (First Round/Round of 64)</h3>
-    <ul>
-      <li>(8) Louisville vs. (9) Creighton, 12:15 p.m. | CBS</li>
-      <li>(4) Purdue vs. (13) High Point, 12:40 p.m. | truTV</li>
-      <li>(3) Wisconsin vs. (14) Montana, 1:30 p.m. | TNT</li>
-      <li>(1) Houston vs. (16) SIU Edwardsville, 2 p.m. | TBS</li>
-      <li>(1) Auburn vs. (16) Alabama State, 2:50 p.m. | CBS</li>
-      <li>(5) Clemson vs. (12) McNeese, 3:15 p.m. | truTV</li>
-      <li>(6) BYU vs. (11) VCU, 4:05 p.m. | TNT</li>
-      <li>(8) Gonzaga vs. (9) Georgia, 4:35 p.m. | TBS</li>
-      <li>(2) Tennessee vs. (15) Wofford, 6:50 p.m. | TNT</li>
-      <li>(7) Kansas vs. (10) Arkansas, 7:10 p.m. | CBS</li>
-      <li>(4) Texas A&M vs. (13) Yale, 7:25 p.m. | TBS</li>
-      <li>(6) Missouri vs. (11) Drake, 7:35 p.m. | truTV</li>
-      <li>(7) UCLA vs. (10) Utah State, 9:25 p.m. | TNT</li>
-      <li>(2) St. John's vs. (15) Omaha, 9:45 p.m. | CBS</li>
-      <li>(5) Michigan vs. (12) UC San Diego, 10 p.m. | TBS</li>
-      <li>(3) Texas Tech vs. (14) UNC Wilmington, 10:10 p.m. | truTV</li>
-    </ul>
-    <h3>Friday, March 21 (First Round/Round of 64)</h3>
-    <ul>
-      <li>(8) Mississippi State vs. (9) Baylor, 12:15 p.m. | CBS</li>
-      <li>(2) Alabama vs. (15) Robert Morris, 12:40 p.m. | truTV</li>
-      <li>(3) Iowa State vs. (14) Lipscomb, 1:30 p.m. | TNT</li>
-      <li>(5) Memphis vs. (12) Colorado State, 2 p.m. | TBS</li>
-      <li>(1) Duke vs. (16) Mount St. Mary's/American, 2:50 p.m. | CBS</li>
-      <li>(7) Saint Mary's vs. (10) Vanderbilt, 3:15 p.m. | truTV</li>
-      <li>(6) Ole Miss vs. (11) North Carolina, 4:05 p.m. | TNT</li>
-      <li>(4) Maryland vs. (13) Grand Canyon, 4:35 p.m. | TBS</li>
-      <li>(1) Florida vs. (16) Norfolk State, 6:50 p.m. | TNT</li>
-      <li>(3) Kentucky vs. (14) Troy, 7:10 p.m. | CBS</li>
-      <li>(7) Marquette vs. (10) New Mexico, 7:25 p.m. | TBS</li>
-      <li>(4) Arizona vs. (13) Akron, 7:35 p.m. | truTV</li>
-      <li>(8) UConn vs. (9) Oklahoma, 9:25 p.m. | TNT</li>
-      <li>(6) Illinois vs. (11) Xavier/Texas, 9:45 p.m. | TNT</li>
-      <li>(2) Michigan State vs. (15) Bryant, 10 p.m. | TBS</li>
-      <li>(5) Oregon vs. (12) Liberty, 10:10 p.m. | truTV</li>
-    </ul>
-    <h3>Saturday, March 22 (Second Round/Round of 32)</h3>
-    <p>(TV schedule for Saturday will be updated soon.)</p>
-    <button class="back-button" style="margin-top:20px;" onclick="scrollToTop()">Back to Top</button>
-  </div>
-
-  <!-- Facts Section -->
-  <div id="factsSection" class="section">
-    <button class="back-button" onclick="showSection('menuSection')">Back to Menu</button>
-    <h2>10 Facts</h2>
-    <div id="factContent">
-      <!-- Fact content will be dynamically updated -->
-    </div>
-    <div class="fact-nav-container">
-      <button class="fact-nav" onclick="previousFact()">&#8592; Previous</button>
-      <button class="fact-nav" onclick="nextFact()">Next &#8594;</button>
-    </div>
-    <button class="back-button" style="margin-top:20px;" onclick="scrollToTop()">Back to Top</button>
-  </div>
-
-  <!-- Navigation and Content Scripts -->
   <script>
-    // Mapping of JSON round numbers to display labels.
-    const roundLabels = {
-      "64": "64",
-      "32": "32",
-      "16": "Sweet 16",
-      "8": "Elite 8",
-      "4": "Final Four",
-      "1": "Championship Game"
-    };
+    /**
+     * Meal Maker App script
+     *
+     * This script:
+     * 1. Determines today's date in CST (YYYY-MM-DD).
+     * 2. Fetches pull.json to find the groupNumber, recipeNumber, and groceryDay for today's date.
+     * 3. Displays today's date, allows user to see the grocery list for the current group, or the recipe if recipeNumber is available.
+     * 4. Pulls the correct grocery list from grocery_list.json by matching groupNumber.
+     * 5. Pulls the correct recipe from rec{groupNumber}.json by matching recipeNumber.
+     */
 
-    // Global bracket variables
-    let currentBracketData = null;
-    let currentRoundIndex = 0;
+    // HTML element references
+    const mainMenu = document.getElementById("main-menu");
+    const grocerySection = document.getElementById("grocery-section");
+    const recipeSection = document.getElementById("recipe-section");
 
-    // Show/hide sections
-    function showSection(sectionId) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(sec => sec.style.display = 'none');
-      document.getElementById(sectionId).style.display = 'block';
-      if (sectionId === 'standingsSection') {
-        updateStandings();
+    const todayDateContainer = document.getElementById("today-date-container");
+    const groceryListContainer = document.getElementById("grocery-list-container");
+    const recipeContainer = document.getElementById("recipe-container");
+
+    const btnGroceryList = document.getElementById("btnGroceryList");
+    const btnRecipeToday = document.getElementById("btnRecipeToday");
+
+    const backButtons = document.querySelectorAll(".back-btn");
+
+    // Global variables (determined on load)
+    let currentGroupNumber = null;
+    let currentRecipeNumber = null;
+    let isGroceryDay = false;
+
+    /**
+     * Get today's date in YYYY-MM-DD format, in Central Standard Time (CST).
+     */
+    function getTodayDateCST() {
+      const now = new Date();
+      // Convert local time to CST by using toLocaleString with America/Chicago
+      const cstString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
+      const cstDate = new Date(cstString);
+
+      // Format as YYYY-MM-DD
+      const year = cstDate.getFullYear();
+      const month = String(cstDate.getMonth() + 1).padStart(2, "0");
+      const day = String(cstDate.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    /**
+     * Show or hide sections
+     */
+    function showSection(sectionToShow) {
+      // Hide all sections
+      [mainMenu, grocerySection, recipeSection].forEach(sec => {
+        sec.classList.add("hidden");
+      });
+      // Show the requested section
+      sectionToShow.classList.remove("hidden");
+    }
+
+    /**
+     * Load the grocery list for the current group number from grocery_list.json.
+     */
+    async function loadGroceryList() {
+      try {
+        const response = await fetch("data/grocery_list.json");
+        const data = await response.json();
+
+        if (!data.groceryLists) return;
+
+        // Find the matching groupNumber object
+        const groupData = data.groceryLists.find(
+          (g) => g.groupNumber === currentGroupNumber
+        );
+
+        if (!groupData) {
+          groceryListContainer.innerHTML = "<p>No grocery list found for this group.</p>";
+          return;
+        }
+
+        // Build the display
+        let html = `<p>Grocery list for <strong>Group ${currentGroupNumber}</strong>${
+          isGroceryDay ? " (It's your grocery day!)" : ""
+        }</p>`;
+
+        // Each category
+        html += createGroceryCategoryHTML("Produce", groupData.produce);
+        html += createGroceryCategoryHTML("Meat/Poultry", groupData.meatPoultry);
+        html += createGroceryCategoryHTML("Canned/Packaged/Dry Goods", groupData.cannedPackagedDryGoods);
+
+        groceryListContainer.innerHTML = html;
+      } catch (error) {
+        console.error("Error loading grocery list:", error);
+        groceryListContainer.innerHTML =
+          "<p>Error loading grocery list. Check console for details.</p>";
       }
     }
 
-    // ---------------- Standings Section ----------------
-    function animateScramble(element, finalText, durationMs) {
-      finalText = finalText.toString();
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{};:,.<>/?";
-      const revealTimes = [];
-      for (let i = 0; i < finalText.length; i++) {
-        revealTimes.push(Math.random() * durationMs);
-      }
-      const startTime = performance.now();
-      function update() {
-        const now = performance.now();
-        const elapsed = now - startTime;
-        let output = "";
-        let allRevealed = true;
-        for (let i = 0; i < finalText.length; i++) {
-          if (elapsed > revealTimes[i]) {
-            output += finalText[i];
-          } else {
-            allRevealed = false;
-            output += chars[Math.floor(Math.random() * chars.length)];
-          }
+    /**
+     * Helper to create grocery category HTML
+     */
+    function createGroceryCategoryHTML(title, items) {
+      if (!items || !Array.isArray(items)) return "";
+      let html = `
+        <div class="grocery-category">
+          <h3>${title}</h3>
+          <ul>
+            ${items.map((item) => `<li>${item}</li>`).join("")}
+          </ul>
+        </div>`;
+      return html;
+    }
+
+    /**
+     * Load the recipe for today from the appropriate rec{groupNumber}.json.
+     */
+    async function loadRecipe() {
+      try {
+        if (!currentRecipeNumber) {
+          recipeContainer.innerHTML = "<p>No recipe scheduled for today.</p>";
+          return;
         }
-        element.textContent = output;
-        if (!allRevealed && elapsed < durationMs) {
-          requestAnimationFrame(update);
+
+        // Fetch the file for the current group
+        const fileName = `data/rec${currentGroupNumber}.json`;
+        const response = await fetch(fileName);
+        const data = await response.json();
+
+        if (!data.recipes) {
+          recipeContainer.innerHTML =
+            "<p>No recipes found in the data for this group.</p>";
+          return;
+        }
+
+        // Find the recipe by recipeNumber
+        const recipeData = data.recipes.find(
+          (r) => r.recipeNumber === currentRecipeNumber
+        );
+
+        if (!recipeData) {
+          recipeContainer.innerHTML =
+            "<p>Recipe data not found for today's recipeNumber.</p>";
+          return;
+        }
+
+        // Build the recipe display
+        let html = `
+          <h3>${recipeData.recipeName}</h3>
+          <p><strong>Prep Time:</strong> ${recipeData.prepTime || ""}</p>
+          <h4>Ingredients:</h4>
+          <ul>
+            ${(recipeData.ingredientsNeeded || [])
+              .map((ing) => `<li>${ing}</li>`)
+              .join("")}
+          </ul>
+          <h4>Steps:</h4>
+          <ol>
+            ${(recipeData.steps || []).map((step) => `<li>${step}</li>`).join("")}
+          </ol>
+        `;
+
+        recipeContainer.innerHTML = html;
+      } catch (error) {
+        console.error("Error loading recipe:", error);
+        recipeContainer.innerHTML =
+          "<p>Error loading recipe. Check console for details.</p>";
+      }
+    }
+
+    /**
+     * On page load, figure out which groupNumber & recipeNumber is for today by reading pull.json
+     */
+    async function initializeApp() {
+      const today = getTodayDateCST();
+      todayDateContainer.textContent = `Today: ${today}`;
+
+      try {
+        const response = await fetch("data/pull.json");
+        const pullData = await response.json();
+
+        // Attempt to find today's entry
+        const foundEntry = pullData.dailySchedule.find(
+          (entry) => entry.date === today
+        );
+
+        if (!foundEntry) {
+          // Not found for some reason; default to group 1
+          currentGroupNumber = 1;
+          currentRecipeNumber = null;
+          isGroceryDay = false;
+          console.warn("No matching date found in pull.json; defaulting to group 1.");
         } else {
-          element.textContent = finalText;
+          currentGroupNumber = foundEntry.groupNumber;
+          currentRecipeNumber = foundEntry.recipeNumber; // Could be null if no recipe
+          isGroceryDay = foundEntry.groceryDay;
         }
-      }
-      requestAnimationFrame(update);
-    }
-
-    function updateStandings() {
-      // Fetch data from data/source.json with cache busting
-      fetch('data/source.json?v=' + new Date().getTime())
-        .then(response => response.json())
-        .then(data => {
-          let participants = data.participants.slice();
-          // Sort participants by points descending (rank 1 = highest)
-          participants.sort((a, b) => b.points - a.points);
-          
-          // Determine if all scores are zero
-          const allZero = participants.every(p => p.points === 0);
-          // Compute tie-aware ranks
-          let ranks = [];
-          if (allZero) {
-            // Everyone is tied for first.
-            for (let i = 0; i < participants.length; i++) {
-              ranks.push("T1");
-            }
-          } else {
-            let currentRank = 1;
-            ranks[0] = currentRank;
-            for (let i = 1; i < participants.length; i++) {
-              if (participants[i].points === participants[i - 1].points) {
-                // Tie: prefix with "T"
-                ranks[i] = "T" + currentRank;
-              } else {
-                currentRank = i + 1;
-                ranks[i] = currentRank;
-              }
-            }
-          }
-          
-          const tbody = document.getElementById('standingsBody');
-          tbody.innerHTML = '';
-          const totalAnimationTime = 16000; // 16 seconds total
-          const totalRows = participants.length;
-          const delayStep = totalAnimationTime / totalRows;
-          participants.forEach((participant, index) => {
-            const row = document.createElement('tr');
-            const rankCell = document.createElement('td');
-            const nameCell = document.createElement('td');
-            const pointsCell = document.createElement('td');
-
-            // Use computed tie-aware rank
-            rankCell.textContent = ranks[index];
-            nameCell.textContent = "";
-            pointsCell.textContent = "";
-
-            row.appendChild(rankCell);
-            row.appendChild(nameCell);
-            row.appendChild(pointsCell);
-            tbody.appendChild(row);
-
-            // Animate from bottom (last) to top (first)
-            const rowDelay = ((totalRows - 1) - index) * delayStep;
-            const rowAnimationTime = totalAnimationTime - rowDelay;
-            const nameDuration = rowAnimationTime / 2;
-            const pointsDuration = rowAnimationTime / 2;
-
-            setTimeout(() => {
-              animateScramble(nameCell, participant.name, nameDuration);
-            }, rowDelay);
-
-            setTimeout(() => {
-              animateScramble(pointsCell, participant.points.toString(), pointsDuration);
-            }, rowDelay + nameDuration);
-          });
-        })
-        .catch(error => console.error('Error fetching JSON:', error));
-    }
-
-    // ---------------- Brackets Section ----------------
-    function onBracketUserChange() {
-      const select = document.getElementById('bracketUserSelect');
-      const user = select.value;
-      if (user) {
-        loadBracket(user);
-      } else {
-        document.getElementById('bracketContainer').innerHTML = '';
+      } catch (error) {
+        console.error("Error reading pull.json:", error);
+        // Default fallback
+        currentGroupNumber = 1;
+        currentRecipeNumber = null;
+        isGroceryDay = false;
       }
     }
 
-    function loadBracket(user) {
-      // Fetch bracket JSON at data/brackets/[user].json with cache busting
-      fetch('data/brackets/' + user + '.json?v=' + new Date().getTime())
-        .then(response => response.json())
-        .then(data => {
-          currentBracketData = data;
-          // Preserve currentRoundIndex if possible; otherwise default to 0.
-          if (typeof currentRoundIndex !== 'number' || currentRoundIndex >= data.rounds.length) {
-            currentRoundIndex = 0;
-          }
-          document.getElementById('roundSelect').value = currentRoundIndex;
-          showBracketRound(currentRoundIndex);
-        })
-        .catch(error => {
-          console.error('Error loading bracket for ' + user + ':', error);
-          document.getElementById('bracketContainer').innerHTML = '<p>Bracket data not available.</p>';
-        });
-    }
-
-    function onRoundChange() {
-      const roundSelect = document.getElementById('roundSelect');
-      const newIndex = parseInt(roundSelect.value, 10);
-      if (!isNaN(newIndex)) {
-        currentRoundIndex = newIndex;
-        showBracketRound(currentRoundIndex);
-      }
-    }
-
-    function showBracketRound(roundIndex) {
-      if (!currentBracketData || !currentBracketData.rounds || currentBracketData.rounds.length === 0) {
-        document.getElementById('bracketContainer').innerHTML = '<p>No bracket data available.</p>';
-        return;
-      }
-      const rounds = currentBracketData.rounds;
-      if (roundIndex < 0 || roundIndex >= rounds.length) return;
-
-      currentRoundIndex = roundIndex;
-      const roundData = rounds[roundIndex];
-      let html = '';
-      if (roundData.matchups && roundData.matchups.length > 0) {
-        html += 
-          <table>
-            <thead>
-              <tr>
-                <th>Team vs Team</th>
-                <th>Winner</th>
-              </tr>
-            </thead>
-            <tbody>
-        ;
-        roundData.matchups.forEach(match => {
-          const teamsStr = match.teams[0] + " vs " + match.teams[1];
-          let winnerStr = match.winner;
-          if (roundData.round === 1 && match.score) {
-            winnerStr +=  (Score: ${match.score});
-          }
-          html += 
-            <tr>
-              <td>${teamsStr}</td>
-              <td>${winnerStr}</td>
-            </tr>
-          ;
-        });
-        html += </tbody></table>;
-      } else {
-        html += '<p>No matchups available.</p>';
-      }
-      document.getElementById('bracketContainer').innerHTML = html;
-    }
-
-    // ---------------- TV Schedule Section ----------------
-    // TV schedule content is static and defined in the HTML below.
-
-    // ---------------- Facts Section ----------------
-    const facts = [
-      {
-        question: "Who picked the riskiest bracket overall?",
-        answer: "Jeanne",
-        explanation: "Why? She not only chose a #4 seed (Texas A&M) to win the entire tournament—something no one else did—but also took several big underdogs in the first round (e.g., a #15, #14, and #13 seed all advancing). In other words, she has the most picks that deviate from the standard “chalk” (favorites)."
-      },
-      {
-        question: "Who has the most conservative (chalk-heavy) bracket?",
-        answer: "Larry",
-        explanation: "Why? Larry’s bracket is dominated by #1 and #2 seeds almost everywhere you look. In his Final Four, for instance, he has three #1 seeds (Auburn, Florida, Duke) plus a #2 (Tennessee), and he crowned a #1 seed (Florida) as champion—about as “safe” (top-heavy) a bracket as you can get."
-      },
-      {
-        question: "Who predicted the most first-round upsets?",
-        answer: "Matt",
-        explanation: "Why? Counting “true” upsets in Round 1 (i.e., 10‐over‐7, 11‐over‐6, 12‐over‐5, etc.), Matt picked double‐digit shockers like #14 Lipscomb over #3 Iowa State, #13 Grand Canyon over #4 Maryland, #15 Wofford over #2 Tennessee, #12 Liberty over #5 Oregon—and more. He ends up with about ten round‐of‐64 underdogs winning, which is the most of anyone."
-      },
-      {
-        question: "Who picked the lowest seed to reach the Final Four?",
-        answer: "A three-way tie among Paige, Peggy, and Matt",
-        explanation: "No one else pushed a seed lower than #5 all the way to the Final Four. Jeanne had a #4 seed winning the title, but that is still not as “low” a seed number as #5."
-      },
-      {
-        question: "Which two players chose brackets most similar to each other?",
-        answer: "Peggy and Scott",
-        explanation: "Why? They share a very similar Final Four (both have Auburn, Florida, Duke, and a fifth‐seed or second‐seed in the mix) and they picked the exact same championship matchup (Florida vs. Duke) with the same champion (Florida). Their early‐round picks also line up closely."
-      },
-      {
-        question: "Who selected a champion that nobody else picked?",
-        answer: "Jeanne",
-        explanation: "Why? She went with Texas A&M (#4 seed) as her champion. All other brackets chose Auburn, Florida, Duke, or Michigan State—no one else has A&M cutting down the nets."
-      },
-      {
-        question: "Who has the most unusual Final Four teams?",
-        answer: "Jeanne again",
-        explanation: "Why? Her Final Four is Texas A&M (#4), Iowa State (#3), St. John’s (#2), and Tennessee (#2). Almost everyone else has at least one #1 seed in the Final Four (Auburn, Florida, or Duke). Jeanne is the only person with no #1s and a #4 as her champion."
-      },
-      {
-        question: "Who predicted the highest-scoring championship game?",
-        answer: "Scott",
-        explanation: "Why? Looking at the final-game tiebreakers, Scott’s total (85) is the highest. Peggy and Matt are at 84, Blake at 82, Paige at 78, Larry 77, etc. Scott tops everyone with an 85-point final."
-      },
-      {
-        question: "Who has the most upsets in the Sweet 16 and Elite 8 rounds?",
-        answer: "Matt",
-        explanation: "Why? It isn’t just that Matt picked a lot of underdogs in the first round—he continued riding them through the middle rounds. He advances multiple double‐digit seeds (e.g., Lipscomb, Liberty, Grand Canyon, Wofford, etc.) into later rounds more often than anyone else."
-      },
-      {
-        question: "Who predicted the fewest number-one seeds in their Final Four?",
-        answer: "Jeanne",
-        explanation: "Why? She has zero #1 seeds in her Final Four (it’s #4, #3, #2, #2). Everyone else has at least one #1 seed in that last weekend."
-      }
-    ];
-    let currentFactIndex = 0;
-    function updateFact() {
-      const factContainer = document.getElementById('factContent');
-      const fact = facts[currentFactIndex];
-      factContainer.innerHTML = 
-        <p><strong>Q: ${fact.question}</strong></p>
-        <p><strong>A: ${fact.answer}</strong></p>
-        <p>${fact.explanation}</p>
-      ;
-    }
-    function nextFact() {
-      if (currentFactIndex < facts.length - 1) {
-        currentFactIndex++;
-        updateFact();
-      }
-    }
-    function previousFact() {
-      if (currentFactIndex > 0) {
-        currentFactIndex--;
-        updateFact();
-      }
-    }
-    // On page load, initialize facts section (if visited later)
-    document.addEventListener("DOMContentLoaded", function() {
-      showSection('menuSection');
+    // Click Handlers
+    btnGroceryList.addEventListener("click", () => {
+      showSection(grocerySection);
+      loadGroceryList();
     });
+
+    btnRecipeToday.addEventListener("click", () => {
+      showSection(recipeSection);
+      loadRecipe();
+    });
+
+    // Back buttons
+    backButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        showSection(mainMenu);
+      });
+    });
+
+    // Initialize on page load
+    initializeApp();
   </script>
 </body>
 </html>
