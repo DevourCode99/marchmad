@@ -7,8 +7,6 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet" />
   <style>
-    /* Inlined CSS inspired by your provided example */
-
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&display=swap');
 
     /* Reset & Base */
@@ -31,75 +29,65 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Sections */
+    /* Sections (pages) */
     .section {
       display: none;
       padding: 20px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto; /* centers the page content container */
     }
-    .menu-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    /* Header for Main Menu */
-    .header {
-      margin-bottom: 40px;
+    /* Common heading area (centered lines) */
+    .page-header {
       text-align: center;
+      margin-bottom: 30px;
     }
-    .header h1 {
+    .page-header h1,
+    .page-header h2 {
       font-family: 'Roboto Condensed', sans-serif;
-      font-size: 3rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: 2rem;
       margin-bottom: 10px;
-    }
-    /* (Optional) The header below the title is not needed if each menu card shows time info.
-       You may remove this if you prefer the menu cards to be the sole display.
-    */
-    .header p {
-      font-size: 1.5rem;
+      text-transform: uppercase;
       letter-spacing: 1px;
     }
+    /* The four lines under each header: Menu Name, DOW, date, time */
+    .header-line {
+      text-align: center;
+      font-size: 1.2rem;
+      margin: 6px 0;
+    }
 
-    /* Main Menu Items (Cards) – centered */
-    .menu-item {
-      font-size: 2.5rem;
+    /* Main Menu container */
+    #menuSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* ensures buttons are physically centered */
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding-top: 40px;
+    }
+
+    /* Main Menu Buttons - physically centered using the container flex above */
+    .menu-button {
+      font-size: 1.4rem;
       font-weight: 700;
-      margin: 20px 0;
-      padding: 20px;
+      margin: 10px 0;
+      padding: 15px 25px;
       border: 2px solid #fff;
       border-radius: 12px;
       transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
       cursor: pointer;
-      width: 80%;
-      max-width: 500px;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
     }
-    .menu-item:hover {
+    .menu-button:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 16px rgba(255,255,255,0.2);
       background-color: #fff;
       color: #000;
     }
-    /* Menu item inner text */
-    .menu-title {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .menu-dow, .menu-date, .menu-time {
-      font-size: 1.2rem;
-      margin-bottom: 5px;
-    }
 
-    /* Buttons (used for back and navigation in other pages) */
-    .back-button, .nav-button {
+    /* Shared button style for "Back to Menu" and Prev/Next */
+    .nav-button, .back-button {
       font-size: 1rem;
       margin: 10px;
       cursor: pointer;
@@ -110,29 +98,20 @@
       border-radius: 5px;
       transition: all 0.3s ease;
     }
-    .back-button:hover, .nav-button:hover {
+    .nav-button:hover, .back-button:hover {
       background: #fff;
       color: #000;
     }
 
-    /* Live time text on non-main-menu pages */
-    .live-time {
-      font-size: 1rem;
-      margin: 10px 0 20px;
-      text-align: left;
-    }
-
-    /* Grocery List Section – left aligned for readability */
+    /* Grocery List content – left aligned */
     #groceryListContainer {
       text-align: left;
-      max-width: 600px;
-      margin: 20px auto;
+      margin-top: 20px;
     }
     .grocery-category {
       margin-top: 15px;
     }
     .grocery-category h3 {
-      color: #fff;
       margin-bottom: 5px;
     }
     .grocery-category ul {
@@ -142,13 +121,12 @@
 
     /* Recipe Section – left aligned for readability */
     #recipeInfoContainer {
-      margin: 20px auto;
-      max-width: 600px;
       text-align: left;
+      margin-top: 20px;
     }
     .recipe-date {
-      font-size: 2rem;
-      margin: 20px 0;
+      font-size: 1.5rem;
+      margin: 15px 0;
       font-weight: bold;
       text-align: left;
     }
@@ -159,71 +137,77 @@
       margin-top: 20px;
     }
 
-    /* Mobile adjustments */
+    /* Mobile styling */
     @media (max-width: 600px) {
-      .menu-item {
-        font-size: 2rem;
-        padding: 15px;
+      .section {
+        padding: 10px;
       }
-      .header h1 {
-        font-size: 2.5rem;
+      .page-header h1,
+      .page-header h2 {
+        font-size: 1.8rem;
       }
-      .header p,
-      .menu-dow, .menu-date, .menu-time {
+      .header-line {
+        font-size: 1rem;
+      }
+      .menu-button {
         font-size: 1.2rem;
+        padding: 12px 20px;
       }
-      .back-button, .nav-button {
+      .nav-button, .back-button {
         font-size: 0.9rem;
         padding: 8px 16px;
       }
-    }
-
-    /* Active Section */
-    .active {
-      display: block;
+      .recipe-date {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Main Menu Section (Centered) -->
-  <div id="menuSection" class="section menu-container" style="display: flex;">
-    <div class="header">
+  <!-- MAIN MENU SECTION -->
+  <div id="menuSection" class="section" style="display: flex;">
+    <div class="page-header">
       <h1>Meal Maker App</h1>
-      <!-- Optional overall live time header; you may remove if each menu card shows time -->
-      <p id="todayTimeHeader"></p>
+      <!-- 4 lines: menu name, dow, date, time (all centered) -->
+      <div class="header-line" id="mainMenuName">Meal Maker App</div>
+      <div class="header-line" id="mainMenuDow">...</div>
+      <div class="header-line" id="mainMenuDate">...</div>
+      <div class="header-line" id="mainMenuTime">...</div>
     </div>
-    <!-- Menu Card for Grocery List -->
-    <div class="menu-item" id="btnGroceryList">
-      <div class="menu-title">Grocery List</div>
-      <div class="menu-dow" id="menuGroceryDOW"></div>
-      <div class="menu-date" id="menuGroceryDate"></div>
-      <div class="menu-time" id="menuGroceryTime"></div>
-    </div>
-    <!-- Menu Card for Weekly Recipes -->
-    <div class="menu-item" id="btnRecipeToday">
-      <div class="menu-title">Weekly Recipes</div>
-      <div class="menu-dow" id="menuRecipeDOW"></div>
-      <div class="menu-date" id="menuRecipeDate"></div>
-      <div class="menu-time" id="menuRecipeTime"></div>
-    </div>
+    <!-- Centered Buttons -->
+    <button class="menu-button" id="btnGroceryList">Grocery List</button>
+    <button class="menu-button" id="btnRecipeToday">Weekly Recipes</button>
   </div>
 
-  <!-- Grocery List Section (Left-aligned content) -->
+  <!-- GROCERY LIST SECTION -->
   <div id="grocerySection" class="section">
+    <div class="page-header">
+      <h2>Grocery List</h2>
+      <!-- 4 lines under header (Menu Name, DOW, Date, Time) -->
+      <div class="header-line" id="groceryMenuName">Grocery List</div>
+      <div class="header-line" id="groceryDow">...</div>
+      <div class="header-line" id="groceryDate">...</div>
+      <div class="header-line" id="groceryTime">...</div>
+    </div>
     <button class="back-button" id="backFromGrocery">Back to Menu</button>
-    <p id="groceryLiveTime" class="live-time"></p>
-    <h2>Grocery List</h2>
     <div id="groceryListContainer"></div>
   </div>
 
-  <!-- Recipe Section (Left-aligned content) -->
+  <!-- RECIPE SECTION -->
   <div id="recipeSection" class="section">
+    <div class="page-header">
+      <h2>Weekly Recipes</h2>
+      <!-- 4 lines under header (Menu Name, DOW, Date, Time) -->
+      <div class="header-line" id="recipeMenuName">Weekly Recipes</div>
+      <div class="header-line" id="recipeDow">...</div>
+      <div class="header-line" id="recipeDate">...</div>
+      <div class="header-line" id="recipeTime">...</div>
+    </div>
     <button class="back-button" id="backFromRecipe">Back to Menu</button>
-    <p id="recipeLiveTime" class="live-time"></p>
-    <h2>Weekly Recipes</h2>
-    <!-- Large scheduled date appears here -->
-    <div id="recipeScheduledDate" class="recipe-date"></div>
-    <div id="recipeInfoContainer"></div>
+    <div id="recipeInfoContainer">
+      <!-- The big scheduled date (like "03/25/2025") if needed -->
+      <div class="recipe-date" id="recipeScheduledDate"></div>
+    </div>
     <div class="recipe-nav">
       <button class="nav-button" id="prevRecipe">Prev Recipe</button>
       <button class="nav-button" id="nextRecipe">Next Recipe</button>
@@ -231,94 +215,94 @@
   </div>
 
   <script>
-    // Global variables
+    /***************************************************
+     * GLOBAL VARIABLES & DOM REFERENCES
+     ***************************************************/
     let currentGroupNumber = null;
     let currentRecipeNumber = null; // from pull.json (may be null on grocery days)
     let isGroceryDay = false;
-    let recipeArray = []; // holds recipes from the appropriate recN.json file
-    let currentRecipeIndex = 1; // carousel index from 1 to 6 (default to today's recipe if available)
+    let recipeArray = [];
+    let currentRecipeIndex = 1; // for recipe carousel
 
-    // HTML element references for sections
+    // Sections
     const menuSection = document.getElementById("menuSection");
     const grocerySection = document.getElementById("grocerySection");
     const recipeSection = document.getElementById("recipeSection");
 
-    // Main Menu header element (optional live header)
-    const todayTimeHeader = document.getElementById("todayTimeHeader");
-    // Main Menu card elements
-    const menuGroceryDOW = document.getElementById("menuGroceryDOW");
-    const menuGroceryDate = document.getElementById("menuGroceryDate");
-    const menuGroceryTime = document.getElementById("menuGroceryTime");
-
-    const menuRecipeDOW = document.getElementById("menuRecipeDOW");
-    const menuRecipeDate = document.getElementById("menuRecipeDate");
-    const menuRecipeTime = document.getElementById("menuRecipeTime");
-
-    // Live time elements on other pages
-    const groceryLiveTimeElem = document.getElementById("groceryLiveTime");
-    const recipeLiveTimeElem = document.getElementById("recipeLiveTime");
-
-    // Other element references
-    const groceryListContainer = document.getElementById("groceryListContainer");
-    const recipeInfoContainer = document.getElementById("recipeInfoContainer");
-    const recipeScheduledDateElem = document.getElementById("recipeScheduledDate");
-
+    // Main Menu
+    const mainMenuNameElem = document.getElementById("mainMenuName");
+    const mainMenuDowElem = document.getElementById("mainMenuDow");
+    const mainMenuDateElem = document.getElementById("mainMenuDate");
+    const mainMenuTimeElem = document.getElementById("mainMenuTime");
     const btnGroceryList = document.getElementById("btnGroceryList");
     const btnRecipeToday = document.getElementById("btnRecipeToday");
 
+    // Grocery Page
+    const groceryMenuNameElem = document.getElementById("groceryMenuName");
+    const groceryDowElem = document.getElementById("groceryDow");
+    const groceryDateElem = document.getElementById("groceryDate");
+    const groceryTimeElem = document.getElementById("groceryTime");
+    const groceryListContainer = document.getElementById("groceryListContainer");
     const backFromGrocery = document.getElementById("backFromGrocery");
-    const backFromRecipe = document.getElementById("backFromRecipe");
 
+    // Recipe Page
+    const recipeMenuNameElem = document.getElementById("recipeMenuName");
+    const recipeDowElem = document.getElementById("recipeDow");
+    const recipeDateElem = document.getElementById("recipeDate");
+    const recipeTimeElem = document.getElementById("recipeTime");
+    const recipeInfoContainer = document.getElementById("recipeInfoContainer");
+    const recipeScheduledDateElem = document.getElementById("recipeScheduledDate");
+    const backFromRecipe = document.getElementById("backFromRecipe");
     const prevRecipeBtn = document.getElementById("prevRecipe");
     const nextRecipeBtn = document.getElementById("nextRecipe");
 
-    // Utility: Show only the given section
+    /***************************************************
+     * HELPER FUNCTIONS
+     ***************************************************/
+
+    // Show only the given section
     function showSection(sectionElem) {
-      [menuSection, grocerySection, recipeSection].forEach(sec => sec.style.display = "none");
+      [menuSection, grocerySection, recipeSection].forEach(sec => {
+        sec.style.display = "none";
+      });
       sectionElem.style.display = "block";
     }
 
-    // Utility: Get current CST time and return an object with parts
+    // Returns an object with dayOfWeek, date, time in CST
     function getCurrentCSTParts() {
       const now = new Date();
       const cstString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
       const cstDate = new Date(cstString);
-      const dow = cstDate.toLocaleDateString("en-US", { weekday: "long", timeZone: "America/Chicago" });
-      const date = cstDate.toLocaleDateString("en-US", { month:"2-digit", day:"2-digit", year:"numeric", timeZone:"America/Chicago" });
-      const time = cstDate.toLocaleTimeString("en-US", { hour:"2-digit", minute:"2-digit", second:"2-digit", hour12:true, timeZone:"America/Chicago" });
-      return { dow, date, time };
+      const dayOfWeek = cstDate.toLocaleDateString("en-US", { weekday: "long" });
+      const dateStr = cstDate.toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" });
+      const timeStr = cstDate.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
+      return { dayOfWeek, dateStr, timeStr };
     }
 
-    // Utility: Get full formatted live CST time (for header)
-    function getLiveCST() {
-      const parts = getCurrentCSTParts();
-      return `${parts.date} – ${parts.dow} – ${parts.time} CST`;
+    // Updates the four lines on each page with the current CST dayOfWeek, date, time
+    function updateAllHeaders() {
+      const cst = getCurrentCSTParts();
+      // Main Menu
+      if (mainMenuDowElem) mainMenuDowElem.textContent = cst.dayOfWeek;
+      if (mainMenuDateElem) mainMenuDateElem.textContent = cst.dateStr;
+      if (mainMenuTimeElem) mainMenuTimeElem.textContent = cst.timeStr + " CST";
+
+      // Grocery Page
+      if (groceryDowElem) groceryDowElem.textContent = cst.dayOfWeek;
+      if (groceryDateElem) groceryDateElem.textContent = cst.dateStr;
+      if (groceryTimeElem) groceryTimeElem.textContent = cst.timeStr + " CST";
+
+      // Recipe Page
+      if (recipeDowElem) recipeDowElem.textContent = cst.dayOfWeek;
+      if (recipeDateElem) recipeDateElem.textContent = cst.dateStr;
+      if (recipeTimeElem) recipeTimeElem.textContent = cst.timeStr + " CST";
     }
 
-    // Update the live time in all pages (menu header and page live time fields)
-    function updateLiveTimeDisplays() {
-      const parts = getCurrentCSTParts();
-      const fullLive = getLiveCST();
-      if (todayTimeHeader) {
-        todayTimeHeader.textContent = fullLive;
-      }
-      // Update main menu cards
-      if (menuGroceryDOW) menuGroceryDOW.textContent = parts.dow;
-      if (menuGroceryDate) menuGroceryDate.textContent = parts.date;
-      if (menuGroceryTime) menuGroceryTime.textContent = parts.time + " CST";
+    // Repeatedly update time every second
+    setInterval(updateAllHeaders, 1000);
+    updateAllHeaders();
 
-      if (menuRecipeDOW) menuRecipeDOW.textContent = parts.dow;
-      if (menuRecipeDate) menuRecipeDate.textContent = parts.date;
-      if (menuRecipeTime) menuRecipeTime.textContent = parts.time + " CST";
-      
-      // Update live time on grocery and recipe pages
-      if (groceryLiveTimeElem) groceryLiveTimeElem.textContent = fullLive;
-      if (recipeLiveTimeElem) recipeLiveTimeElem.textContent = fullLive;
-    }
-    setInterval(updateLiveTimeDisplays, 1000);
-    updateLiveTimeDisplays();
-
-    // Utility: Get a Date object for today (at midnight CST)
+    // Returns a Date object for "today" at midnight in CST
     function getTodayCSTDate() {
       const now = new Date();
       const cstString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
@@ -326,10 +310,12 @@
       return new Date(cstDate.getFullYear(), cstDate.getMonth(), cstDate.getDate());
     }
 
-    // ------------------ Grocery List ------------------
+    /***************************************************
+     * GROCERY LIST
+     ***************************************************/
     async function loadGroceryList() {
       try {
-        // Fetch grocery schedule dates from year.json
+        // Get the date range for the current group from year.json
         const dateRange = await getGroceryDateRange();
         let headingText = "";
         if (dateRange) {
@@ -338,24 +324,28 @@
           headingText = `Grocery List for Group ${currentGroupNumber}`;
         }
         let html = `<p>${headingText}${isGroceryDay ? " – (It’s Grocery Day!)" : ""}</p>`;
-        // Fetch the grocery list
-        const response = await fetch("data/grocery_list.json");
-        const data = await response.json();
+
+        // fetch grocery_list.json
+        const resp = await fetch("data/grocery_list.json");
+        const data = await resp.json();
         if (!data.groceryLists) return;
         const groupData = data.groceryLists.find(g => g.groupNumber === currentGroupNumber);
         if (!groupData) {
           groceryListContainer.innerHTML = "<p>No grocery list found for this group.</p>";
           return;
         }
+        // produce, meatPoultry, cannedPackagedDryGoods
         html += createGroceryCategoryHTML("Produce", groupData.produce);
         html += createGroceryCategoryHTML("Meat/Poultry", groupData.meatPoultry);
         html += createGroceryCategoryHTML("Canned/Packaged/Dry Goods", groupData.cannedPackagedDryGoods);
+
         groceryListContainer.innerHTML = html;
       } catch (error) {
         console.error("Error loading grocery list:", error);
-        groceryListContainer.innerHTML = "<p>Error loading grocery list. See console for details.</p>";
+        groceryListContainer.innerHTML = "<p>Error loading grocery list.</p>";
       }
     }
+
     function createGroceryCategoryHTML(title, items) {
       if (!items || !Array.isArray(items)) return "";
       return `
@@ -367,11 +357,12 @@
         </div>
       `;
     }
-    // Fetch grocery date range from year.json based on today's date
+
+    // Gets the date range from year.json based on today's date
     async function getGroceryDateRange() {
       try {
-        const response = await fetch("data/year.json");
-        const data = await response.json();
+        const resp = await fetch("data/year.json");
+        const data = await resp.json();
         const schedule = data.mealSchedule2025;
         const today = getTodayCSTDate();
         let foundBlock = null;
@@ -387,26 +378,29 @@
           if (foundBlock) break;
         }
         if (foundBlock) {
-          const startStr = new Date(foundBlock.startDate).toLocaleDateString("en-US", {month:"2-digit", day:"2-digit", year:"numeric"});
-          const endStr = new Date(foundBlock.endDate).toLocaleDateString("en-US", {month:"2-digit", day:"2-digit", year:"numeric"});
+          const options = { month:"2-digit", day:"2-digit", year:"numeric" };
+          const startStr = new Date(foundBlock.startDate).toLocaleDateString("en-US", options);
+          const endStr = new Date(foundBlock.endDate).toLocaleDateString("en-US", options);
           return { start: startStr, end: endStr };
-        } else {
-          return null;
         }
+        return null;
       } catch (error) {
         console.error("Error fetching year.json for grocery range:", error);
         return null;
       }
     }
 
-    // ------------------ Recipe Carousel ------------------
+    /***************************************************
+     * WEEKLY RECIPES (CAROUSEL)
+     ***************************************************/
     async function loadRecipeCarousel() {
+      // if there's no recipe, default to 1
       if (!currentRecipeNumber) currentRecipeIndex = 1;
       else currentRecipeIndex = currentRecipeNumber;
       try {
         const fileName = `data/rec${currentGroupNumber}.json`;
-        const response = await fetch(fileName);
-        const data = await response.json();
+        const resp = await fetch(fileName);
+        const data = await resp.json();
         if (!data.recipes) {
           recipeInfoContainer.innerHTML = "<p>No recipes available for this group.</p>";
           return;
@@ -415,16 +409,17 @@
         displayRecipe(currentRecipeIndex);
       } catch (error) {
         console.error("Error loading recipes:", error);
-        recipeInfoContainer.innerHTML = "<p>Error loading recipe. See console for details.</p>";
+        recipeInfoContainer.innerHTML = "<p>Error loading recipe data.</p>";
       }
     }
+
     function displayRecipe(recipeNum) {
       const recipeData = recipeArray.find(r => r.recipeNumber === recipeNum);
       if (!recipeData) {
         recipeInfoContainer.innerHTML = "<p>Recipe data not found.</p>";
         return;
       }
-      // Compute scheduled date assuming today's recipe is from pull.json
+      // compute scheduled date based on offset from today's recipe
       const offsetDays = recipeNum - (currentRecipeNumber || 1);
       const todayCST = getTodayCSTDate();
       const scheduledDate = new Date(todayCST.getTime() + offsetDays * 24 * 3600 * 1000);
@@ -444,18 +439,24 @@
       nextRecipeBtn.disabled = (recipeNum >= 6);
     }
 
-    // ------------------ Initialize App ------------------
+    /***************************************************
+     * INITIALIZE APP
+     ***************************************************/
     async function initializeApp() {
-      // Set main menu header live time
-      todayTimeHeader.textContent = getLiveCST();
+      // The main menu has "Meal Maker App" name by default. We can set the sub-lines via updateAllHeaders.
+      mainMenuNameElem.textContent = "Meal Maker App";
+      groceryMenuNameElem.textContent = "Grocery List";
+      recipeMenuNameElem.textContent = "Weekly Recipes";
+
+      // read pull.json to figure out today's group/recipe
       try {
         const response = await fetch("data/pull.json");
         const pullData = await response.json();
-        const todayStr = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Chicago" }))
-                         .toISOString().split('T')[0];
+        const now = new Date().toLocaleString("en-US", { timeZone: "America/Chicago" });
+        const todayStr = new Date(now).toISOString().split('T')[0]; // "YYYY-MM-DD"
         const foundEntry = pullData.dailySchedule.find(entry => entry.date === todayStr);
         if (!foundEntry) {
-          console.warn("No matching entry found in pull.json; defaulting to Group 1.");
+          console.warn("No matching entry found in pull.json; defaulting to group=1");
           currentGroupNumber = 1;
           currentRecipeNumber = null;
           isGroceryDay = false;
@@ -472,7 +473,9 @@
       }
     }
 
-    // ------------------ Event Listeners ------------------
+    /***************************************************
+     * EVENT LISTENERS
+     ***************************************************/
     btnGroceryList.addEventListener("click", () => {
       showSection(grocerySection);
       loadGroceryList();
@@ -496,9 +499,12 @@
       }
     });
 
-    // ------------------ Start ------------------
-    initializeApp();
-    showSection(menuSection);
+    /***************************************************
+     * START
+     ***************************************************/
+    initializeApp().then(() => {
+      showSection(menuSection); 
+    });
   </script>
 </body>
 </html>
