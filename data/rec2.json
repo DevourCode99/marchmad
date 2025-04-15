@@ -1,0 +1,133 @@
+{
+  "groupNumber": 2,
+  "recipes": [
+    {
+      "recipeNumber": 7,
+      "recipeName": "Chicken Fajitas",
+      "prepTime": "~20 minutes",
+      "ingredientsNeeded": [
+        "1 lb chicken breasts, sliced",
+        "2–3 bell peppers, sliced",
+        "1 onion, sliced",
+        "Fajita seasoning (or chili powder, cumin, paprika)",
+        "1 Tbsp oil",
+        "Tortillas (whole wheat if possible)",
+        "Optional toppings: lettuce, salsa, sour cream, cheese"
+      ],
+      "steps": [
+        "Marinate chicken (optional): Toss sliced chicken with seasoning and a bit of oil. Let sit ~10 minutes.",
+        "Cook chicken: In a skillet over medium-high heat, sauté chicken until browned (~5–6 minutes).",
+        "Add peppers & onions: Stir-fry until vegetables are tender (~5 more minutes).",
+        "Warm tortillas: In a dry pan or microwave.",
+        "Assemble: Fill tortillas with chicken mixture, add desired toppings."
+      ]
+    },
+    {
+      "recipeNumber": 8,
+      "recipeName": "Oven-Baked Chicken Parmesan",
+      "prepTime": "~15 minutes (+ ~20–25 minutes baking)",
+      "ingredientsNeeded": [
+        "~1 lb chicken cutlets (or breasts pounded thin)",
+        "1 cup tomato sauce (low-sodium)",
+        "½ cup breadcrumbs (panko recommended)",
+        "¼ cup grated Parmesan cheese",
+        "½ cup shredded mozzarella cheese",
+        "1 egg",
+        "Salt, pepper, Italian herbs"
+      ],
+      "steps": [
+        "Preheat oven to 400°F (200°C).",
+        "Dredge chicken: Beat egg in a bowl. In another bowl, mix breadcrumbs, Parmesan, salt, pepper, and herbs. Dip chicken in egg, then coat with breadcrumb mixture.",
+        "Bake chicken: Place coated chicken on a baking sheet lined with foil or parchment. Bake ~15 minutes.",
+        "Add sauce & cheese: Spoon tomato sauce over each piece, top with mozzarella.",
+        "Finish baking: Bake another ~5–10 minutes until cheese melts and chicken is fully cooked."
+      ]
+    },
+    {
+      "recipeNumber": 9,
+      "recipeName": "Chicken Fried Rice",
+      "prepTime": "~15 minutes",
+      "ingredientsNeeded": [
+        "1 lb chicken breasts, diced",
+        "3 cups cooked rice (preferably leftover, cold)",
+        "1 cup diced carrots, peas, or other veggies",
+        "2 green onions, sliced (optional)",
+        "2 Tbsp soy sauce",
+        "2 eggs (optional)",
+        "1 Tbsp oil (vegetable or sesame)",
+        "Salt and pepper to taste"
+      ],
+      "steps": [
+        "Sauté chicken: Heat oil in a wok or skillet; cook diced chicken until browned (~5–6 minutes). Season lightly.",
+        "Add veggies: Stir-fry carrots, peas, or other veggies until tender.",
+        "Push aside: Move chicken & veggies to one side; scramble eggs on the empty side (if using).",
+        "Add rice: Stir in cooked rice; break up clumps.",
+        "Season: Drizzle soy sauce over; stir well. Taste and adjust salt, pepper, or more soy sauce.",
+        "Serve with green onions sprinkled on top (optional)."
+      ]
+    },
+    {
+      "recipeNumber": 10,
+      "recipeName": "Beef Taco Bowls",
+      "prepTime": "~15 minutes",
+      "ingredientsNeeded": [
+        "1 lb ground beef",
+        "1 onion, diced (optional)",
+        "1 packet taco seasoning (or chili powder, cumin, garlic powder)",
+        "2 cups cooked rice or quinoa (optional base)",
+        "Lettuce, chopped",
+        "Bell pepper, diced (optional topping)",
+        "Salsa, cheese, sour cream, guacamole (optional toppings)"
+      ],
+      "steps": [
+        "Brown beef: In a skillet over medium heat, sauté ground beef (and onion) until no longer pink. Drain excess fat if needed.",
+        "Season: Add taco seasoning + a splash of water. Simmer a few minutes.",
+        "Assemble bowl: Layer lettuce or rice, then beef, then bell peppers, salsa, cheese, etc."
+      ]
+    },
+    {
+      "recipeNumber": 11,
+      "recipeName": "Beef Vegetable Soup",
+      "prepTime": "~15 minutes (+ ~45 minutes simmer)",
+      "ingredientsNeeded": [
+        "1 lb beef stew meat or ground beef",
+        "1 onion, chopped",
+        "2 carrots, sliced",
+        "2–3 cups chopped mixed vegetables (celery, peas, green beans, etc.)",
+        "4 cups beef broth (low-sodium if possible)",
+        "1 can diced tomatoes (optional)",
+        "Salt, pepper, thyme, bay leaf (optional)"
+      ],
+      "steps": [
+        "Sear meat: In a large pot, brown stew meat or ground beef with onion. Drain excess fat if needed.",
+        "Add liquids: Pour in broth and diced tomatoes.",
+        "Add veggies: Carrots, celery, any others.",
+        "Season: Salt, pepper, thyme, and bay leaf.",
+        "Simmer: Bring to a gentle boil, reduce heat, cover, and simmer ~45 minutes (or until stew meat is tender).",
+        "Taste and serve hot."
+      ]
+    },
+    {
+      "recipeNumber": 12,
+      "recipeName": "Spinach and Ricotta Whole Wheat Lasagna",
+      "prepTime": "~25 minutes (+ ~30 minutes bake)",
+      "ingredientsNeeded": [
+        "Whole wheat lasagna noodles (~9 noodles)",
+        "1 jar/can tomato sauce or crushed tomatoes (~24 oz)",
+        "1 cup ricotta cheese",
+        "2–3 cups spinach (fresh or frozen, drained)",
+        "1 cup shredded mozzarella cheese",
+        "¼ cup grated Parmesan cheese",
+        "1 egg (beaten, optional)",
+        "Salt, pepper, Italian herbs"
+      ],
+      "steps": [
+        "Pre-cook noodles (if needed) or use no-boil noodles.",
+        "Mix ricotta & spinach: In a bowl, combine ricotta, spinach, optional egg, salt, pepper, and Italian herbs.",
+        "Layer: In a baking dish, spread a bit of tomato sauce. Place a layer of noodles, then ricotta-spinach mix, then sauce, then a sprinkle of mozzarella. Repeat layers until ingredients are used.",
+        "Top with sauce and remaining mozzarella + Parmesan.",
+        "Bake: Cover with foil; bake at 375°F (190°C) for ~20 minutes. Uncover and bake another 10 minutes until cheese is melted and bubbling."
+      ]
+    }
+  ]
+}
