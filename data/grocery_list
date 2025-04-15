@@ -1,0 +1,158 @@
+{
+  "groceryLists": [
+    {
+      "groupNumber": 1,
+      "produce": [
+        "Onions (about 5–6 large)",
+        "Garlic (1 head)",
+        "Fresh ginger (1 small knob)",
+        "Bell peppers (8–10 total: mixed red/green/yellow)",
+        "Carrots (5–6)",
+        "Broccoli florets (2 large heads or ~4–5 cups)",
+        "Zucchini (2–3)",
+        "Potatoes (4–5 medium)",
+        "Spinach (1 large bag or ~8 cups)",
+        "Mixed stir-fry vegetables (optional)",
+        "Celery (optional for chili, ~2 stalks)",
+        "Fresh parsley or cilantro (optional garnish)"
+      ],
+      "meatPoultry": [
+        "Chicken breasts (about 2–3 lbs total for Stir-Fry and Chili)",
+        "Chicken thighs or additional breasts (about 1.5–2 lbs for Sheet Pan Bake)",
+        "Beef steak (about 1–1.5 lbs for Beef & Broccoli Stir-Fry)",
+        "Ground beef (about 1 lb for Stuffed Bell Peppers)"
+      ],
+      "cannedPackagedDryGoods": [
+        "Brown rice (1–2 lbs or enough for multiple meals)",
+        "Whole wheat pasta (1 box for the Pasta Primavera)",
+        "Diced tomatoes (2 cans for Chicken Chili)",
+        "Beans (e.g., kidney or black beans; 1–2 cans for Chicken Chili)",
+        "Tomato sauce or crushed tomatoes (1 small can for Chicken Chili)",
+        "Chicken or vegetable broth (about 4 cups for Chili)",
+        "Soy sauce (1 bottle)",
+        "Cornstarch (small box)",
+        "Cooking oil (olive oil or vegetable oil)",
+        "Salt, pepper, dried herbs (rosemary, thyme, etc.)",
+        "Chili powder, cumin, paprika (for Chili)"
+      ]
+    },
+    {
+      "groupNumber": 2,
+      "produce": [
+        "Onions (4–5)",
+        "Garlic (1 head)",
+        "Bell peppers (4–5)",
+        "Tomatoes (4–5 fresh, optional for fresh salsa/toppings)",
+        "Lettuce or shredded cabbage (optional garnish)",
+        "Carrots, peas, green onions (for chicken fried rice)",
+        "Spinach (for lasagna filling, ~4–5 cups)",
+        "Fresh basil or parsley (optional garnish)"
+      ],
+      "meatPoultry": [
+        "Chicken breasts (~2 lbs total for Fajitas and Fried Rice)",
+        "Chicken cutlets or breasts (~1 lb for Oven-Baked Chicken Parmesan)",
+        "Ground beef (~1 lb for Taco Bowls)",
+        "Beef stew meat or ground beef (~1 lb for Beef Vegetable Soup)"
+      ],
+      "cannedPackagedDryGoods": [
+        "Whole wheat tortillas or your choice (for fajitas/tacos)",
+        "Rice (white or brown, for fried rice)",
+        "Low-sodium tomato sauce (~1 can, for Chicken Parmesan)",
+        "Panko or breadcrumbs (for Chicken Parmesan)",
+        "Mozzarella cheese (for Chicken Parmesan)",
+        "Parmesan cheese (for Chicken Parmesan + lasagna)",
+        "Seasoning packets/spices (chili powder, cumin, fajita or taco seasoning)",
+        "Beef or chicken broth (~4–6 cups total for soup)",
+        "Mixed frozen or fresh vegetables (for Beef Vegetable Soup)",
+        "Whole wheat lasagna noodles (1 box)",
+        "Ricotta cheese (~1 cup)",
+        "Canned crushed tomatoes (1–2 cans for lasagna sauce)",
+        "Soy sauce (for fried rice, if needed)",
+        "Eggs (2–3 for fried rice, optional)"
+      ]
+    },
+    {
+      "groupNumber": 3,
+      "produce": [
+        "Onions (4–5)",
+        "Garlic (1 head)",
+        "Bell peppers (3–4)",
+        "Spinach or kale (1 bag)",
+        "Mushrooms (1 box)",
+        "Carrots, celery (for soup)",
+        "Sweet potatoes or potatoes (2–3)",
+        "Lettuce (for wraps or side salads)",
+        "Lemons (1–2, for marinade/glaze)"
+      ],
+      "meatPoultry": [
+        "Chicken breasts (~3–4 lbs total)",
+        "Ground chicken (~1 lb, for meatballs)",
+        "Beef roast or beef strips (~1 lb)"
+      ],
+      "cannedPackagedDryGoods": [
+        "Whole wheat pasta (1 box for Chicken Alfredo or similar)",
+        "Chicken broth (~4 cups for soup)",
+        "Tortilla chips or tortillas (for Chicken Tortilla Soup garnish)",
+        "Canned tomatoes (~2 cans, for soup)",
+        "Beans (black or pinto, 1 can for soup)",
+        "Parmesan cheese (for Alfredo)",
+        "Low-fat milk or half-and-half (for Alfredo sauce)",
+        "Various seasonings (Italian herbs, chili powder, cumin)",
+        "Hoisin or soy sauce (for Lettuce Wraps)",
+        "Cornstarch (for thickening sauces)"
+      ]
+    },
+    {
+      "groupNumber": 4,
+      "produce": [
+        "Onions (4–5)",
+        "Garlic (1 head)",
+        "Bell peppers (4–5)",
+        "Mushrooms (1 box)",
+        "Broccoli (1–2 heads)",
+        "Carrots, celery (for stew or soups)",
+        "Green beans or zucchini (for sides)",
+        "Romaine or mixed greens (for Chicken Caesar Salad)",
+        "Tomatoes (2–3, for bruschetta or salads)",
+        "Basil (fresh, for bruschetta chicken or pasta)"
+      ],
+      "meatPoultry": [
+        "Chicken breasts/thighs (~3–4 lbs total)",
+        "Ground beef (~1 lb)"
+      ],
+      "cannedPackagedDryGoods": [
+        "Whole wheat spaghetti (for Pasta Bolognese)",
+        "Tomato sauce, crushed tomatoes (~2 cans total)",
+        "Parmesan cheese, mozzarella (for various chicken recipes)",
+        "Caesar dressing or ingredients (for homemade Caesar)",
+        "Croutons (optional)",
+        "Various seasonings/spices"
+      ]
+    },
+    {
+      "groupNumber": 5,
+      "produce": [
+        "Onions (4–5)",
+        "Garlic (1 head)",
+        "Bell peppers (3–4)",
+        "Spinach or mixed greens",
+        "Eggplant or zucchini",
+        "Carrots, celery (if needed for soups/stews)",
+        "Fresh herbs: cilantro or parsley",
+        "Potatoes (3–4)"
+      ],
+      "meatPoultry": [
+        "Chicken breasts (~2–3 lbs total)",
+        "Ground beef (~1 lb)",
+        "Beef strips or stew meat (~1 lb)"
+      ],
+      "cannedPackagedDryGoods": [
+        "Whole wheat pasta (1 box)",
+        "Low-sodium chicken broth (2–4 cups)",
+        "Cheese (cheddar, mozzarella, or your choice)",
+        "Breadcrumbs or panko",
+        "Various seasonings/spices"
+      ]
+    }
+  ]
+}
