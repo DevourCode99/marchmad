@@ -1,0 +1,117 @@
+{
+  "groupNumber": 5,
+  "recipes": [
+    {
+      "recipeNumber": 25,
+      "recipeName": "Chicken Piccata (Lightened Up)",
+      "prepTime": "~20 minutes",
+      "ingredientsNeeded": [
+        "1 lb chicken breasts, pounded thin",
+        "¼ cup flour (whole wheat or regular)",
+        "2 Tbsp olive oil",
+        "1 cup chicken broth (low-sodium)",
+        "Juice of 1 lemon",
+        "2 Tbsp capers (rinsed, optional)",
+        "Salt, pepper"
+      ],
+      "steps": [
+        "Dredge chicken: Season chicken with salt, pepper. Lightly coat in flour.",
+        "Sauté: In a skillet over medium-high heat, warm olive oil. Cook chicken ~3–4 minutes per side until golden. Remove.",
+        "Sauce: Add broth, lemon juice, capers to skillet. Scrape up bits from the pan; simmer a few minutes.",
+        "Return chicken: Let simmer in sauce ~2–3 minutes to finish cooking. Adjust seasoning."
+      ]
+    },
+    {
+      "recipeNumber": 26,
+      "recipeName": "Spinach-Stuffed Chicken Breasts",
+      "prepTime": "~20 minutes (+ ~20–25 minutes baking)",
+      "ingredientsNeeded": [
+        "1.5–2 lbs chicken breasts (butterflied)",
+        "1 cup spinach (chopped)",
+        "½ cup ricotta or cream cheese (light)",
+        "¼ cup shredded mozzarella (optional)",
+        "Salt, pepper, garlic powder"
+      ],
+      "steps": [
+        "Preheat oven to 400°F (200°C).",
+        "Mix filling: Combine spinach, ricotta, mozzarella (if using), and seasonings.",
+        "Stuff chicken: Butterfly each breast, spoon filling inside, secure with toothpicks if needed.",
+        "Bake: Place in a baking dish, lightly drizzle with oil or use cooking spray. Bake ~20–25 minutes until chicken is 165°F inside."
+      ]
+    },
+    {
+      "recipeNumber": 27,
+      "recipeName": "Chicken & Vegetable Soup",
+      "prepTime": "~15 minutes (+ ~20–25 minutes simmer)",
+      "ingredientsNeeded": [
+        "1 lb chicken breasts, cubed or shredded",
+        "1 onion, chopped",
+        "2 carrots, sliced",
+        "2 celery stalks, sliced",
+        "4 cups chicken broth",
+        "Salt, pepper, thyme"
+      ],
+      "steps": [
+        "Sauté chicken: In a pot with a little oil, cook chicken until lightly browned.",
+        "Add veggies: Onions, carrots, celery. Cook a few minutes.",
+        "Broth: Pour in broth, add thyme, salt, pepper.",
+        "Simmer: ~20–25 minutes until veggies are tender."
+      ]
+    },
+    {
+      "recipeNumber": 28,
+      "recipeName": "Beef & Potato Skillet (or Hash)",
+      "prepTime": "~15 minutes",
+      "ingredientsNeeded": [
+        "1 lb ground beef",
+        "2–3 potatoes, diced small",
+        "1 onion, diced",
+        "1 bell pepper, diced (optional)",
+        "Salt, pepper, paprika"
+      ],
+      "steps": [
+        "Brown beef: In a large skillet, cook beef and onion over medium heat. Drain fat if needed.",
+        "Add potatoes: Stir in diced potatoes (and bell pepper if using). Season with salt, pepper, paprika.",
+        "Cook: Cover and cook ~10–15 minutes, stirring occasionally, until potatoes are tender (add a splash of water or broth if too dry).",
+        "Serve hot."
+      ]
+    },
+    {
+      "recipeNumber": 29,
+      "recipeName": "Homemade Beef Burgers (with Veggie Side)",
+      "prepTime": "~15 minutes",
+      "ingredientsNeeded": [
+        "1 lb ground beef",
+        "Salt, pepper, garlic powder",
+        "4 whole wheat burger buns (optional)",
+        "Lettuce, tomato, onions",
+        "Cheese slices (optional)"
+      ],
+      "steps": [
+        "Form patties: Divide beef into 4 patties. Season with salt, pepper, garlic powder.",
+        "Cook: Grill or pan-fry ~4–5 minutes per side (depending on thickness and desired doneness).",
+        "Assemble: Toast buns if desired. Add toppings. Serve with a side of roasted veggies or salad."
+      ]
+    },
+    {
+      "recipeNumber": 30,
+      "recipeName": "Baked Whole Wheat Pasta with Veggies",
+      "prepTime": "~20 minutes (+ ~15–20 minutes bake)",
+      "ingredientsNeeded": [
+        "8 oz whole wheat pasta (penne, ziti, etc.)",
+        "1 jar/can tomato sauce (~24 oz)",
+        "2 cups mixed vegetables (eggplant, zucchini, or mushrooms, chopped)",
+        "1 cup shredded mozzarella (optional)",
+        "¼ cup Parmesan cheese (optional)",
+        "Salt, pepper, Italian seasoning"
+      ],
+      "steps": [
+        "Cook pasta: According to package directions. Drain.",
+        "Sauté veggies: In a skillet, lightly cook chopped veggies with a bit of oil, salt, pepper.",
+        "Combine: Mix pasta, sauce, veggies, half the cheese in a baking dish.",
+        "Top: Sprinkle remaining cheese on top.",
+        "Bake: At 375°F (190°C) for ~15–20 minutes until cheese is melted and bubbly."
+      ]
+    }
+  ]
+}
