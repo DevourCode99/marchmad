@@ -1,0 +1,148 @@
+{
+  "groupNumber": 1,
+  "recipes": [
+    {
+      "recipeNumber": 1,
+      "recipeName": "Chicken Stir-Fry with Brown Rice",
+      "prepTime": "~20 minutes",
+      "ingredientsNeeded": [
+        "1 lb chicken breasts (cut into thin strips)",
+        "2–3 cups mixed stir-fry vegetables (bell peppers, onions, carrots, broccoli)",
+        "2 cups cooked brown rice (about 1 cup dry)",
+        "2 Tbsp soy sauce",
+        "2 cloves garlic, minced",
+        "1 tsp fresh ginger, minced (optional)",
+        "1–2 Tbsp vegetable oil",
+        "Salt and pepper to taste"
+      ],
+      "steps": [
+        "Cook the rice (if not already done). Follow package instructions for brown rice (usually ~25–30 minutes).",
+        "Prep chicken and veggies: Cut chicken into strips; wash and chop veggies into bite-size pieces.",
+        "Stir-fry chicken: Heat oil in a wok or large skillet on medium-high heat. Add chicken strips; season with salt and pepper. Cook until browned (about 5–6 minutes).",
+        "Add veggies: Toss in vegetables; stir-fry for another 4–5 minutes until slightly tender.",
+        "Season: Add minced garlic, ginger, and soy sauce. Stir to coat.",
+        "Serve: Spoon stir-fry over brown rice and enjoy."
+      ]
+    },
+    {
+      "recipeNumber": 2,
+      "recipeName": "Chicken and Veggie Sheet Pan Bake",
+      "prepTime": "~15 minutes (+ ~30 minutes bake time)",
+      "ingredientsNeeded": [
+        "1.5–2 lbs chicken thighs or breasts",
+        "2–3 bell peppers, sliced",
+        "2 onions, sliced",
+        "2–3 medium potatoes, cut into chunks",
+        "2–3 carrots or zucchini, sliced into chunks",
+        "2 Tbsp olive oil",
+        "1 tsp dried rosemary",
+        "1 tsp dried thyme",
+        "Salt and pepper to taste"
+      ],
+      "steps": [
+        "Preheat oven to 400°F (200°C).",
+        "Chop and toss: Place chicken, peppers, onions, potatoes, and carrots/zucchini on a large baking sheet.",
+        "Season: Drizzle with olive oil; sprinkle with rosemary, thyme, salt, and pepper. Toss everything to coat evenly.",
+        "Arrange: Spread out so everything is in a single layer.",
+        "Bake: Cook for ~30 minutes (flip chicken/veggies halfway) or until chicken is cooked through and veggies are tender.",
+        "Serve warm."
+      ]
+    },
+    {
+      "recipeNumber": 3,
+      "recipeName": "Chicken Chili",
+      "prepTime": "~15 minutes (+ 30–40 minutes simmer)",
+      "ingredientsNeeded": [
+        "1 lb chicken breasts (cubed or shredded)",
+        "1 onion, diced",
+        "1 bell pepper, diced",
+        "2 cloves garlic, minced",
+        "1 can diced tomatoes (~14–15 oz)",
+        "1 can tomato sauce or crushed tomatoes (~8 oz)",
+        "1 can beans (kidney or black), drained and rinsed",
+        "1 cup chicken broth (approx.)",
+        "1 Tbsp chili powder",
+        "1 tsp cumin",
+        "1 tsp paprika (optional)",
+        "Salt and pepper to taste",
+        "Olive oil (1 Tbsp)"
+      ],
+      "steps": [
+        "Sauté veggies: In a pot or Dutch oven, heat oil over medium. Add onion and bell pepper; cook 3–4 minutes. Add garlic; cook 1 minute.",
+        "Add chicken: If raw, add cubed chicken now; cook until lightly browned. If pre-cooked, add after broth in next step.",
+        "Combine: Add diced tomatoes, tomato sauce, beans, chili powder, cumin, paprika, salt, pepper, and ~1 cup chicken broth. Stir to combine.",
+        "Simmer: Bring to a gentle boil, then reduce heat. Simmer 30–40 minutes (add more broth if it thickens too much).",
+        "Taste and adjust: Season with more salt or spices as needed.",
+        "Serve hot (top with cilantro, low-fat cheese, or yogurt if desired)."
+      ]
+    },
+    {
+      "recipeNumber": 4,
+      "recipeName": "Beef & Broccoli Stir-Fry",
+      "prepTime": "~20 minutes",
+      "ingredientsNeeded": [
+        "1 lb flank or sirloin steak (thinly sliced)",
+        "3–4 cups broccoli florets",
+        "1 onion, sliced (optional)",
+        "2 cloves garlic, minced",
+        "1 tsp fresh ginger, minced (optional)",
+        "2 Tbsp soy sauce",
+        "1 tsp cornstarch (mixed in ¼ cup water)",
+        "1–2 Tbsp vegetable oil",
+        "Salt and pepper to taste"
+      ],
+      "steps": [
+        "Prep marinade (optional): Toss beef with half the soy sauce, ginger, and garlic. Let sit ~10 minutes.",
+        "Cook beef: Heat oil in a wok or skillet over high heat. Stir-fry beef for 2–3 minutes until browned; remove and set aside.",
+        "Add broccoli (& onion): Stir-fry 2–3 minutes until broccoli is slightly tender.",
+        "Combine: Return beef to pan. Add remaining soy sauce. Stir in cornstarch slurry.",
+        "Thicken: Cook another 1–2 minutes until sauce thickens. Season as needed.",
+        "Serve with rice or noodles."
+      ]
+    },
+    {
+      "recipeNumber": 5,
+      "recipeName": "Ground Beef Stuffed Bell Peppers",
+      "prepTime": "~15 minutes (+ ~25–30 minutes bake)",
+      "ingredientsNeeded": [
+        "1 lb ground beef",
+        "4 large bell peppers (tops cut off, seeds removed)",
+        "1 onion, diced",
+        "1 cup cooked rice (brown rice preferred)",
+        "1 can diced tomatoes (optional, ~14–15 oz)",
+        "1 tsp dried oregano",
+        "Salt and pepper to taste",
+        "Cheese (optional topping)"
+      ],
+      "steps": [
+        "Preheat oven to 375°F (190°C).",
+        "Brown ground beef: In a skillet, cook beef and onion over medium heat until beef is no longer pink. Drain excess fat if needed.",
+        "Add seasoning: Stir in cooked rice, diced tomatoes (optional), oregano, salt, and pepper. Let simmer a few minutes.",
+        "Stuff peppers: Spoon beef mixture into bell peppers.",
+        "Bake: Place stuffed peppers upright in a baking dish with a little water at the bottom. Cover with foil; bake ~20 minutes. If adding cheese, sprinkle it on top and bake uncovered another 5–10 minutes until melted.",
+        "Serve hot."
+      ]
+    },
+    {
+      "recipeNumber": 6,
+      "recipeName": "Whole Wheat Pasta Primavera",
+      "prepTime": "~20 minutes",
+      "ingredientsNeeded": [
+        "8 oz whole wheat pasta (penne or fusilli)",
+        "2–3 cups mixed vegetables (zucchini, bell peppers, broccoli, carrots)",
+        "2 cloves garlic, minced",
+        "1 Tbsp olive oil",
+        "½ cup pasta water (reserved)",
+        "Salt, pepper, Italian seasoning to taste",
+        "Optional: Grated Parmesan cheese"
+      ],
+      "steps": [
+        "Cook pasta: According to package directions. Reserve ~½ cup cooking water.",
+        "Sauté veggies: Heat olive oil in a large pan over medium heat. Add garlic, then chopped vegetables. Cook ~5–6 minutes until tender.",
+        "Combine: Add drained pasta to pan with veggies. Stir in a bit of reserved pasta water to create a light sauce.",
+        "Season: Add salt, pepper, and Italian seasoning. Toss to coat well.",
+        "Serve: Top with grated Parmesan if desired."
+      ]
+    }
+  ]
+}
