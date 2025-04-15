@@ -1,1 +1,293 @@
-
+{
+  "mealSchedule2025": {
+    "January": [
+      {
+        "startDate": "2024-12-29",
+        "endDate": "2025-01-04",
+        "groupNumber": 1
+      },
+      {
+        "startDate": "2025-01-05",
+        "endDate": "2025-01-11",
+        "groupNumber": 2
+      },
+      {
+        "startDate": "2025-01-12",
+        "endDate": "2025-01-18",
+        "groupNumber": 3
+      },
+      {
+        "startDate": "2025-01-19",
+        "endDate": "2025-01-25",
+        "groupNumber": 4
+      },
+      {
+        "startDate": "2025-01-26",
+        "endDate": "2025-02-01",
+        "groupNumber": 5
+      }
+    ],
+    "February": [
+      {
+        "startDate": "2025-02-02",
+        "endDate": "2025-02-08",
+        "groupNumber": 1
+      },
+      {
+        "startDate": "2025-02-09",
+        "endDate": "2025-02-15",
+        "groupNumber": 2
+      },
+      {
+        "startDate": "2025-02-16",
+        "endDate": "2025-02-22",
+        "groupNumber": 3
+      },
+      {
+        "startDate": "2025-02-23",
+        "endDate": "2025-03-01",
+        "groupNumber": 4
+      }
+    ],
+    "March": [
+      {
+        "startDate": "2025-03-02",
+        "endDate": "2025-03-08",
+        "groupNumber": 5
+      },
+      {
+        "startDate": "2025-03-09",
+        "endDate": "2025-03-15",
+        "groupNumber": 1
+      },
+      {
+        "startDate": "2025-03-16",
+        "endDate": "2025-03-22",
+        "groupNumber": 2
+      },
+      {
+        "startDate": "2025-03-23",
+        "endDate": "2025-03-29",
+        "groupNumber": 3
+      },
+      {
+        "startDate": "2025-03-30",
+        "endDate": "2025-04-05",
+        "groupNumber": 4
+      }
+    ],
+    "April": [
+      {
+        "startDate": "2025-04-06",
+        "endDate": "2025-04-12",
+        "groupNumber": 5
+      },
+      {
+        "startDate": "2025-04-13",
+        "endDate": "2025-04-19",
+        "groupNumber": 1
+      },
+      {
+        "startDate": "2025-04-20",
+        "endDate": "2025-04-26",
+        "groupNumber": 2
+      },
+      {
+        "startDate": "2025-04-27",
+        "endDate": "2025-05-03",
+        "groupNumber": 3
+      }
+    ],
+    "May": [
+      {
+        "startDate": "2025-05-04",
+        "endDate": "2025-05-10",
+        "groupNumber": 4
+      },
+      {
+        "startDate": "2025-05-11",
+        "endDate": "2025-05-17",
+        "groupNumber": 5
+      },
+      {
+        "startDate": "2025-05-18",
+        "endDate": "2025-05-24",
+        "groupNumber": 1
+      },
+      {
+        "startDate": "2025-05-25",
+        "endDate": "2025-05-31",
+        "groupNumber": 2
+      }
+    ],
+    "June": [
+      {
+        "startDate": "2025-06-01",
+        "endDate": "2025-06-07",
+        "groupNumber": 3
+      },
+      {
+        "startDate": "2025-06-08",
+        "endDate": "2025-06-14",
+        "groupNumber": 4
+      },
+      {
+        "startDate": "2025-06-15",
+        "endDate": "2025-06-21",
+        "groupNumber": 5
+      },
+      {
+        "startDate": "2025-06-22",
+        "endDate": "2025-06-28",
+        "groupNumber": 1
+      },
+      {
+        "startDate": "2025-06-29",
+        "endDate": "2025-07-05",
+        "groupNumber": 2
+      }
+    ],
+    "July": [
+      {
+        "startDate": "2025-07-06",
+        "endDate": "2025-07-12",
+        "groupNumber": 3
+      },
+      {
+        "startDate": "2025-07-13",
+        "endDate": "2025-07-19",
+        "groupNumber": 4
+      },
+      {
+        "startDate": "2025-07-20",
+        "endDate": "2025-07-26",
+        "groupNumber": 5
+      },
+      {
+        "startDate": "2025-07-27",
+        "endDate": "2025-08-02",
+        "groupNumber": 1
+      }
+    ],
+    "August": [
+      {
+        "startDate": "2025-08-03",
+        "endDate": "2025-08-09",
+        "groupNumber": 2
+      },
+      {
+        "startDate": "2025-08-10",
+        "endDate": "2025-08-16",
+        "groupNumber": 3
+      },
+      {
+        "startDate": "2025-08-17",
+        "endDate": "2025-08-23",
+        "groupNumber": 4
+      },
+      {
+        "startDate": "2025-08-24",
+        "endDate": "2025-08-30",
+        "groupNumber": 5
+      },
+      {
+        "startDate": "2025-08-31",
+        "endDate": "2025-09-06",
+        "groupNumber": 1
+      }
+    ],
+    "September": [
+      {
+        "startDate": "2025-09-07",
+        "endDate": "2025-09-13",
+        "groupNumber": 2
+      },
+      {
+        "startDate": "2025-09-14",
+        "endDate": "2025-09-20",
+        "groupNumber": 3
+      },
+      {
+        "startDate": "2025-09-21",
+        "endDate": "2025-09-27",
+        "groupNumber": 4
+      },
+      {
+        "startDate": "2025-09-28",
+        "endDate": "2025-10-04",
+        "groupNumber": 5
+      }
+    ],
+    "October": [
+      {
+        "startDate": "2025-10-05",
+        "endDate": "2025-10-11",
+        "groupNumber": 1
+      },
+      {
+        "startDate": "2025-10-12",
+        "endDate": "2025-10-18",
+        "groupNumber": 2
+      },
+      {
+        "startDate": "2025-10-19",
+        "endDate": "2025-10-25",
+        "groupNumber": 3
+      },
+      {
+        "startDate": "2025-10-26",
+        "endDate": "2025-11-01",
+        "groupNumber": 4
+      }
+    ],
+    "November": [
+      {
+        "startDate": "2025-11-02",
+        "endDate": "2025-11-08",
+        "groupNumber": 5
+      },
+      {
+        "startDate": "2025-11-09",
+        "endDate": "2025-11-15",
+        "groupNumber": 1
+      },
+      {
+        "startDate": "2025-11-16",
+        "endDate": "2025-11-22",
+        "groupNumber": 2
+      },
+      {
+        "startDate": "2025-11-23",
+        "endDate": "2025-11-29",
+        "groupNumber": 3
+      },
+      {
+        "startDate": "2025-11-30",
+        "endDate": "2025-12-06",
+        "groupNumber": 4
+      }
+    ],
+    "December": [
+      {
+        "startDate": "2025-12-07",
+        "endDate": "2025-12-13",
+        "groupNumber": 5
+      },
+      {
+        "startDate": "2025-12-14",
+        "endDate": "2025-12-20",
+        "groupNumber": 1
+      },
+      {
+        "startDate": "2025-12-21",
+        "endDate": "2025-12-27",
+        "groupNumber": 2
+      },
+      {
+        "startDate": "2025-12-28",
+        "endDate": "2026-01-03",
+        "groupNumber": 3
+      }
+    ]
+  }
+}
