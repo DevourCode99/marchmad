@@ -44,7 +44,7 @@
       min-height: 100vh;
     }
 
-    /* Header */
+    /* Header (Main Menu) */
     .header {
       margin-bottom: 40px;
     }
@@ -60,7 +60,7 @@
       margin-top: 10px;
     }
 
-    /* Main Menu Items */
+    /* Main Menu Items – centered */
     .menu-item {
       font-size: 2.5rem;
       font-weight: 700;
@@ -72,6 +72,7 @@
       cursor: pointer;
       width: 80%;
       max-width: 500px;
+      text-align: center;
     }
     .menu-item:hover {
       transform: translateY(-5px);
@@ -97,9 +98,16 @@
       color: #000;
     }
 
-    /* Grocery List Section */
+    /* Live time text for all pages */
+    .live-time {
+      font-size: 1rem;
+      margin: 10px 0 20px;
+      text-align: left;
+    }
+
+    /* Grocery List Section – left aligned */
     #groceryListContainer {
-      text-align: center;
+      text-align: left;
       max-width: 600px;
       margin: 20px auto;
     }
@@ -115,22 +123,41 @@
       list-style: disc;
     }
 
-    /* Recipe Section */
+    /* Recipe Section – left aligned */
     #recipeInfoContainer {
       margin: 20px auto;
       max-width: 600px;
-      text-align: center;
+      text-align: left;
     }
     .recipe-date {
       font-size: 2rem;
       margin: 20px 0;
       font-weight: bold;
+      text-align: left;
     }
     .recipe-nav {
       display: flex;
       justify-content: center;
       align-items: center;
       margin-top: 20px;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      .menu-item {
+        font-size: 2rem;
+        padding: 15px;
+      }
+      .header h1 {
+        font-size: 2.5rem;
+      }
+      .header p {
+        font-size: 1.2rem;
+      }
+      .back-button, .nav-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
     }
 
     /* Active Section */
@@ -140,7 +167,7 @@
   </style>
 </head>
 <body>
-  <!-- Main Menu Section -->
+  <!-- Main Menu Section (Centered) -->
   <div id="menuSection" class="section menu-container" style="display: flex;">
     <div class="header">
       <h1>Meal Maker App</h1>
@@ -150,16 +177,20 @@
     <div class="menu-item" id="btnRecipeToday">Weekly Recipes</div>
   </div>
 
-  <!-- Grocery List Section -->
+  <!-- Grocery List Section (Left-aligned content) -->
   <div id="grocerySection" class="section">
     <button class="back-button" id="backFromGrocery">Back to Menu</button>
+    <!-- Live time for grocery page -->
+    <p id="groceryLiveTime" class="live-time"></p>
     <h2>Grocery List</h2>
     <div id="groceryListContainer"></div>
   </div>
 
-  <!-- Recipe Section -->
+  <!-- Recipe Section (Left-aligned content) -->
   <div id="recipeSection" class="section">
     <button class="back-button" id="backFromRecipe">Back to Menu</button>
+    <!-- Live time for recipe page -->
+    <p id="recipeLiveTime" class="live-time"></p>
     <h2>Weekly Recipes</h2>
     <!-- Large scheduled date appears here -->
     <div id="recipeScheduledDate" class="recipe-date"></div>
@@ -197,13 +228,17 @@
     const prevRecipeBtn = document.getElementById("prevRecipe");
     const nextRecipeBtn = document.getElementById("nextRecipe");
 
+    // Live Time Elements for non-main-menu pages
+    const groceryLiveTimeElem = document.getElementById("groceryLiveTime");
+    const recipeLiveTimeElem = document.getElementById("recipeLiveTime");
+
     // Utility: Show only the given section
     function showSection(sectionElem) {
       [menuSection, grocerySection, recipeSection].forEach(sec => sec.style.display = "none");
       sectionElem.style.display = "block";
     }
 
-    // Utility: Format today's CST date as "MM/DD/YYYY – Day – HH:MM:SS CST"
+    // Utility: Format current CST date-time as "MM/DD/YYYY – Day – HH:MM:SS CST"
     function getTodayFormattedCST() {
       const now = new Date();
       const cstString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
@@ -217,7 +252,7 @@
       return `${dateStr} – ${weekdayStr} – ${timeStr} CST`;
     }
 
-    // Utility: Get a Date object for today (set to midnight CST)
+    // Utility: Get a Date object for today (midnight CST)
     function getTodayCSTDate() {
       const now = new Date();
       const cstString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
@@ -225,9 +260,38 @@
       return new Date(cstDate.getFullYear(), cstDate.getMonth(), cstDate.getDate());
     }
 
+    // Update live time on all pages
+    function updateLiveTimes() {
+      const liveTime = getTodayFormattedCST();
+      // Update main menu
+      todayDateElem.textContent = liveTime;
+      // Update grocery page live time if present
+      if (groceryLiveTimeElem) {
+        groceryLiveTimeElem.textContent = liveTime;
+      }
+      // Update recipe page live time if present
+      if (recipeLiveTimeElem) {
+        recipeLiveTimeElem.textContent = liveTime;
+      }
+    }
+    // Call updateLiveTimes every second
+    setInterval(updateLiveTimes, 1000);
+    updateLiveTimes();
+
     // ------------------ Grocery List ------------------
     async function loadGroceryList() {
       try {
+        // First, fetch and determine the grocery date range from year.json
+        const dateRange = await getGroceryDateRange();
+        let headingText = "";
+        if (dateRange) {
+          headingText = `Grocery List for ${dateRange.start} – ${dateRange.end}`;
+        } else {
+          headingText = `Grocery List for Group ${currentGroupNumber}`;
+        }
+        // Build heading HTML
+        let html = `<p>${headingText}${isGroceryDay ? " – (It’s Grocery Day!)" : ""}</p>`;
+        // Then, fetch the grocery list data
         const response = await fetch("data/grocery_list.json");
         const data = await response.json();
         if (!data.groceryLists) return;
@@ -236,7 +300,6 @@
           groceryListContainer.innerHTML = "<p>No grocery list found for this group.</p>";
           return;
         }
-        let html = `<p>Grocery list for <strong>Group ${currentGroupNumber}</strong>${isGroceryDay ? " – (It’s Grocery Day!)" : ""}</p>`;
         html += createGroceryCategoryHTML("Produce", groupData.produce);
         html += createGroceryCategoryHTML("Meat/Poultry", groupData.meatPoultry);
         html += createGroceryCategoryHTML("Canned/Packaged/Dry Goods", groupData.cannedPackagedDryGoods);
@@ -256,6 +319,38 @@
           </ul>
         </div>
       `;
+    }
+
+    // Fetch the current grocery schedule block from year.json based on today's date
+    async function getGroceryDateRange() {
+      try {
+        const response = await fetch("data/year.json");
+        const data = await response.json();
+        const schedule = data.mealSchedule2025;
+        const today = getTodayCSTDate();
+        let foundBlock = null;
+        for (let month in schedule) {
+          for (let block of schedule[month]) {
+            const start = new Date(block.startDate);
+            const end = new Date(block.endDate);
+            if (today >= start && today <= end) {
+              foundBlock = block;
+              break;
+            }
+          }
+          if (foundBlock) break;
+        }
+        if (foundBlock) {
+          const startStr = new Date(foundBlock.startDate).toLocaleDateString("en-US", {month:"2-digit", day:"2-digit", year:"numeric"});
+          const endStr = new Date(foundBlock.endDate).toLocaleDateString("en-US", {month:"2-digit", day:"2-digit", year:"numeric"});
+          return { start: startStr, end: endStr };
+        } else {
+          return null;
+        }
+      } catch (error) {
+        console.error("Error fetching year.json for grocery range:", error);
+        return null;
+      }
     }
 
     // ------------------ Recipe Carousel ------------------
@@ -285,15 +380,14 @@
         recipeInfoContainer.innerHTML = "<p>Recipe data not found.</p>";
         return;
       }
-      // Calculate the scheduled date based on the current scheduling.
-      // Assuming the recipe from pull.json is for today.
+      // Calculate the scheduled date assuming the recipe from pull.json is scheduled for today.
       const offsetDays = recipeNum - (currentRecipeNumber || 1);
       const todayCST = getTodayCSTDate();
       const scheduledDate = new Date(todayCST.getTime() + offsetDays * 24 * 3600 * 1000);
-      const scheduledOptions = { weekday: "long", month: "2-digit", day: "2-digit", year:"numeric" };
-      const scheduledStr = scheduledDate.toLocaleDateString("en-US", scheduledOptions);
-      
-      // Display the scheduled date in large text
+      const options = { weekday: "long", month: "2-digit", day: "2-digit", year:"numeric" };
+      const scheduledStr = scheduledDate.toLocaleDateString("en-US", options);
+
+      // Update the large scheduled date element in the recipe page
       recipeScheduledDateElem.textContent = scheduledStr + (offsetDays === 0 ? " (Today)" : "");
 
       let html = `<h3>${recipeData.recipeName}</h3>`;
@@ -304,13 +398,14 @@
       html += `<ol>${(recipeData.steps || []).map(step => `<li>${step}</li>`).join("")}</ol>`;
       recipeInfoContainer.innerHTML = html;
 
-      // Enable or disable navigation at boundaries
+      // Enable/disable navigation buttons at boundaries
       prevRecipeBtn.disabled = (recipeNum <= 1);
       nextRecipeBtn.disabled = (recipeNum >= 6);
     }
 
     // ------------------ Initialize App ------------------
     async function initializeApp() {
+      // Set the live time in the main menu immediately
       todayDateElem.textContent = getTodayFormattedCST();
       try {
         const response = await fetch("data/pull.json");
