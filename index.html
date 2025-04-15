@@ -7,7 +7,8 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet" />
   <style>
-    /* Inlined CSS inspired by your provided CSS example */
+    /* Inlined CSS inspired by your provided example */
+
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&display=swap');
 
     /* Reset & Base */
@@ -23,7 +24,6 @@
       animation: gradientAnimation 15s ease infinite;
       color: #fff;
       min-height: 100vh;
-      text-align: center;
     }
     @keyframes gradientAnimation {
       0% { background-position: 0% 50%; }
@@ -44,23 +44,27 @@
       min-height: 100vh;
     }
 
-    /* Header (Main Menu) */
+    /* Header for Main Menu */
     .header {
       margin-bottom: 40px;
+      text-align: center;
     }
     .header h1 {
       font-family: 'Roboto Condensed', sans-serif;
       font-size: 3rem;
       letter-spacing: 2px;
       text-transform: uppercase;
+      margin-bottom: 10px;
     }
+    /* (Optional) The header below the title is not needed if each menu card shows time info.
+       You may remove this if you prefer the menu cards to be the sole display.
+    */
     .header p {
       font-size: 1.5rem;
       letter-spacing: 1px;
-      margin-top: 10px;
     }
 
-    /* Main Menu Items – centered */
+    /* Main Menu Items (Cards) – centered */
     .menu-item {
       font-size: 2.5rem;
       font-weight: 700;
@@ -73,6 +77,9 @@
       width: 80%;
       max-width: 500px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .menu-item:hover {
       transform: translateY(-5px);
@@ -80,8 +87,18 @@
       background-color: #fff;
       color: #000;
     }
+    /* Menu item inner text */
+    .menu-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .menu-dow, .menu-date, .menu-time {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
 
-    /* Buttons */
+    /* Buttons (used for back and navigation in other pages) */
     .back-button, .nav-button {
       font-size: 1rem;
       margin: 10px;
@@ -98,14 +115,14 @@
       color: #000;
     }
 
-    /* Live time text for all pages */
+    /* Live time text on non-main-menu pages */
     .live-time {
       font-size: 1rem;
       margin: 10px 0 20px;
       text-align: left;
     }
 
-    /* Grocery List Section – left aligned */
+    /* Grocery List Section – left aligned for readability */
     #groceryListContainer {
       text-align: left;
       max-width: 600px;
@@ -123,7 +140,7 @@
       list-style: disc;
     }
 
-    /* Recipe Section – left aligned */
+    /* Recipe Section – left aligned for readability */
     #recipeInfoContainer {
       margin: 20px auto;
       max-width: 600px;
@@ -151,7 +168,8 @@
       .header h1 {
         font-size: 2.5rem;
       }
-      .header p {
+      .header p,
+      .menu-dow, .menu-date, .menu-time {
         font-size: 1.2rem;
       }
       .back-button, .nav-button {
@@ -171,16 +189,28 @@
   <div id="menuSection" class="section menu-container" style="display: flex;">
     <div class="header">
       <h1>Meal Maker App</h1>
-      <p id="todayDate"></p>
+      <!-- Optional overall live time header; you may remove if each menu card shows time -->
+      <p id="todayTimeHeader"></p>
     </div>
-    <div class="menu-item" id="btnGroceryList">Grocery List</div>
-    <div class="menu-item" id="btnRecipeToday">Weekly Recipes</div>
+    <!-- Menu Card for Grocery List -->
+    <div class="menu-item" id="btnGroceryList">
+      <div class="menu-title">Grocery List</div>
+      <div class="menu-dow" id="menuGroceryDOW"></div>
+      <div class="menu-date" id="menuGroceryDate"></div>
+      <div class="menu-time" id="menuGroceryTime"></div>
+    </div>
+    <!-- Menu Card for Weekly Recipes -->
+    <div class="menu-item" id="btnRecipeToday">
+      <div class="menu-title">Weekly Recipes</div>
+      <div class="menu-dow" id="menuRecipeDOW"></div>
+      <div class="menu-date" id="menuRecipeDate"></div>
+      <div class="menu-time" id="menuRecipeTime"></div>
+    </div>
   </div>
 
   <!-- Grocery List Section (Left-aligned content) -->
   <div id="grocerySection" class="section">
     <button class="back-button" id="backFromGrocery">Back to Menu</button>
-    <!-- Live time for grocery page -->
     <p id="groceryLiveTime" class="live-time"></p>
     <h2>Grocery List</h2>
     <div id="groceryListContainer"></div>
@@ -189,7 +219,6 @@
   <!-- Recipe Section (Left-aligned content) -->
   <div id="recipeSection" class="section">
     <button class="back-button" id="backFromRecipe">Back to Menu</button>
-    <!-- Live time for recipe page -->
     <p id="recipeLiveTime" class="live-time"></p>
     <h2>Weekly Recipes</h2>
     <!-- Large scheduled date appears here -->
@@ -204,17 +233,32 @@
   <script>
     // Global variables
     let currentGroupNumber = null;
-    let currentRecipeNumber = null; // From pull.json (may be null on grocery days)
+    let currentRecipeNumber = null; // from pull.json (may be null on grocery days)
     let isGroceryDay = false;
-    let recipeArray = []; // Holds recipes from the correct recN.json file
-    let currentRecipeIndex = 1; // Carousel index from 1 to 6 (default to today's recipe if available)
+    let recipeArray = []; // holds recipes from the appropriate recN.json file
+    let currentRecipeIndex = 1; // carousel index from 1 to 6 (default to today's recipe if available)
 
-    // HTML element references
+    // HTML element references for sections
     const menuSection = document.getElementById("menuSection");
     const grocerySection = document.getElementById("grocerySection");
     const recipeSection = document.getElementById("recipeSection");
 
-    const todayDateElem = document.getElementById("todayDate");
+    // Main Menu header element (optional live header)
+    const todayTimeHeader = document.getElementById("todayTimeHeader");
+    // Main Menu card elements
+    const menuGroceryDOW = document.getElementById("menuGroceryDOW");
+    const menuGroceryDate = document.getElementById("menuGroceryDate");
+    const menuGroceryTime = document.getElementById("menuGroceryTime");
+
+    const menuRecipeDOW = document.getElementById("menuRecipeDOW");
+    const menuRecipeDate = document.getElementById("menuRecipeDate");
+    const menuRecipeTime = document.getElementById("menuRecipeTime");
+
+    // Live time elements on other pages
+    const groceryLiveTimeElem = document.getElementById("groceryLiveTime");
+    const recipeLiveTimeElem = document.getElementById("recipeLiveTime");
+
+    // Other element references
     const groceryListContainer = document.getElementById("groceryListContainer");
     const recipeInfoContainer = document.getElementById("recipeInfoContainer");
     const recipeScheduledDateElem = document.getElementById("recipeScheduledDate");
@@ -228,31 +272,53 @@
     const prevRecipeBtn = document.getElementById("prevRecipe");
     const nextRecipeBtn = document.getElementById("nextRecipe");
 
-    // Live Time Elements for non-main-menu pages
-    const groceryLiveTimeElem = document.getElementById("groceryLiveTime");
-    const recipeLiveTimeElem = document.getElementById("recipeLiveTime");
-
     // Utility: Show only the given section
     function showSection(sectionElem) {
       [menuSection, grocerySection, recipeSection].forEach(sec => sec.style.display = "none");
       sectionElem.style.display = "block";
     }
 
-    // Utility: Format current CST date-time as "MM/DD/YYYY – Day – HH:MM:SS CST"
-    function getTodayFormattedCST() {
+    // Utility: Get current CST time and return an object with parts
+    function getCurrentCSTParts() {
       const now = new Date();
       const cstString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
       const cstDate = new Date(cstString);
-      const optionsDate = { month: "2-digit", day: "2-digit", year: "numeric" };
-      const optionsTime = { hour: "2-digit", minute:"2-digit", second:"2-digit", hour12: true, timeZone: "America/Chicago" };
-      const optionsWeekday = { weekday: "long", timeZone: "America/Chicago" };
-      const dateStr = cstDate.toLocaleDateString("en-US", optionsDate);
-      const timeStr = cstDate.toLocaleTimeString("en-US", optionsTime);
-      const weekdayStr = cstDate.toLocaleDateString("en-US", optionsWeekday);
-      return `${dateStr} – ${weekdayStr} – ${timeStr} CST`;
+      const dow = cstDate.toLocaleDateString("en-US", { weekday: "long", timeZone: "America/Chicago" });
+      const date = cstDate.toLocaleDateString("en-US", { month:"2-digit", day:"2-digit", year:"numeric", timeZone:"America/Chicago" });
+      const time = cstDate.toLocaleTimeString("en-US", { hour:"2-digit", minute:"2-digit", second:"2-digit", hour12:true, timeZone:"America/Chicago" });
+      return { dow, date, time };
     }
 
-    // Utility: Get a Date object for today (midnight CST)
+    // Utility: Get full formatted live CST time (for header)
+    function getLiveCST() {
+      const parts = getCurrentCSTParts();
+      return `${parts.date} – ${parts.dow} – ${parts.time} CST`;
+    }
+
+    // Update the live time in all pages (menu header and page live time fields)
+    function updateLiveTimeDisplays() {
+      const parts = getCurrentCSTParts();
+      const fullLive = getLiveCST();
+      if (todayTimeHeader) {
+        todayTimeHeader.textContent = fullLive;
+      }
+      // Update main menu cards
+      if (menuGroceryDOW) menuGroceryDOW.textContent = parts.dow;
+      if (menuGroceryDate) menuGroceryDate.textContent = parts.date;
+      if (menuGroceryTime) menuGroceryTime.textContent = parts.time + " CST";
+
+      if (menuRecipeDOW) menuRecipeDOW.textContent = parts.dow;
+      if (menuRecipeDate) menuRecipeDate.textContent = parts.date;
+      if (menuRecipeTime) menuRecipeTime.textContent = parts.time + " CST";
+      
+      // Update live time on grocery and recipe pages
+      if (groceryLiveTimeElem) groceryLiveTimeElem.textContent = fullLive;
+      if (recipeLiveTimeElem) recipeLiveTimeElem.textContent = fullLive;
+    }
+    setInterval(updateLiveTimeDisplays, 1000);
+    updateLiveTimeDisplays();
+
+    // Utility: Get a Date object for today (at midnight CST)
     function getTodayCSTDate() {
       const now = new Date();
       const cstString = now.toLocaleString("en-US", { timeZone: "America/Chicago" });
@@ -260,28 +326,10 @@
       return new Date(cstDate.getFullYear(), cstDate.getMonth(), cstDate.getDate());
     }
 
-    // Update live time on all pages
-    function updateLiveTimes() {
-      const liveTime = getTodayFormattedCST();
-      // Update main menu
-      todayDateElem.textContent = liveTime;
-      // Update grocery page live time if present
-      if (groceryLiveTimeElem) {
-        groceryLiveTimeElem.textContent = liveTime;
-      }
-      // Update recipe page live time if present
-      if (recipeLiveTimeElem) {
-        recipeLiveTimeElem.textContent = liveTime;
-      }
-    }
-    // Call updateLiveTimes every second
-    setInterval(updateLiveTimes, 1000);
-    updateLiveTimes();
-
     // ------------------ Grocery List ------------------
     async function loadGroceryList() {
       try {
-        // First, fetch and determine the grocery date range from year.json
+        // Fetch grocery schedule dates from year.json
         const dateRange = await getGroceryDateRange();
         let headingText = "";
         if (dateRange) {
@@ -289,9 +337,8 @@
         } else {
           headingText = `Grocery List for Group ${currentGroupNumber}`;
         }
-        // Build heading HTML
         let html = `<p>${headingText}${isGroceryDay ? " – (It’s Grocery Day!)" : ""}</p>`;
-        // Then, fetch the grocery list data
+        // Fetch the grocery list
         const response = await fetch("data/grocery_list.json");
         const data = await response.json();
         if (!data.groceryLists) return;
@@ -320,8 +367,7 @@
         </div>
       `;
     }
-
-    // Fetch the current grocery schedule block from year.json based on today's date
+    // Fetch grocery date range from year.json based on today's date
     async function getGroceryDateRange() {
       try {
         const response = await fetch("data/year.json");
@@ -355,7 +401,6 @@
 
     // ------------------ Recipe Carousel ------------------
     async function loadRecipeCarousel() {
-      // If there's no recipe scheduled, default to index 1.
       if (!currentRecipeNumber) currentRecipeIndex = 1;
       else currentRecipeIndex = currentRecipeNumber;
       try {
@@ -373,21 +418,18 @@
         recipeInfoContainer.innerHTML = "<p>Error loading recipe. See console for details.</p>";
       }
     }
-
     function displayRecipe(recipeNum) {
       const recipeData = recipeArray.find(r => r.recipeNumber === recipeNum);
       if (!recipeData) {
         recipeInfoContainer.innerHTML = "<p>Recipe data not found.</p>";
         return;
       }
-      // Calculate the scheduled date assuming the recipe from pull.json is scheduled for today.
+      // Compute scheduled date assuming today's recipe is from pull.json
       const offsetDays = recipeNum - (currentRecipeNumber || 1);
       const todayCST = getTodayCSTDate();
       const scheduledDate = new Date(todayCST.getTime() + offsetDays * 24 * 3600 * 1000);
       const options = { weekday: "long", month: "2-digit", day: "2-digit", year:"numeric" };
       const scheduledStr = scheduledDate.toLocaleDateString("en-US", options);
-
-      // Update the large scheduled date element in the recipe page
       recipeScheduledDateElem.textContent = scheduledStr + (offsetDays === 0 ? " (Today)" : "");
 
       let html = `<h3>${recipeData.recipeName}</h3>`;
@@ -398,15 +440,14 @@
       html += `<ol>${(recipeData.steps || []).map(step => `<li>${step}</li>`).join("")}</ol>`;
       recipeInfoContainer.innerHTML = html;
 
-      // Enable/disable navigation buttons at boundaries
       prevRecipeBtn.disabled = (recipeNum <= 1);
       nextRecipeBtn.disabled = (recipeNum >= 6);
     }
 
     // ------------------ Initialize App ------------------
     async function initializeApp() {
-      // Set the live time in the main menu immediately
-      todayDateElem.textContent = getTodayFormattedCST();
+      // Set main menu header live time
+      todayTimeHeader.textContent = getLiveCST();
       try {
         const response = await fetch("data/pull.json");
         const pullData = await response.json();
@@ -457,7 +498,6 @@
 
     // ------------------ Start ------------------
     initializeApp();
-    todayDateElem.textContent = getTodayFormattedCST();
     showSection(menuSection);
   </script>
 </body>
